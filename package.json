@@ -1,17 +1,35 @@
 {
-  "name": "",
+  "name": "ivanruiz",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --open",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write ./src --plugin=prettier-plugin-astro",
+    "lint": "eslint --ext .astro,.js,.ts,.tsx ."
   },
   "dependencies": {
+    "@astrojs/react": "^3.1.0",
+    "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.5.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "reactflow": "^11.10.4",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
     "@astrojs/check": "^0.5.9",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.32.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "typescript": "^5.4.3"
   }
 }
