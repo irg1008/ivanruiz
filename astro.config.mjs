@@ -13,6 +13,7 @@ export default defineConfig({
   integrations: [
     tailwind({
       nesting: true,
+      applyBaseStyles: true,
     }),
     react(),
     sitemap(),

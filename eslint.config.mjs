@@ -1,20 +1,17 @@
-import eslintPluginAstro from 'eslint-plugin-astro';
+import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginAstro from 'eslint-plugin-astro'
 
 /**
- * @type {import("eslint").Linter.Config}
+ * @type {import("eslint").Linter.FlatConfig}
  */
 export default [
-  ...eslintPluginAstro.configs['flat/recommended'],
-  {
-    plugins: ['jsx-a11y'],
-    extends: ['plugin:jsx-a11y/recommended', 'eslint-config-prettier'],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-    },
-    rules: {
-      // "astro/no-set-html-directive": "error"
-    },
-  },
-];
+	{
+		languageOptions: {
+			ecmaVersion: 'latest',
+			sourceType: 'module',
+		},
+		rules: {},
+	},
+	...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
+	eslintConfigPrettier,
+]
