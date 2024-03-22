@@ -18,7 +18,7 @@ export default defineConfig({
     sitemap(),
   ],
   build: {
-    inlineStylesheets: true,
+    inlineStylesheets: 'always',
   },
   output: 'server',
   vite: {
