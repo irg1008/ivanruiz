@@ -3,9 +3,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "baseUrl": "src",
+    "baseUrl": "",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["public"]
 }

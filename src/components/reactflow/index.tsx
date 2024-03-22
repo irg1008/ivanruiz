@@ -4,10 +4,11 @@ import ReactFlow, {
 	useEdgesState,
 	useNodesState,
 	type Connection,
-	type Edge
+	type Edge,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
+import './style.module.css';
 
 const initialNodes = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
