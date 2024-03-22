@@ -1,14 +1,20 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
+
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "prettier.documentSelectors": ["**/*.astro"],
+
   "tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list"],
+
+  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
+  "prettier.documentSelectors": ["**/*.astro"],
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
