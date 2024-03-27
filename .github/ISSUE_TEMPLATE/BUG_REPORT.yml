@@ -10,7 +10,7 @@ body:
       description: Please enter an explicit description of your issue
       placeholder: Short and explicit description of your incident...
     validations:
-      required: true
+      required: false
   - type: input
     id: reprod-url
     attributes:
@@ -18,7 +18,7 @@ body:
       description: Please enter your GitHub URL to provide a reproduction of the issue
       placeholder: ex. https://github.com/USERNAME/REPO-NAME
     validations:
-      required: true
+      required: false
   - type: textarea
     id: reprod
     attributes:
@@ -31,7 +31,7 @@ body:
         4. See error
       render: bash
     validations:
-      required: true
+      required: false
   - type: textarea
     id: screenshot
     attributes:
@@ -55,7 +55,7 @@ body:
     attributes:
       label: 'Browsers'
       description: What browsers are you seeing the problem on ?
-      multiple: true
+      multiple: false
       options:
         - Firefox
         - Chrome
@@ -69,7 +69,7 @@ body:
     attributes:
       label: 'OS'
       description: What is the impacted environment ?
-      multiple: true
+      multiple: false
       options:
         - Windows
         - Linux
