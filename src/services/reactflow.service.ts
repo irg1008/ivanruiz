@@ -12,14 +12,14 @@ export const saveSnapshot = async (snapshot: ReactFlowJsonObject) => {
 }
 
 export const getNodeId = async () => {
-	const res = await fetch('/api/reactflow/node/genId')
+	const res = await fetch('/api/reactflow/genId')
 	return res.text()
 }
 
 export const likeNodeContent = async (
 	data: CreateNodeLikeDTO
 ): Promise<FlatNodeLikeDTO[] | null> => {
-	const res = await fetch('/api/reactflow/node/likes', {
+	const res = await fetch('/api/reactflow/likes', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ export const toggleLikeNode = async (likeNodeId: NodeLike['id']): Promise<Like> 
 }
 
 export const likeNode = async (likeNodeId: NodeLike['id']): Promise<Like> => {
-	const res = await fetch(`/api/reactflow/node/likes/${likeNodeId}`, {
+	const res = await fetch(`/api/reactflow/likes/${likeNodeId}`, {
 		method: 'PATCH',
 	})
 	if (res.ok) addToLocalLikes(likeNodeId)
@@ -46,7 +46,7 @@ export const likeNode = async (likeNodeId: NodeLike['id']): Promise<Like> => {
 }
 
 export const dislikeNode = async (likeNodeId: NodeLike['id']): Promise<Like> => {
-	const res = await fetch(`/api/reactflow/node/likes/${likeNodeId}`, {
+	const res = await fetch(`/api/reactflow/likes/${likeNodeId}`, {
 		method: 'DELETE',
 	})
 	if (res.ok) removeFromLocalLikes(likeNodeId)
