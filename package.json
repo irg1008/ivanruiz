@@ -25,7 +25,7 @@
     "@nanostores/react": "0.7.2",
     "@nextui-org/react": "2.2.10",
     "@xata.io/client": "0.29.3",
-    "astro": "4.5.9",
+    "astro": "4.5.10",
     "framer-motion": "11.0.22",
     "lucide-react": "0.363.0",
     "nanostores": "0.10.0",
@@ -66,7 +66,7 @@
     "prettier-plugin-tailwindcss": "0.5.13",
     "tailwind-merge": "2.2.2",
     "typescript": "5.4.3",
-    "typescript-eslint": "7.3.1",
+    "typescript-eslint": "7.4.0",
     "vite-plugin-pwa": "0.19.7"
   },
   "engines": {
