@@ -68,7 +68,8 @@
     "tailwind-merge": "2.2.2",
     "typescript": "5.4.3",
     "typescript-eslint": "7.4.0",
-    "vite-plugin-pwa": "0.19.7"
+    "vite-plugin-pwa": "0.19.7",
+    "wrangler": "3.39.0"
   },
   "engines": {
     "node": "18.x"
