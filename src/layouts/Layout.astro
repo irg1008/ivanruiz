@@ -1,0 +1,36 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+
+import '@fontsource-variable/jost'
+
+const { title } = Astro.props
+---
+
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+	<body class='overflow-x-hidden bg-gray-800'>
+		<div class='mx-auto min-h-screen w-full'>
+			<!-- <NoiseBackground /> -->
+			<slot />
+		</div>
+		<style is:global>
+			@font-face {
+				font-family: 'Phosphene';
+				font-style: normal;
+				font-weight: normal;
+				src: url('/fonts/PhospheneFont-Regular.ttf') format('truetype');
+			}
+
+			html {
+				font-family: 'Jost Variable', system-ui, sans-serif;
+			}
+		</style>
+	</body>
+</html>

@@ -1,3 +1,30 @@
-:global(.react-flow__attribution) {
-	display: none;
+:global {
+	.react-flow__attribution {
+		@apply hidden;
+	}
+
+	.react-flow__controls {
+		@apply flex flex-row;
+	}
+
+	.react-flow__controls-button {
+		border: inherit;
+		@apply border border-gray-50 bg-gray-800 text-gray-50;
+	}
+
+	.react-flow__controls-button:hover {
+		@apply bg-gray-700;
+	}
+
+	.react-flow__controls-button:first-child {
+		@apply rounded-l-lg;
+	}
+
+	.react-flow__controls-button:last-child {
+		@apply rounded-r-lg border-gray-50;
+	}
+
+	.react-flow__controls-button path {
+		@apply fill-current;
+	}
 }

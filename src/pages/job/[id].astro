@@ -1,0 +1,19 @@
+---
+import { JobNodeContent } from '@/components/ReactFlow/Nodes/JobNode'
+import { TitleName } from '@/components/TitleName'
+import Layout from '@/layouts/Layout.astro'
+import type { Node } from 'reactflow'
+import { GET } from '../api/reactflow/node/[id]'
+
+const nodeRes = await GET(Astro)
+const node: Node = await nodeRes.json()
+if (!node?.data) return new Response('Not Found', { status: 404 })
+---
+
+<Layout>
+	<TitleName client:idle transition:animate='none' />
+
+	<div class='p-12 text-gray-50'>
+		<JobNodeContent {...node.data} nodeId={node.id} />
+	</div>
+</Layout>

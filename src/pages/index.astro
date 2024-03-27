@@ -1,16 +1,20 @@
 ---
-import { ReactFlowCanvas } from '@/components/reactflow'
+import { ReactFlowCanvas } from '@/components/ReactFlow'
+import { TitleName } from '@/components/TitleName'
+import type { FlowLikesDTO } from '@/db/dto/reactflow.dto'
+import Layout from '@/layouts/Layout.astro'
+import { GET as getFlowSnapshot } from '@/pages/api/reactflow'
+import { GET as getFlowLikes } from '@/pages/api/reactflow/node/likes'
+import type { ReactFlowJsonObject } from 'reactflow'
+
+const snapshotRes = await getFlowSnapshot(Astro)
+const flow: ReactFlowJsonObject = snapshotRes.ok ? await snapshotRes.json() : {}
+
+const flowLikesRes = await getFlowLikes(Astro)
+const flowLikes: FlowLikesDTO = await flowLikesRes.json()
 ---
 
-<html lang='en'>
-	<head>
-		<meta charset='utf-8' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='viewport' content='width=device-width' />
-		<meta name='generator' content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body class='bg-gray-800'>
-		<ReactFlowCanvas client:visible />
-	</body>
-</html>
+<Layout title='Board'>
+	<ReactFlowCanvas client:load flowValue={flow} flowLikes={flowLikes} allowEditing />
+	<TitleName client:load />
+</Layout>
