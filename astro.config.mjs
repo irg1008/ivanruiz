@@ -4,6 +4,8 @@ import tailwind from '@astrojs/tailwind'
 import { defineConfig } from 'astro/config'
 import { VitePWA } from 'vite-plugin-pwa'
 
+import vercel from '@astrojs/vercel/serverless'
+
 // https://astro.build/config
 export default defineConfig({
 	prefetch: true,
@@ -37,4 +39,5 @@ export default defineConfig({
 			}),
 		],
 	},
+	adapter: vercel(),
 })

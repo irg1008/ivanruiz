@@ -96,7 +96,7 @@ const mapLikeCountResult = (lc: DBLikeCount): FlatNodeLikeDTO => ({
 	nodeLikeId: lc.id,
 	content: lc.content,
 	likeId: lc.entity?.like?.id ?? '',
-	likeCount: lc.entity?.like?.likeCount,
+	likeCount: lc.entity?.like?.likeCount ?? 0,
 })
 
 export const getLikesCount = async (nodeId: Node['id']): Promise<FlatNodeLikeDTO[] | null> => {

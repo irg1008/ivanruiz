@@ -22,11 +22,12 @@
   "dependencies": {
     "@astrojs/react": "3.1.0",
     "@astrojs/tailwind": "5.1.0",
+    "@astrojs/vercel": "7.4.0",
     "@fontsource-variable/jost": "5.0.18",
     "@nanostores/persistent": "0.10.1",
     "@nanostores/react": "0.7.2",
     "@nextui-org/react": "2.2.10",
-    "@xata.io/client": "^0.29.3",
+    "@xata.io/client": "0.29.3",
     "astro": "4.5.9",
     "framer-motion": "11.0.22",
     "lucide-react": "0.363.0",
