@@ -16,7 +16,7 @@ export const saveFile = async (fileName: string, fileContent: BinaryFile) => {
 	let file = await xata.db.File.filter({ name: fileName }).getFirst()
 	if (!file) file = await xata.db.File.create({ name: fileName })
 
-	await xata.files.upload(
+	return await xata.files.upload(
 		{
 			table: 'File',
 			column: 'file',
