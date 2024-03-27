@@ -20,6 +20,7 @@ export default defineConfig({
 		react(),
 		sitemap(),
 	],
+	output: 'server',
 	adapter: vercel({
 		webAnalytics: {
 			enabled: true,
@@ -28,7 +29,6 @@ export default defineConfig({
 	build: {
 		inlineStylesheets: 'always',
 	},
-	output: 'server',
 	vite: {
 		build: {
 			cssMinify: 'lightningcss',
