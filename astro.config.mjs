@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind'
 import { defineConfig } from 'astro/config'
 import { VitePWA } from 'vite-plugin-pwa'
 
-import vercel from '@astrojs/vercel/serverless'
+import cloudflare from '@astrojs/cloudflare'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,11 +21,7 @@ export default defineConfig({
 		sitemap(),
 	],
 	output: 'server',
-	adapter: vercel({
-		webAnalytics: {
-			enabled: true,
-		},
-	}),
+	adapter: cloudflare(),
 	build: {
 		inlineStylesheets: 'always',
 	},
