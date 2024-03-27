@@ -20,6 +20,11 @@ export default defineConfig({
 		react(),
 		sitemap(),
 	],
+	adapter: vercel({
+		webAnalytics: {
+			enabled: true,
+		},
+	}),
 	build: {
 		inlineStylesheets: 'always',
 	},
@@ -28,9 +33,14 @@ export default defineConfig({
 		build: {
 			cssMinify: 'lightningcss',
 		},
+		ssr: {
+			noExternal: ['path-to-regexp'],
+		},
 		plugins: [
 			VitePWA({
 				registerType: 'autoUpdate',
+				includeAssets: ['**/*'],
+				injectRegister: 'auto',
 				workbox: {
 					globDirectory: 'dist',
 					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
@@ -39,5 +49,4 @@ export default defineConfig({
 			}),
 		],
 	},
-	adapter: vercel(),
 })
