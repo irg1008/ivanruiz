@@ -32,7 +32,16 @@ export const POST: APIRoute = async (ctx) => {
 			statusText: 'Unauthorized',
 		})
 
-	await saveSnapshot(body)
+	try {
+		await saveSnapshot(body)
+	} catch (error) {
+		return new Response(JSON.stringify(error), {
+			status: 500,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+	}
 
 	return new Response(null, { status: 200 })
 }
