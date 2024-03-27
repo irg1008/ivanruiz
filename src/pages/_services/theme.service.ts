@@ -13,6 +13,7 @@ export const getTheme = (cookies: AstroCookies): Theme => {
 export const setTheme = (cookies: AstroCookies, theme: Theme) => {
 	cookies.set(themeCookieName, theme, {
 		path: '/',
+		expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
 	})
 }
 
