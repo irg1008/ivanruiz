@@ -1,5 +1,5 @@
 import type { CreateNodeLikeDTO } from '@/db/dto/reactflow.dto'
-import { createLike, getAllLikesCount } from '@/pages/api/_services/reactflow.service'
+import { createLike, getAllLikesCount } from '@/pages/_services/reactflow.service'
 import type { APIRoute } from 'astro'
 
 export const POST: APIRoute = async (ctx) => {

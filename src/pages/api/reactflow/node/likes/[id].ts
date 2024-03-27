@@ -2,7 +2,7 @@ import {
 	decrementNodeLike,
 	getLikesCount,
 	incrementNodeLike,
-} from '@/pages/api/_services/reactflow.service'
+} from '@/pages/_services/reactflow.service'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async ({ params }) => {

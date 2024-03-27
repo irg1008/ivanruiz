@@ -71,13 +71,17 @@ export function CustomReactFlow({ flowValue, allowEditing, flowLikes }: ReactFlo
 
 	const { isEditing, toggleEditing } = useIsEditing()
 
+	const deselectNodes = useCallback(() => {
+		setNodes((nds) => nds.map((n) => ({ ...n, selected: false })))
+	}, [setNodes])
+
 	const onSave = useCallback(async () => {
 		if (!rfInstance) return
 		toggleEditing()
+		deselectNodes()
 		const flowObject = rfInstance.toObject()
-		flowObject.nodes.forEach((n) => (n.selected = false))
 		await saveSnapshot(flowObject)
-	}, [rfInstance, toggleEditing])
+	}, [rfInstance, toggleEditing, deselectNodes])
 
 	const onConnect: OnConnect = useCallback(
 		(params) => {

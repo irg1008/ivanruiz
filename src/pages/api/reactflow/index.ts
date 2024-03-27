@@ -1,5 +1,6 @@
+import { isValidApiKey } from '@/pages/_services/admin.service'
+import { downloadSnapshot, saveSnapshot } from '@/pages/_services/reactflow.service'
 import type { APIRoute } from 'astro'
-import { downloadSnapshot, saveSnapshot } from '../_services/reactflow.service'
 
 export const GET: APIRoute = async () => {
 	const snapshot = await downloadSnapshot()
@@ -23,6 +24,12 @@ export const POST: APIRoute = async (ctx) => {
 		return new Response(null, {
 			status: 400,
 			statusText: 'Bad Request',
+		})
+
+	if (!isValidApiKey(ctx.cookies))
+		return new Response(null, {
+			status: 401,
+			statusText: 'Unauthorized',
 		})
 
 	await saveSnapshot(body)
