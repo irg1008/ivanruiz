@@ -1,0 +1,16 @@
+{
+  "id": "mig_co1b5vh1imsrh036fecg",
+  "parentID": "mig_co1b0dh1imsrh036fe8g",
+  "checksum": "1:e1b3c4a1cae55ea38d546c46335cda788a43918056de36f659cd232e5bc271cc",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "snapshotNodeId",
+          "type": "string"
+        },
+        "table": "Node"
+      }
+    }
+  ]
+}

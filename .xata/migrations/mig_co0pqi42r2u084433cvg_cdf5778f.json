@@ -1,0 +1,11 @@
+{
+  "id": "mig_co0pqi42r2u084433cvg",
+  "checksum": "1:cdf5778f351c4b179aceff6fcb99210fd5a0edeac89fb7bcbd4cb962b59a5d46",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Nodes"
+      }
+    }
+  ]
+}

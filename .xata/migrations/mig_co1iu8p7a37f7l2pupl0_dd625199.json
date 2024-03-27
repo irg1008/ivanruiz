@@ -1,0 +1,13 @@
+{
+  "id": "mig_co1iu8p7a37f7l2pupl0",
+  "parentID": "mig_co1it517a37f7l2pupk0",
+  "checksum": "1:dd625199ec4c8259a6d6cb366eba1bb02f922ab48e064f7ea5bfaa2bc08cf519",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "content",
+        "table": "NodeLike"
+      }
+    }
+  ]
+}

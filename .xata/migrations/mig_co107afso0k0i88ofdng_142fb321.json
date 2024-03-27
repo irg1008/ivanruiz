@@ -1,0 +1,13 @@
+{
+  "id": "mig_co107afso0k0i88ofdng",
+  "parentID": "mig_co1073fso0k0i88ofdmg",
+  "checksum": "1:142fb3215cddaaa0991149b95ddf3af0597ce2a74d9a00db4b5693071c9a272b",
+  "operations": [
+    {
+      "renameTable": {
+        "newName": "File",
+        "oldName": "Files"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "mig_co0q5h2dbsbhtrnr27v0",
+  "parentID": "mig_co0q2cs2r2u084433d5g",
+  "checksum": "1:67148bba5952f61a16f8752a35c72f73f4732c677ac48c6946f01823fc48d77e",
+  "operations": [
+    {
+      "renameTable": {
+        "newName": "Node",
+        "oldName": "Nodes"
+      }
+    },
+    {
+      "renameTable": {
+        "newName": "Edge",
+        "oldName": "Edges"
+      }
+    }
+  ]
+}

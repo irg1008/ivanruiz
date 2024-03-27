@@ -1,0 +1,16 @@
+{
+  "id": "mig_co107hvso0k0i88ofdog",
+  "parentID": "mig_co107afso0k0i88ofdng",
+  "checksum": "1:4e79cafa75f5c34c84c50eb5b7e397ff544ef0f446bace580daf48c4c62e945b",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "file",
+          "type": "file"
+        },
+        "table": "File"
+      }
+    }
+  ]
+}

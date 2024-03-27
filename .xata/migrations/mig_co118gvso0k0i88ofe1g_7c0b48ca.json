@@ -1,0 +1,12 @@
+{
+  "id": "mig_co118gvso0k0i88ofe1g",
+  "parentID": "mig_co10ce5s0n2gojmspegg",
+  "checksum": "1:7c0b48caec1089e91a53df99ce137e0c911d60e9337576d61f63f7c3dff967d5",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "Edge"
+      }
+    }
+  ]
+}

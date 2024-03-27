@@ -1,0 +1,12 @@
+{
+  "id": "mig_co1073fso0k0i88ofdmg",
+  "parentID": "mig_co0q5h2dbsbhtrnr27v0",
+  "checksum": "1:f76e9c91063f72d312fd34aff97a48c9611bc5770efeaeb34e23ba8ea62f946a",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Files"
+      }
+    }
+  ]
+}

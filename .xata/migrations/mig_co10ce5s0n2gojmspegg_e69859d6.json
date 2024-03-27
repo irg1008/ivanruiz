@@ -1,0 +1,17 @@
+{
+  "id": "mig_co10ce5s0n2gojmspegg",
+  "parentID": "mig_co107hvso0k0i88ofdog",
+  "checksum": "1:e69859d602f27a0ad2655e0f30b01e4c1b7e038eb6f5879909529f87a8fa82d1",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "unique": true
+        },
+        "table": "File"
+      }
+    }
+  ]
+}

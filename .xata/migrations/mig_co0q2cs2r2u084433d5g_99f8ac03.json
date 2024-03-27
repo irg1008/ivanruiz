@@ -1,0 +1,95 @@
+{
+  "id": "mig_co0q2cs2r2u084433d5g",
+  "parentID": "mig_co0pr1c2r2u084433d0g",
+  "checksum": "1:99f8ac03a6a65a2c3281ad1ae3cb34cde0f9ea25b7d0dd155959d96f562a4a9f",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Nodes"
+      }
+    },
+    {
+      "addTable": {
+        "table": "Edges"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "position",
+          "type": "json"
+        },
+        "table": "Nodes"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "data",
+          "type": "json"
+        },
+        "table": "Nodes"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "type",
+          "type": "string"
+        },
+        "table": "Nodes"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "type",
+          "type": "string"
+        },
+        "table": "Edges"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "source",
+          "type": "link",
+          "link": {
+            "table": "Nodes"
+          }
+        },
+        "table": "Edges"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "target",
+          "type": "link",
+          "link": {
+            "table": "Nodes"
+          }
+        },
+        "table": "Edges"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "label",
+          "type": "string"
+        },
+        "table": "Edges"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "data",
+          "type": "json"
+        },
+        "table": "Edges"
+      }
+    }
+  ]
+}

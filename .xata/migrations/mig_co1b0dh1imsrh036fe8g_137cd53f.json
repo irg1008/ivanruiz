@@ -1,0 +1,81 @@
+{
+  "id": "mig_co1b0dh1imsrh036fe8g",
+  "parentID": "mig_co118i5s0n2gojmspemg",
+  "checksum": "1:137cd53fb03c9a12ceb77e5ec15c2c19adfd54099aa7de67279158a9fa0d2d2d",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Like"
+      }
+    },
+    {
+      "addTable": {
+        "table": "Entity"
+      }
+    },
+    {
+      "addTable": {
+        "table": "Node"
+      }
+    },
+    {
+      "addTable": {
+        "table": "NodeLike"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "likedEntity",
+          "type": "link",
+          "link": {
+            "table": "Entity"
+          }
+        },
+        "table": "Like"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "likeCount",
+          "type": "int"
+        },
+        "table": "Like"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "entity",
+          "type": "link",
+          "link": {
+            "table": "Entity"
+          }
+        },
+        "table": "NodeLike"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "node",
+          "type": "link",
+          "link": {
+            "table": "Node"
+          }
+        },
+        "table": "NodeLike"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "content",
+          "type": "string"
+        },
+        "table": "NodeLike"
+      }
+    }
+  ]
+}

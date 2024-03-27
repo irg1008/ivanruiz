@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Iv-n-Ruiz-G-zquez-s-workspace-0ntic2.eu-west-1.xata.sh/db/ivanruiz",
+  "codegen": {
+    "output": "src/db/xata.ts"
+  }
+}
