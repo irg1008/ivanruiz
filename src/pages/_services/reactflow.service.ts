@@ -3,6 +3,7 @@ import { xata } from '@/db'
 import type { CreateNodeLikeDTO, FlatNodeLikeDTO, FlowLikesDTO } from '@/db/dto/reactflow.dto'
 import type { Node, NodeLike } from '@/db/xata'
 import { groupBy } from '@/utils/list.utils'
+import { Buffer } from 'node:buffer'
 import type { ReactFlowJsonObject, Node as ReactFlowNode } from 'reactflow'
 import { downloadFile, saveFile } from './files.service'
 
