@@ -17,7 +17,16 @@ type Transition = {
 
 const createTransitionElement = <K extends HTMLKey>(element: K, props: ElementProps<K>) => {
 	const { name, style, ...rest } = props
-	return createElement(element, { ...rest, style: { ...style, viewTransitionName: name } })
+
+	const el = createElement(element, {
+		...rest,
+		style: {
+			...style,
+			viewTransitionName: name,
+		},
+	})
+
+	return el
 }
 
 const transitionGetter = <K extends HTMLKey>(element: K): ElementFactory<K> => {

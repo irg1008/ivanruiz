@@ -11,9 +11,9 @@ if (!node?.data) return new Response('Not Found', { status: 404 })
 ---
 
 <Layout>
-	<TitleName client:idle transition:animate='none' />
+	<TitleName client:load />
 
-	<div class='p-12 text-gray-50'>
+	<div class='p-12'>
 		<JobNodeContent {...node.data} nodeId={node.id} />
 	</div>
 </Layout>

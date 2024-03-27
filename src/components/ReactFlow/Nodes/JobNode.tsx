@@ -60,7 +60,7 @@ export function JobNodeEditing(data: JobNodeData) {
 
 export function JobNodeContent({ nodeId, name, job, emoji }: JobNodeData & { nodeId: string }) {
 	return (
-		<main className='flex'>
+		<main className='flex transition-colors duration-500'>
 			<transition.div
 				name={`info-emoji-${nodeId}`}
 				className='flex size-12 items-center justify-center rounded-full bg-gray-100'
@@ -71,7 +71,7 @@ export function JobNodeContent({ nodeId, name, job, emoji }: JobNodeData & { nod
 				<transition.div name={`info-name-${nodeId}`} className='text-lg font-bold'>
 					{name}
 				</transition.div>
-				<transition.div name={`info-job-${nodeId}`} className='text-gray-500'>
+				<transition.div name={`info-job-${nodeId}`} className='text-foreground-500'>
 					{job}
 				</transition.div>
 			</div>

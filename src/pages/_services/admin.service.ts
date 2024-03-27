@@ -5,6 +5,10 @@ const apiKeyCookieName = 'apiKey'
 export const setApiKey = (cookies: AstroCookies, value: string) => {
 	cookies.set(apiKeyCookieName, value, {
 		path: '/',
+		expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes,
+		secure: true,
+		httpOnly: true,
+		sameSite: 'strict',
 	})
 }
 

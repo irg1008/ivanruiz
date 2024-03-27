@@ -9,11 +9,11 @@
 
 	.react-flow__controls-button {
 		border: inherit;
-		@apply border border-gray-50 bg-gray-800 text-gray-50;
+		@apply border border-foreground-300 drop-shadow-sm bg-background text-foreground transition-colors duration-200;
 	}
 
 	.react-flow__controls-button:hover {
-		@apply bg-gray-700;
+		@apply bg-foreground-200;
 	}
 
 	.react-flow__controls-button:first-child {
@@ -21,10 +21,14 @@
 	}
 
 	.react-flow__controls-button:last-child {
-		@apply rounded-r-lg border-gray-50;
+		@apply rounded-r-lg;
 	}
 
 	.react-flow__controls-button path {
 		@apply fill-current;
+	}
+
+	.react-flow__arrowhead *, .react-flow__edge * {
+		transition: stroke 0.5s, fill 0.5s;
 	}
 }

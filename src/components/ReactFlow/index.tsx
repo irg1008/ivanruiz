@@ -46,16 +46,19 @@ export function ReactFlowCanvas(props: ReactFlowCanvasProps) {
 	)
 }
 
+const connectionColor = 'hsl(var(--nextui-foreground))'
 const connectionType: ConnectionLineType = ConnectionLineType.Step
+
 const baseEdge: Omit<Edge, 'id' | 'source' | 'target'> = {
 	animated: false,
 	type: connectionType,
-	style: { stroke: '#fff' },
+	style: { stroke: connectionColor },
 	markerEnd: {
 		type: MarkerType.ArrowClosed,
 		width: 20,
 		height: 20,
-		color: '#fff',
+		color: connectionColor,
+		strokeWidth: 2,
 	},
 }
 
@@ -127,7 +130,7 @@ export function CustomReactFlow({ flowValue, allowEditing, flowLikes }: ReactFlo
 				// eslint-disable-next-line tailwindcss/no-custom-classname
 				className='touchdevice-flow'
 				fitView
-				fitViewOptions={{ padding: 0.5 }}
+				fitViewOptions={{ padding: 0.2 }}
 				nodeOrigin={[0.5, 0]}
 				nodes={nodes}
 				edges={edges}

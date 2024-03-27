@@ -9,7 +9,7 @@ export function TitleName() {
 
 	return (
 		<aside className='relative ml-auto w-max p-12'>
-			<h2 className='font-phospene text-4xl text-gray-50 selection:bg-gray-50 selection:text-gray-800 md:text-6xl lg:text-8xl'>
+			<h2 className='font-phospene text-4xl selection:bg-foreground selection:text-background md:text-6xl lg:text-8xl'>
 				Iván Ruiz
 			</h2>
 			<div className='absolute left-1/2 top-4 w-10 -translate-x-1/2 md:w-14 lg:w-20'>
