@@ -68,5 +68,8 @@
     "typescript": "5.4.3",
     "typescript-eslint": "7.3.1",
     "vite-plugin-pwa": "0.19.7"
+  },
+  "engines": {
+    "node": "^18.0.0"
   }
 }
