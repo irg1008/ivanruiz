@@ -4,7 +4,7 @@ import { addToLocalLikes, hasUserLike, removeFromLocalLikes } from '@/stores/rea
 import type { ReactFlowJsonObject } from 'reactflow'
 
 export const saveSnapshot = async (snapshot: ReactFlowJsonObject) => {
-	await fetch('/api/reactflow', {
+	return await fetch('/api/reactflow', {
 		method: 'POST',
 		body: JSON.stringify(snapshot),
 		headers: { 'Content-Type': 'application/json' },
