@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro'
 
 export const POST: APIRoute = async (ctx) => {
 	const body: CreateNodeLikeDTO = await ctx.request.json()
+
 	const nodeLike = await createLike(body)
 	if (!nodeLike) return new Response(null, { status: 409, statusText: 'Conflict' })
 
