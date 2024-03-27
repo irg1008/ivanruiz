@@ -1,0 +1,13 @@
+{
+  "id": "mig_co20pmnvvkql08l9k54g",
+  "parentID": "mig_co20pgnvvkql08l9k53g",
+  "checksum": "1:c6f5a34b7e8bfa6a2c7b5aa915f0a710f8ec00aca4ea99a55908b97df2c04a69",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "entity",
+        "table": "Like"
+      }
+    }
+  ]
+}

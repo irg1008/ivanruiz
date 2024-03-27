@@ -1,0 +1,13 @@
+{
+  "id": "mig_co20pth7a37f7l2puu8g",
+  "parentID": "mig_co20pqp7a37f7l2puu7g",
+  "checksum": "1:106e44a059c8026701e78a16bd1ca24a9a291648216fa01d05fc68057716544d",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "like",
+        "table": "Entity"
+      }
+    }
+  ]
+}

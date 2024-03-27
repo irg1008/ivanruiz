@@ -1,0 +1,20 @@
+{
+  "id": "mig_co20pgnvvkql08l9k53g",
+  "parentID": "mig_co1jrbtg8v0fh28odskg",
+  "checksum": "1:bb4b232460be763da7125819de63e8fdc958a8f843f5f059b0057caf6cba552b",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "entity",
+          "type": "link",
+          "link": {
+            "table": "Entity"
+          },
+          "unique": true
+        },
+        "table": "Like"
+      }
+    }
+  ]
+}
