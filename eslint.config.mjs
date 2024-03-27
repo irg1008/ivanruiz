@@ -2,6 +2,9 @@ import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
 import eslintPluginAstro from 'eslint-plugin-astro'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import eslintPluginReact from 'eslint-plugin-react'
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
+import eslintPluginTailwind from 'eslint-plugin-tailwindcss'
 import tseslint from 'typescript-eslint'
 
 const compat = new FlatCompat()
@@ -15,13 +18,11 @@ export default [
 	...tseslint.configs.recommended,
 	...eslintPluginAstro.configs['flat/recommended'],
 	...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
-	...compat.config({
-		extends: ['plugin:tailwindcss/recommended'],
-		rules: {
-			'tailwindcss/no-custom-classname': 'warn',
-			'tailwindcss/classnames-order': 'error',
-		},
-	}),
+	...compat.config(eslintPluginReact.configs['recommended']),
+	...compat.config(eslintPluginReact.configs['jsx-runtime']),
+	...compat.config(eslintPluginReactHooks.configs.recommended),
+	...compat.config(eslintPluginTailwind.configs.recommended),
+	...compat.config({ settings: { react: { version: 'detect' } } }),
 	{
 		rules: {
 			'no-console': 'warn',
@@ -29,6 +30,8 @@ export default [
 			'no-implicit-coercion': 'error',
 			'prefer-const': 'error',
 			'no-var': 'error',
+			'react/prop-types': 'off',
+			'react/no-unknown-property': 'off',
 		},
 	},
 ]

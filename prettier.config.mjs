@@ -8,7 +8,7 @@ export default {
 	tabWidth: 2,
 	trailingComma: 'es5',
 	useTabs: true,
-	endOfLine: 'lf',
+	endOfLine: 'auto',
 	arrowParens: 'always',
 	bracketSameLine: false,
 	singleAttributePerLine: false,
