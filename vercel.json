@@ -1,8 +1,5 @@
 {
   "regions": [
     "dub1"
-  ],
-  "functionFailoverRegions": [
-    "dub1"
   ]
 }
