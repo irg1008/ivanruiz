@@ -35,6 +35,7 @@ export const POST: APIRoute = async (ctx) => {
 	try {
 		await saveSnapshot(body)
 	} catch (error) {
+		console.log(error)
 		return new Response(JSON.stringify(error), {
 			status: 500,
 			headers: {
