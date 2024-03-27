@@ -12,7 +12,7 @@ dependencies:
     specifier: 5.1.0
     version: 5.1.0(astro@4.5.9)(tailwindcss@3.4.1)
   '@astrojs/vercel':
-    specifier: ^7.4.0
+    specifier: 7.4.0
     version: 7.4.0(astro@4.5.9)(react@18.2.0)
   '@fontsource-variable/jost':
     specifier: 5.0.18
@@ -27,7 +27,7 @@ dependencies:
     specifier: 2.2.10
     version: 2.2.10(@types/react@18.2.70)(framer-motion@11.0.22)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.2.1)(tailwindcss@3.4.1)
   '@xata.io/client':
-    specifier: ^0.29.3
+    specifier: 0.29.3
     version: 0.29.3(typescript@5.4.3)
   astro:
     specifier: 4.5.9
