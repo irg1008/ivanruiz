@@ -17,7 +17,7 @@ export const Emoji = ({ like, onEmojiClick }: EmojiProps) => {
 	return (
 		<AnimatePresence>
 			{like.likeCount > 0 && (
-				<motion.div exit={{ scale: 0, opacity: 0 }}>
+				<motion.div animate={{ scale: 1 }} exit={{ scale: 0, opacity: 0 }}>
 					<Badge
 						content={like.likeCount}
 						color={color}

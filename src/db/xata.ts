@@ -33,8 +33,8 @@ const tables = [
       { name: "like", type: "link", link: { table: "Like" }, unique: true },
     ],
     revLinks: [
-      { column: "likedEntity", table: "Like" },
       { column: "entity", table: "NodeLike" },
+      { column: "likedEntity", table: "Like" },
     ],
   },
   {

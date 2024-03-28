@@ -15,28 +15,42 @@ export const downloadSnapshot = async (): Promise<ReactFlowJsonObject | null> =>
 }
 
 const insertNodes = async (nodes: ReactFlowNode[]) => {
+	if (nodes.length === 0) return
 	await xata.db.Node.create(nodes.map((node) => ({ id: node.id })))
 }
 
 const deleteNodes = async (nodeIds: Node['id'][]) => {
-	await xata.db.Node.delete(nodeIds)
-}
+	if (nodeIds.length === 0) return
 
-const getNodes = async () => {
-	return await xata.db.Node.getMany()
+	const nodeLikes = await xata.db.NodeLike.filter({
+		'node.id': { $any: nodeIds },
+	})
+		.select(['id', 'entity.id', 'entity.like.id'])
+		.getMany()
+
+	xata.transactions.run(
+		nodeLikes.flatMap((nl) => [
+			{ delete: { table: 'NodeLike', id: nl.id } },
+			{ delete: { table: 'Entity', id: nl!.entity!.id } },
+			{ delete: { table: 'Like', id: nl.entity!.like!.id } },
+		])
+	)
+
+	xata.db.Node.delete(nodeIds)
 }
 
 const updateDBNodes = async (snapshot: ReactFlowJsonObject) => {
-	const currentSnapshotNodes = await getNodes()
+	const currentSnapshotNodes = await xata.db.Node.getMany()
 
 	const addedNodes = snapshot.nodes.filter(
 		(node) => !currentSnapshotNodes.some((n) => n.id === node.id)
 	)
-	await insertNodes(addedNodes)
 
 	const deletedNodes = currentSnapshotNodes.filter(
 		(node) => !snapshot.nodes.some((n) => n.id === node.id)
 	)
+
+	await insertNodes(addedNodes)
 	await deleteNodes(deletedNodes.map((node) => node.id))
 }
 
@@ -47,35 +61,43 @@ export const saveSnapshot = (snapshot: ReactFlowJsonObject) => {
 }
 
 const createNodeLikeRelationship = async (data: CreateNodeLikeDTO) => {
-	const like = await xata.db.Like.create({ likeCount: 1 })
-	const entity = await xata.db.Entity.create({ like })
-	like.update({ likedEntity: entity })
-	return await xata.db.NodeLike.create({ ...data, entity })
+	const {
+		results: [entity, like],
+	} = await xata.transactions.run([
+		{ insert: { table: 'Entity', record: {} } },
+		{ insert: { table: 'Like', record: { likeCount: 1 } } },
+	])
+
+	const {
+		results: [nodeLike],
+	} = await xata.transactions.run([
+		{ insert: { table: 'NodeLike', record: { ...data, entity: entity.id } } },
+		{ update: { table: 'Entity', id: entity.id, fields: { like: like.id } } },
+		{ update: { table: 'Like', id: like.id, fields: { likedEntity: entity.id } } },
+	])
+
+	return xata.db.NodeLike.filter({ id: nodeLike.id }).getFirst()
 }
 
 export const createLike = async (data: CreateNodeLikeDTO) => {
-	let nodeLike = await xata.db.NodeLike.filter(data).getFirst()
+	let nodeLike = await xata.db.NodeLike.filter(data).select(['node.id']).getFirst()
 	if (nodeLike) return null
 	nodeLike = await createNodeLikeRelationship(data)
 	return await getLikesCount(nodeLike!.node!.id)
 }
 
-const getLike = async (nodeLikeId: NodeLike['id']) => {
-	const nodeLike = await xata.db.NodeLike.filter({ id: nodeLikeId }).getFirst()
-	if (!nodeLike) return null
-	return await xata.db.Like.filter({ likedEntity: nodeLike.entity }).getFirst()
+const getLike = (nodeLikeId: NodeLike['id']) => {
+	return xata.db.NodeLike.filter({ id: nodeLikeId }).select(['entity.like']).getFirst()
 }
 
 export const incrementNodeLike = async (nodeLikeId: NodeLike['id'], n = 1) => {
-	const like = await getLike(nodeLikeId)
-	if (!like) return null
-	return await like.update({ likeCount: { $increment: n } })
+	const nodeLike = await getLike(nodeLikeId)
+	return await nodeLike?.entity?.like?.update({ likeCount: { $increment: n } })
 }
 
 export const decrementNodeLike = async (nodeLikeId: NodeLike['id'], n = 1) => {
-	const like = await getLike(nodeLikeId)
-	if (!like) return null
-	return await like.update({ likeCount: { $decrement: n } })
+	const nodeLike = await getLike(nodeLikeId)
+	return await nodeLike?.entity?.like?.update({ likeCount: { $decrement: n } })
 }
 
 const getLikeCountQuery = () => {

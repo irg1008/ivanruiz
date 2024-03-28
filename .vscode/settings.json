@@ -13,5 +13,6 @@
   },
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "explorer.excludeGitIgnore": true,
 }
