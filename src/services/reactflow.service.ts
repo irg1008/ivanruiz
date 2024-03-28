@@ -20,7 +20,7 @@ export const likeNodeContent = async (
 	data: CreateNodeLikeDTO
 ): Promise<FlatNodeLikeDTO[] | null> => {
 	const res = await fetch('/api/reactflow/likes', {
-		method: 'POST',
+		method: 'PATCH',
 		body: JSON.stringify(data),
 		headers: { 'Content-Type': 'application/json' },
 	})
