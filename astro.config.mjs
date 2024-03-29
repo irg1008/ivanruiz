@@ -29,7 +29,7 @@ export default defineConfig({
 			cssMinify: 'lightningcss',
 		},
 		ssr: {
-			noExternal: ['path-to-regexp'],
+			external: ['node:buffer', 'node:crypto'],
 		},
 		plugins: [
 			VitePWA({

@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "wrangler:prepare": "wrangler pages dev ./dist --compatibility-flags='nodejs_compat'",
-    "preview": "pnpm wrangler:prepare && wrangler pages dev ./dist",
+    "preview": "wrangler pages dev ./dist --compatibility-flags='nodejs_compat'",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "format": "prettier --write src",
@@ -38,7 +37,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.5.10",
-    "@astrojs/cloudflare": "9.2.1",
+    "@astrojs/cloudflare": "10.0.0",
     "@astrojs/react": "3.1.0",
     "@astrojs/sitemap": "3.1.2",
     "@astrojs/tailwind": "5.1.0",
