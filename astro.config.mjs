@@ -29,6 +29,7 @@ export default defineConfig({
 			cssMinify: 'lightningcss',
 		},
 		ssr: {
+			noExternal: true,
 			external: ['node:buffer', 'node:crypto'],
 		},
 		plugins: [
