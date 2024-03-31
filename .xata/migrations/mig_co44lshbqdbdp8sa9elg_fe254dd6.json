@@ -1,0 +1,18 @@
+{
+  "id": "mig_co44lshbqdbdp8sa9elg",
+  "parentID": "mig_co44lendifft4ad8lvhg",
+  "checksum": "1:fe254dd6d3cdbe6ca50395a4896fadc7238dc78297b36f3825c830436de8fb8c",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "snapshot"
+        },
+        "table": "Snapshot"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "mig_co44tsig71l8r6rp3gtg",
+  "parentID": "mig_co44p09bqdbdp8sa9eng",
+  "checksum": "1:0a038c9685e552ffeea2ba7c9672c0bd67628f15b58e35473a0ae50117ed2c86",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "snapshotId",
+          "type": "link",
+          "link": {
+            "table": "Snapshot"
+          }
+        },
+        "table": "Node"
+      }
+    }
+  ]
+}

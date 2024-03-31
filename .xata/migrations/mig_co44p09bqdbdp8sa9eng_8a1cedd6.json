@@ -1,0 +1,14 @@
+{
+  "id": "mig_co44p09bqdbdp8sa9eng",
+  "parentID": "mig_co44lshbqdbdp8sa9elg",
+  "checksum": "1:8a1cedd6c3c94f83901d4db7d9095ad75c69a35b9d7858acd964fbeca36c2d0f",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "document",
+        "oldName": "snapshot",
+        "table": "Snapshot"
+      }
+    }
+  ]
+}
