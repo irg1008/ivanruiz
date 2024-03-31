@@ -1,5 +1,6 @@
 import type { Identifiable } from '@xata.io/client'
-import type { Like, Node, NodeLike } from '../xata'
+import type { ReactFlowJsonObject } from 'reactflow'
+import type { Like, Node, NodeLike, Snapshot } from '../xata'
 
 export type CreateNodeLikeDTO = {
 	node: Identifiable | Node['id']
@@ -15,3 +16,9 @@ export type FlatNodeLikeDTO = {
 }
 
 export type FlowLikesDTO = Record<Node['id'], FlatNodeLikeDTO[]>
+
+export type SnapshotDTO = {
+	id: Snapshot['id']
+	document: ReactFlowJsonObject
+	name: string
+}

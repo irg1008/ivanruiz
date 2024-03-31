@@ -9,7 +9,7 @@
 
 	.react-flow__controls-button {
 		border: inherit;
-		@apply border border-foreground-300 drop-shadow-sm bg-background text-foreground transition-colors duration-200;
+		@apply border border-foreground-300 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
 	}
 
 	.react-flow__controls-button:hover {
@@ -28,7 +28,10 @@
 		@apply fill-current;
 	}
 
-	.react-flow__arrowhead *, .react-flow__edge * {
-		transition: stroke 0.5s, fill 0.5s;
+	.react-flow__arrowhead *,
+	.react-flow__edge * {
+		transition:
+			stroke 0.5s,
+			fill 0.5s;
 	}
 }

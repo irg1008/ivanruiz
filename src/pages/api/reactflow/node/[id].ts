@@ -1,9 +1,15 @@
+import { getNodeInfo } from '@/pages/_services/reactflow.service'
 import type { APIRoute } from 'astro'
-import { downloadSnapshot } from '../../../_services/reactflow.service'
 
 export const GET: APIRoute = async ({ params }) => {
-	const snapshot = await downloadSnapshot()
-	const node = snapshot?.nodes.find((node) => node.id === params.id)
+	if (!params.id)
+		return new Response(null, {
+			status: 400,
+			statusText: 'Bad Request',
+		})
+
+	const node = await getNodeInfo(params.id)
+
 	if (!node)
 		return new Response(null, {
 			status: 404,

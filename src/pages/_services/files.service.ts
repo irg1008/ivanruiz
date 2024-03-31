@@ -1,4 +1,4 @@
-import { xata } from '@/db'
+import { xata } from '@/lib/db'
 import type { BinaryFile } from '@xata.io/client'
 
 export const downloadFile = async (fileName: string) => {

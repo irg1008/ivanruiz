@@ -1,5 +1,5 @@
+import { useIsEditing } from '@/lib/stores/reactflow.store'
 import { transition } from '@/lib/transition'
-import { useIsEditing } from '@/stores/reactflow.store'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
 import { navigate } from 'astro:transitions/client'
 import { type ChangeEvent } from 'react'
@@ -60,7 +60,7 @@ export function JobNodeEditing(data: JobNodeData) {
 
 export function JobNodeContent({ nodeId, name, job, emoji }: JobNodeData & { nodeId: string }) {
 	return (
-		<main className='flex transition-colors duration-500'>
+		<main className='flex transition-colors'>
 			<transition.div
 				name={`info-emoji-${nodeId}`}
 				className='flex size-12 items-center justify-center rounded-full bg-gray-100'
@@ -93,7 +93,7 @@ export const JobNode = nodeWrapper<JobNodeData>((props) => {
 						<>
 							<JobNodeContent {...data} nodeId={id} />
 							<Button
-								onClick={() => navigate(`/job/${id}`)}
+								onClick={async () => await navigate(`/job/${id}`)}
 								color='primary'
 								variant='solid'
 								className='m-4'

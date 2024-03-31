@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { Button, Code, Link } from '@nextui-org/react'
+import { FrownIcon } from 'lucide-react'
+
+const path = new URL(Astro.request.url).pathname
+---
+
+<Layout title='Page not found'>
+  <main class='relative grid min-h-dvh w-full place-content-center overflow-hidden'>
+    <div class='flex flex-col items-center gap-4'>
+      <h1 class='flex items-baseline font-phospene text-[30vw] text-secondary'>
+        4
+        <FrownIcon client:load className='-m-[10vw] size-[0.9em] text-foreground' />
+        4
+      </h1>
+      <Code>path not found: {path}</Code>
+      <Button href='/' as={Link} color='secondary' showAnchorIcon variant='solid'> Go home </Button>
+    </div>
+  </main>
+</Layout>

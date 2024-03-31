@@ -9,9 +9,11 @@ export function TitleName() {
 
 	return (
 		<aside className='relative ml-auto w-max p-12'>
-			<h2 className='font-phospene text-4xl selection:bg-foreground selection:text-background md:text-6xl lg:text-8xl'>
-				Iván Ruiz
-			</h2>
+			<a href='/'>
+				<h2 className='font-mogi text-4xl selection:bg-foreground selection:text-background md:text-6xl lg:text-8xl'>
+					Iván.Ruiz
+				</h2>
+			</a>
 			<div className='absolute left-1/2 top-4 w-10 -translate-x-1/2 md:w-14 lg:w-20'>
 				<Tooltip content='Hi 😸, drag me around!' isDisabled={!showTooltip} showArrow offset={10}>
 					<motion.div
@@ -42,7 +44,7 @@ export function TitleName() {
 							draggable={false}
 							src={meImg}
 							alt='Supposed to be a handsome dev here'
-							className='-rotate-6'
+							className='-rotate-3'
 						/>
 					</motion.div>
 				</Tooltip>

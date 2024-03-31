@@ -1,5 +1,5 @@
-import type { FlatNodeLikeDTO, FlowLikesDTO } from '@/db/dto/reactflow.dto'
-import type { Like, Node, NodeLike } from '@/db/xata'
+import type { FlatNodeLikeDTO, FlowLikesDTO } from '@/lib/db/dto/reactflow.dto'
+import type { Like, Node, NodeLike } from '@/lib/db/xata'
 import { persistentMap } from '@nanostores/persistent'
 import { useStore } from '@nanostores/react'
 import { atom, deepMap } from 'nanostores'

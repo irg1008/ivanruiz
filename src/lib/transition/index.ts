@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactHTML } from 'react'
+import type { AllHTMLAttributes, ReactHTML } from 'react'
 import { createElement } from 'react'
 
 type HTMLKey = keyof ReactHTML
@@ -7,7 +7,7 @@ type TransitionProps = {
 	name: string
 }
 
-type ElementProps<K extends HTMLKey> = TransitionProps & HTMLAttributes<K>
+type ElementProps<K extends HTMLKey> = TransitionProps & AllHTMLAttributes<K>
 
 type ElementFactory<K extends HTMLKey> = (props: ElementProps<K>) => JSX.Element
 

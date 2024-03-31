@@ -1,5 +1,5 @@
-import type { FlatNodeLikeDTO } from '@/db/dto/reactflow.dto'
-import { hasUserLike } from '@/stores/reactflow.store'
+import type { FlatNodeLikeDTO } from '@/lib/db/dto/reactflow.dto'
+import { hasUserLike } from '@/lib/stores/reactflow.store'
 import { Badge, Button } from '@nextui-org/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
@@ -21,6 +21,7 @@ export const Emoji = ({ like, onEmojiClick }: EmojiProps) => {
 					<Badge
 						content={like.likeCount}
 						color={color}
+						className='!transition-all'
 						key={like.likeId}
 						size='sm'
 						placement='bottom-right'

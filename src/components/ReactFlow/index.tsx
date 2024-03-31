@@ -1,28 +1,28 @@
 import { useCallback, useEffect, useState, type MouseEventHandler } from 'react'
 import ReactFlow, {
-	Background,
-	BackgroundVariant,
-	ConnectionLineType,
-	Controls,
-	MarkerType,
-	Panel,
-	ReactFlowProvider,
-	addEdge,
-	updateEdge,
-	useEdgesState,
-	useNodesState,
-	useReactFlow,
-	type Edge,
-	type Node,
-	type OnConnect,
-	type OnEdgeUpdateFunc,
-	type ReactFlowInstance,
-	type ReactFlowJsonObject,
+    Background,
+    BackgroundVariant,
+    ConnectionLineType,
+    Controls,
+    MarkerType,
+    Panel,
+    ReactFlowProvider,
+    addEdge,
+    updateEdge,
+    useEdgesState,
+    useNodesState,
+    useReactFlow,
+    type Edge,
+    type Node,
+    type OnConnect,
+    type OnEdgeUpdateFunc,
+    type ReactFlowInstance,
 } from 'reactflow'
 
-import type { FlowLikesDTO } from '@/db/dto/reactflow.dto'
-import { getNodeId, saveSnapshot } from '@/services/reactflow.service'
-import { $flowLikes, useIsEditing } from '@/stores/reactflow.store'
+import type { FlowLikesDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
+import { getNodeId, saveSnapshot } from '@/lib/services/reactflow.service'
+import { $flowLikes, useIsEditing } from '@/lib/stores/reactflow.store'
+import { transition } from '@/lib/transition'
 import { Button, Tooltip } from '@nextui-org/react'
 import { PencilIcon, SaveIcon } from 'lucide-react'
 import 'reactflow/dist/style.css'
@@ -31,18 +31,18 @@ import { NodeType } from './Nodes/types'
 import './style.module.css'
 
 type ReactFlowCanvasProps = {
-	flowValue?: ReactFlowJsonObject
+	snapshot: SnapshotDTO
 	flowLikes?: FlowLikesDTO
 	allowEditing?: boolean
 }
 
 export function ReactFlowCanvas(props: ReactFlowCanvasProps) {
 	return (
-		<div className='fixed h-screen w-full'>
-			<ReactFlowProvider>
+		<ReactFlowProvider>
+			<transition.div name='reactflow' className='fixed h-dvh w-full'>
 				<CustomReactFlow {...props} />
-			</ReactFlowProvider>
-		</div>
+			</transition.div>
+		</ReactFlowProvider>
 	)
 }
 
@@ -62,9 +62,9 @@ const baseEdge: Omit<Edge, 'id' | 'source' | 'target'> = {
 	},
 }
 
-export function CustomReactFlow({ flowValue, allowEditing, flowLikes }: ReactFlowCanvasProps) {
-	const [nodes, setNodes, onNodesChange] = useNodesState(flowValue?.nodes ?? [])
-	const [edges, setEdges, onEdgesChange] = useEdgesState(flowValue?.edges ?? [])
+export function CustomReactFlow({ snapshot, allowEditing, flowLikes }: ReactFlowCanvasProps) {
+	const [nodes, setNodes, onNodesChange] = useNodesState(snapshot.document.nodes ?? [])
+	const [edges, setEdges, onEdgesChange] = useEdgesState(snapshot.document.edges ?? [])
 	const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null)
 	const { screenToFlowPosition } = useReactFlow()
 
@@ -81,11 +81,16 @@ export function CustomReactFlow({ flowValue, allowEditing, flowLikes }: ReactFlo
 	const onSave = useCallback(async () => {
 		if (!rfInstance) return
 		toggleEditing()
-		const flowObject = rfInstance.toObject()
 		setNodes(deselectNodes(nodes))
+
+		const flowObject = rfInstance.toObject()
 		flowObject.nodes = deselectNodes(flowObject.nodes)
-		await saveSnapshot(flowObject)
-	}, [rfInstance, toggleEditing, nodes, setNodes])
+
+		await saveSnapshot({
+			...snapshot,
+			document: flowObject,
+		})
+	}, [rfInstance, toggleEditing, nodes, setNodes, snapshot])
 
 	const onConnect: OnConnect = useCallback(
 		(params) => {
