@@ -13,25 +13,25 @@ const compat = new FlatCompat()
  * @type {import("eslint").Linter.FlatConfig}
  */
 export default [
-	eslint.configs.recommended,
-	eslintPluginPrettierRecommended,
-	...tseslint.configs.recommended,
-	...eslintPluginAstro.configs['flat/recommended'],
-	...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
-	...compat.config(eslintPluginReact.configs['recommended']),
-	...compat.config(eslintPluginReact.configs['jsx-runtime']),
-	...compat.config(eslintPluginReactHooks.configs.recommended),
-	...compat.config(eslintPluginTailwind.configs.recommended),
-	...compat.config({ settings: { react: { version: 'detect' } } }),
-	{
-		rules: {
-			'no-console': 'warn',
-			'no-extend-native': 'error',
-			'no-implicit-coercion': 'error',
-			'prefer-const': 'error',
-			'no-var': 'error',
-			'react/prop-types': 'off',
-			'react/no-unknown-property': 'off',
-		},
-	},
+  eslint.configs.recommended,
+  eslintPluginPrettierRecommended,
+  ...tseslint.configs.recommended,
+  ...eslintPluginAstro.configs['flat/recommended'],
+  ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
+  ...compat.config(eslintPluginReact.configs['recommended']),
+  ...compat.config(eslintPluginReact.configs['jsx-runtime']),
+  ...compat.config(eslintPluginReactHooks.configs.recommended),
+  ...compat.config(eslintPluginTailwind.configs.recommended),
+  ...compat.config({ settings: { react: { version: 'detect' } } }),
+  {
+    rules: {
+      'no-console': 'warn',
+      'no-extend-native': 'error',
+      'no-implicit-coercion': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'react/prop-types': 'off',
+      'react/no-unknown-property': 'off',
+    },
+  },
 ]
