@@ -1,29 +1,23 @@
-import { searchMe } from '@/lib/services/search.service'
 import { useTheme } from '@/lib/stores/theme.store'
-import { Button, Input } from '@nextui-org/react'
+import { Button, Image } from '@nextui-org/react'
 import { navigate } from 'astro:transitions/client'
 import { motion } from 'framer-motion'
-import {
-  BriefcaseIcon,
-  GraduationCapIcon,
-  SearchIcon,
-  SpeechIcon,
-  type LucideIcon,
-} from 'lucide-react'
-import type { PropsWithChildren } from 'react'
-import { useDebounceCallback } from 'usehooks-ts'
+import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
+import { type PropsWithChildren } from 'react'
 import { CircleItems } from '../CircleItems'
+import { FlowSearch } from './Search'
 
-export function Hero() {
+export type HeroProps = {
+  initQuery?: string
+}
+
+export function Hero({ initQuery = '' }: HeroProps) {
   const { isDark } = useTheme()
-
   const items: CircleItemProps[] = [
     { icon: BriefcaseIcon, children: 'Jobs', link: '/jobs' },
     { icon: GraduationCapIcon, children: 'Education', link: '/education' },
     { icon: SpeechIcon, children: 'Events', link: '/events' },
   ]
-
-  const searchMeDebounced = useDebounceCallback(searchMe, 500)
 
   return (
     <>
@@ -48,21 +42,7 @@ export function Hero() {
             make you lose your time. <mark>Click the links</mark> to get to know me better or{' '}
             <mark>search below</mark> for an easy lookup.
           </motion.p>
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <Input
-              type='search'
-              variant='faded'
-              autoFocus
-              classNames={{ mainWrapper: 'mt-10' }}
-              placeholder='Search my skills, jobs, etc'
-              startContent={<SearchIcon size={18} />}
-              onChange={(e) => searchMeDebounced(e.target.value)}
-            />
-          </motion.div>
+          <FlowSearch initQuery={initQuery} />
         </header>
 
         <aside className='flex items-center justify-end lg:basis-1/2'>
@@ -146,14 +126,19 @@ const InnerCircleItem = () => {
         stiffness: 300,
         damping: 20,
       }}
-      className='absolute left-1/2 top-1/2 h-full w-[65%] origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full'
+      className='absolute left-1/2 top-1/2 size-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full'
     >
-      <img
-        draggable={false}
-        src='/imgs/me-borderless.webp'
-        alt='Supposed to be a handsome dev here'
-        className='w-full -rotate-3'
-      />
+      <div className='mx-auto w-[65%]'>
+        <Image
+          draggable={false}
+          loading='eager'
+          isBlurred
+          disableSkeleton
+          src='/imgs/me-borderless.webp'
+          alt='Supposed to be a handsome dev here'
+          className='-rotate-3'
+        />
+      </div>
     </motion.div>
   )
 }

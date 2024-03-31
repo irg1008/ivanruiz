@@ -18,11 +18,15 @@ const allowEditing = isValidApiKey(Astro.cookies)
 ---
 
 <Layout title='Board'>
-	<ReactFlowCanvas
-	client:load
-	snapshot={snapshot}
-	flowLikes={flowLikes}
-	allowEditing={allowEditing}
-	/>
-	<TitleName client:load />
+  <main class='h-dvh'>
+    <ReactFlowCanvas
+      client:load
+      snapshot={snapshot}
+      flowLikes={flowLikes}
+      allowEditing={allowEditing}
+    />
+  </main>
+  <div class='absolute right-0 top-0'>
+    <TitleName client:only='react' />
+  </div>
 </Layout>

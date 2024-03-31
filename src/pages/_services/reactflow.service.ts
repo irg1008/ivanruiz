@@ -1,9 +1,9 @@
 import { xata } from '@/lib/db'
 import type {
-	CreateNodeLikeDTO,
-	FlatNodeLikeDTO,
-	FlowLikesDTO,
-	SnapshotDTO,
+  CreateNodeLikeDTO,
+  FlatNodeLikeDTO,
+  FlowLikesDTO,
+  SnapshotDTO,
 } from '@/lib/db/dto/reactflow.dto'
 import type { Node, NodeLike, Snapshot } from '@/lib/db/xata'
 import { groupBy } from '@/lib/utils/list.utils'
@@ -143,8 +143,18 @@ export const getLikesCount = async (nodeId: Node['id']): Promise<FlatNodeLikeDTO
   return likeCount.map(mapLikeCountResult)
 }
 
-export const getAllLikesCount = async (snapshot: Snapshot['name']): Promise<FlowLikesDTO> => {
-  const likeCount = await getLikeCountQuery().filter({ 'node.snapshot.name': snapshot }).getMany()
-  const flatLikeCount = likeCount.map(mapLikeCountResult)
+const groupByNodeId = async (likesQuery: ReturnType<typeof getLikeCountQuery>) => {
+  const likes = await likesQuery.getAll()
+  const flatLikeCount = likes.map(mapLikeCountResult)
   return groupBy(flatLikeCount, (lc) => lc.nodeId)
+}
+
+export const getAllLikesCount = (snapshot: Snapshot['name']): Promise<FlowLikesDTO> => {
+  const query = getLikeCountQuery().filter({ 'node.snapshot.name': snapshot })
+  return groupByNodeId(query)
+}
+
+export const getLikesCountForIds = (nodeIds: Node['id'][]): Promise<FlowLikesDTO> => {
+  const query = getLikeCountQuery().filter({ 'node.id': { $any: nodeIds } })
+  return groupByNodeId(query)
 }

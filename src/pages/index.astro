@@ -2,11 +2,14 @@
 import { Hero } from '@/components/Hero'
 import { SocialLinks } from '@/components/SocialLinks'
 import Layout from '@/layouts/Layout.astro'
+
+const searchParams = Astro.url.searchParams
+const initQuery = searchParams.get('q') ?? ''
 ---
 
-<Layout>
+<Layout title='Iván Ruiz'>
   <main class='flex h-dvh justify-center pt-32 bg-dot-black/20 dark:bg-dot-white/20 lg:pt-40'>
-    <Hero client:only='react' />
+    <Hero client:only='react' initQuery={initQuery} />
     <aside class='absolute right-0 top-0 p-10'>
       <SocialLinks client:load />
     </aside>
