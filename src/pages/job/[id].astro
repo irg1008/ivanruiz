@@ -11,8 +11,8 @@ const node: Node = await nodeRes.json()
 ---
 
 <Layout>
-	<TitleName client:load />
-	<div class='p-12'>
-		<JobNodeContent {...node.data} nodeId={node.id} />
-	</div>
+  <TitleName client:load />
+  <div class='p-12'>
+    <JobNodeContent {...node.data} nodeId={node.id} />
+  </div>
 </Layout>

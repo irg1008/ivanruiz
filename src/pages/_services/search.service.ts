@@ -1,12 +1,12 @@
 import { xata } from '@/lib/db'
 import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import type { Node } from '@/lib/db/xata'
+import { getLayoutedFlow } from '@/lib/utils/layout.utils'
 import type { Edge as FlowEdge, Node as FlowNode, ReactFlowJsonObject } from 'reactflow'
 import { getLikesCountForIds } from './reactflow.service'
 
-const findNodes = (document: ReactFlowJsonObject, highlight: string) => {
-  const nodesString = JSON.stringify(document.nodes)
-  const { nodes } = document
+const findHighlightNodes = ({ nodes }: ReactFlowJsonObject, highlight: string) => {
+  const nodesString = JSON.stringify(nodes)
 
   // Create node positon accessor
   const nodePositions = new Map<number, Node['id']>()
@@ -49,7 +49,7 @@ export const createSearchFlowObject = async (query: string): Promise<ReactFlowJs
     const docHighlight: string = xata.highlight?.['document']?.at(0)
     if (!docHighlight) continue
 
-    const nodes = findNodes(document, docHighlight)
+    const nodes = findHighlightNodes(document, docHighlight)
     searchNodes.push(...nodes)
     searchEdges.push(...document.edges)
   }
@@ -68,5 +68,6 @@ export const createSearchFlowObject = async (query: string): Promise<ReactFlowJs
 export const searchMe = async (query: string): Promise<FlowDTO> => {
   const flowObject = await createSearchFlowObject(query)
   const likes = await getLikesCountForIds(flowObject.nodes.map((node) => node.id))
-  return { likes, flowObject }
+  const layoutedFlowObject = getLayoutedFlow(flowObject, { direction: 'TB', distanceScale: 1.4 })
+  return { likes, flowObject: layoutedFlowObject }
 }
