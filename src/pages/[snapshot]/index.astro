@@ -1,30 +1,14 @@
 ---
-import { ReactFlowCanvas } from '@/components/ReactFlow'
+import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
 import { TitleName } from '@/components/TitleName'
 import Layout from '@/layouts/Layout.astro'
-import type { FlowLikesDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
-import { isValidApiKey } from '@/pages/_services/admin.service'
-import { GET as getFlowSnapshot } from '@/pages/api/reactflow/[snapshot]'
-import { GET as getFlowLikes } from '@/pages/api/reactflow/[snapshot]/likes'
 
-const snapshotRes = await getFlowSnapshot(Astro)
-if (!snapshotRes.ok) return new Response('Not Found', { status: 404 })
-const snapshot: SnapshotDTO = await snapshotRes.json()
-
-const flowLikesRes = await getFlowLikes(Astro)
-const flowLikes: FlowLikesDTO = await flowLikesRes.json()
-
-const allowEditing = isValidApiKey(Astro.cookies)
+if (!Astro.params.snapshot) return new Response('Not Found', { status: 404 })
 ---
 
-<Layout title='Board'>
+<Layout title={Astro.params.snapshot}>
   <main class='h-dvh'>
-    <ReactFlowCanvas
-      client:load
-      snapshot={snapshot}
-      flowLikes={flowLikes}
-      allowEditing={allowEditing}
-    />
+    <ReactFlowLoader snapshotName={Astro.params.snapshot} />
   </main>
   <div class='absolute right-0 top-0'>
     <TitleName client:only='react' />
