@@ -1,0 +1,32 @@
+---
+import type { FlowLikesDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
+import { isValidApiKey } from '@/pages/_services/admin.service'
+import { GET as getFlowSnapshot } from '@/pages/api/reactflow/[snapshot]'
+import { GET as getFlowLikes } from '@/pages/api/reactflow/[snapshot]/likes'
+import { ReactFlowCanvas, type BaseReactFlowCanvasProps } from './ReactFlow'
+
+type Props = Omit<BaseReactFlowCanvasProps, 'flowLikes'> & {
+  snapshotName: string
+}
+
+const { snapshotName } = Astro.props
+
+Astro.params.snapshot = snapshotName
+
+const snapshotRes = await getFlowSnapshot(Astro)
+if (!snapshotRes.ok) return new Response('Not Found', { status: 404 })
+const snapshot: SnapshotDTO = await snapshotRes.json()
+
+const flowLikesRes = await getFlowLikes(Astro)
+const flowLikes: FlowLikesDTO = await flowLikesRes.json()
+
+const allowEditing = isValidApiKey(Astro.cookies)
+---
+
+<ReactFlowCanvas
+  client:load
+  snapshot={snapshot}
+  flowLikes={flowLikes}
+  allowEditing={allowEditing}
+  {...Astro.props}
+/>

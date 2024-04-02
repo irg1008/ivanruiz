@@ -1,17 +1,12 @@
+import { NodeSocial } from '@/components/ReactFlow/NodeSocial'
+import { nodeWrapper } from '@/components/ReactFlow/NodeWrapper'
 import { useIsEditing } from '@/lib/stores/reactflow.store'
 import { transition } from '@/lib/transition'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
 import { navigate } from 'astro:transitions/client'
 import { type ChangeEvent } from 'react'
 import { useNodeId, useReactFlow } from 'reactflow'
-import { NodeSocial } from '../NodeSocial'
-import { nodeWrapper } from './NodeWrapper'
-
-export type JobNodeData = {
-  name: string
-  job: string
-  emoji: string
-}
+import type { JobNodeData, NodeType } from '../types'
 
 export function JobNodeEditing(data: JobNodeData) {
   const nodeId = useNodeId()
@@ -79,7 +74,7 @@ export function JobNodeContent({ nodeId, name, job, emoji }: JobNodeData & { nod
   )
 }
 
-export const JobNode = nodeWrapper<JobNodeData>((props) => {
+export const JobNode = nodeWrapper<NodeType.Job>((props) => {
   const { data, id } = props
   const { isEditing } = useIsEditing()
 
@@ -105,7 +100,7 @@ export const JobNode = nodeWrapper<JobNodeData>((props) => {
         </CardBody>
       </Card>
 
-      {!isEditing && <NodeSocial />}
+      <NodeSocial />
     </>
   )
-}, 'JobNode')
+})

@@ -1,10 +1,18 @@
-import { memo, useCallback, useEffect, useState, type MouseEventHandler } from 'react'
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  type ComponentProps,
+  type MouseEventHandler,
+} from 'react'
 import ReactFlow, {
   Background,
   BackgroundVariant,
   ConnectionLineType,
   Controls,
   MarkerType,
+  MiniMap,
   Panel,
   ReactFlowProvider,
   addEdge,
@@ -12,7 +20,7 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
   useReactFlow,
-  type Edge,
+  type DefaultEdgeOptions,
   type Node,
   type OnConnect,
   type OnEdgeUpdateFunc,
@@ -31,20 +39,33 @@ import { nodeTypes } from './Nodes'
 import { NodeType } from './Nodes/types'
 import './style.module.css'
 
-type ReactFlowCanvasProps =
+export type FlowProps = Omit<ComponentProps<typeof ReactFlow>, 'className'>
+
+export type BaseReactFlowCanvasProps = {
+  flowLikes?: FlowLikesDTO
+  showBackground?: boolean
+  showControls?: boolean
+  showMinimap?: boolean
+  flowClassName?: string
+  flowProps?: FlowProps
+  editingFlowProps?: FlowProps
+  onCustomSave?: (snapshot: SnapshotDTO) => unknown | Promise<unknown>
+}
+
+export type ConditionalReactFlowCanvasProps =
   | {
       snapshot: SnapshotDTO
-      flowLikes?: FlowLikesDTO
       allowEditing?: true
     }
   | {
       snapshot: Omit<SnapshotDTO, 'id'>
-      flowLikes?: FlowLikesDTO
       allowEditing?: false
     }
 
-const isSameCanvas = (prevProps: ReactFlowCanvasProps, nextProps: ReactFlowCanvasProps) => {
-  return prevProps.snapshot.name === nextProps.snapshot.name
+export type ReactFlowCanvasProps = BaseReactFlowCanvasProps & ConditionalReactFlowCanvasProps
+
+const isSameCanvas = (prev: ReactFlowCanvasProps, next: ReactFlowCanvasProps) => {
+  return prev.snapshot.name === next.snapshot.name
 }
 
 export const ReactFlowCanvas = memo(
@@ -63,10 +84,10 @@ export const ReactFlowCanvas = memo(
 ReactFlowCanvas.displayName = 'ReactFlowCanvas'
 
 const connectionColor = 'hsl(var(--nextui-foreground))'
-const connectionType: ConnectionLineType = ConnectionLineType.Step
+const connectionType: ConnectionLineType = ConnectionLineType.SmoothStep
 
-const baseEdge: Omit<Edge, 'id' | 'source' | 'target'> = {
-  animated: false,
+const baseEdge: DefaultEdgeOptions = {
+  animated: true,
   type: connectionType,
   style: { stroke: connectionColor },
   markerEnd: {
@@ -78,17 +99,27 @@ const baseEdge: Omit<Edge, 'id' | 'source' | 'target'> = {
   },
 }
 
-function CustomReactFlow({ snapshot, allowEditing, flowLikes }: ReactFlowCanvasProps) {
+function CustomReactFlow({
+  snapshot,
+  allowEditing,
+  flowLikes,
+  showBackground = true,
+  showControls = true,
+  flowClassName,
+  showMinimap = false,
+  onCustomSave = saveSnapshot,
+  flowProps,
+  editingFlowProps,
+}: ReactFlowCanvasProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(snapshot.document.nodes ?? [])
   const [edges, setEdges, onEdgesChange] = useEdgesState(snapshot.document.edges ?? [])
   const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null)
   const { screenToFlowPosition } = useReactFlow()
+  const { isEditing, toggleEditing } = useIsEditing()
 
   useEffect(() => {
     if (flowLikes) $flowLikes.set(flowLikes)
   }, [flowLikes])
-
-  const { isEditing, toggleEditing } = useIsEditing()
 
   const deselectNodes = (nodes: Node[]) => {
     return nodes.map((n) => ({ ...n, selected: false }))
@@ -102,7 +133,7 @@ function CustomReactFlow({ snapshot, allowEditing, flowLikes }: ReactFlowCanvasP
     const flowObject = rfInstance.toObject()
     flowObject.nodes = deselectNodes(flowObject.nodes)
 
-    await saveSnapshot({
+    await onCustomSave({
       ...snapshot,
       document: flowObject,
     })
@@ -111,7 +142,7 @@ function CustomReactFlow({ snapshot, allowEditing, flowLikes }: ReactFlowCanvasP
   const onConnect: OnConnect = useCallback(
     (params) => {
       if (!isEditing) return
-      setEdges((eds) => addEdge({ ...baseEdge, ...params }, eds))
+      setEdges((eds) => addEdge(params, eds))
     },
     [isEditing, setEdges]
   )
@@ -136,43 +167,46 @@ function CustomReactFlow({ snapshot, allowEditing, flowLikes }: ReactFlowCanvasP
             y: event.clientY,
           }),
           type: NodeType.Selector,
-          data: null,
+          data: { snapshotName: snapshot.name },
         }
 
         return nds.concat(newNode)
       })
     },
-    [screenToFlowPosition, isEditing, setNodes]
+    [screenToFlowPosition, isEditing, setNodes, snapshot.name]
   )
 
   return (
     <>
       <ReactFlow
         // eslint-disable-next-line tailwindcss/no-custom-classname
-        className='touchdevice-flow'
+        className={cn('touchdevice-flow', flowClassName)}
         fitView
-        fitViewOptions={{ padding: 0.2 }}
+        fitViewOptions={{ padding: 0.3 }}
         nodeOrigin={[0.5, 0]}
         nodes={nodes}
         edges={edges}
         nodesConnectable={isEditing}
         elementsSelectable={isEditing}
         nodesFocusable={isEditing}
-        edgesUpdatable={isEditing}
         nodesDraggable={true}
+        edgesUpdatable={isEditing}
         nodeTypes={nodeTypes}
         connectionLineStyle={baseEdge.style}
         connectionLineType={connectionType}
         zoomOnDoubleClick={false}
+        defaultEdgeOptions={baseEdge}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onInit={setRfInstance}
         onEdgeUpdate={onEdgeUpdate}
         onDoubleClick={createNodeSelector}
+        {...(isEditing ? editingFlowProps : flowProps)}
       >
-        <Controls showInteractive={false} />
-        <Background variant={BackgroundVariant.Dots} />
+        {showControls && <Controls showInteractive={false} />}
+        {showBackground && <Background variant={BackgroundVariant.Dots} />}
+        {showMinimap && <MiniMap pannable />}
 
         {allowEditing && (
           <Panel position='bottom-right'>

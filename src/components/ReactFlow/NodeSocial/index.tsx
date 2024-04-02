@@ -1,6 +1,6 @@
 import type { FlatNodeLikeDTO } from '@/lib/db/dto/reactflow.dto'
 import { likeNodeContent, toggleLikeNode } from '@/lib/services/reactflow.service'
-import { useNodeLikes } from '@/lib/stores/reactflow.store'
+import { useIsEditing, useNodeLikes } from '@/lib/stores/reactflow.store'
 import { Button, ButtonGroup, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react'
 import { SmileIcon } from 'lucide-react'
 import { memo, useState } from 'react'
@@ -11,8 +11,13 @@ const allowedEmojies = ['👍', '👎', '❤️', '😂', '😮', '😢', '😡'
 
 export const NodeSocial = memo(() => {
   const [isOpen, setIsOpen] = useState(false)
+
   const nodeId = useNodeId()
   const { likes, setLikes, setLikesCount } = useNodeLikes(nodeId!)
+  const { isEditing } = useIsEditing()
+
+  if (nodeId === null) throw new Error('NodeSocial must be inside a node')
+  if (isEditing) return null
 
   const onEmojiClick = async (nodeLike: FlatNodeLikeDTO) => {
     const like = await toggleLikeNode(nodeLike.nodeLikeId)
