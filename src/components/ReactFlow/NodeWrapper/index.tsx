@@ -1,27 +1,30 @@
-import { Button } from '@nextui-org/react'
-import { TrashIcon } from 'lucide-react'
-import { memo, useCallback } from 'react'
-import {
-  NodeResizer as BaseNodeResizer,
-  Handle,
-  Position,
-  useNodeId,
-  useReactFlow,
-} from 'reactflow'
+import { cn } from '@/lib/utils/cn'
+import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
-import type { NodeProps, NodeType, WrapperCB } from '../Nodes/types'
+import { ElementFit, type NodeProps, type NodeType, type WrapperCB } from '../Nodes/types'
+import { Handles } from './NodeHandles'
+import { NodeResizer } from './NodeResizer'
+import { NodeToolbar } from './NodeToolbar'
 
 export function nodeWrapper<T extends NodeType>(cb: WrapperCB<T>) {
-  return memo<NodeProps<T>>((props) => {
+  const component = memo<NodeProps<T>>((props) => {
     const { selected, isConnectable, data } = props
+    const { horiontalFit, verticalFit } = data
 
     return (
-      <article className='group/node-wrapper size-full' onDoubleClick={(e) => e.stopPropagation()}>
+      <article
+        className={cn(
+          'group/node-wrapper',
+          horiontalFit === ElementFit.Fit ? 'w-fit' : 'w-full',
+          verticalFit === ElementFit.Fit ? 'h-fit' : 'h-full'
+        )}
+        onDoubleClick={(e) => e.stopPropagation()}
+      >
         {cb(props)}
 
         {selected && (
           <>
-            <NodeToolbar />
+            <NodeToolbar {...props} />
             <NodeResizer isVisible={selected} />
           </>
         )}
@@ -38,45 +41,7 @@ export function nodeWrapper<T extends NodeType>(cb: WrapperCB<T>) {
       </article>
     )
   })
-}
 
-export function Handles() {
-  return (
-    <>
-      <Handle type='target' id='top' position={Position.Top} className='!bg-teal-500' />
-      <Handle type='target' id='left' position={Position.Left} className='!bg-teal-500' />
-      <Handle type='source' id='bottom' position={Position.Bottom} className='!bg-teal-500' />
-      <Handle type='source' id='right' position={Position.Right} className='!bg-teal-500' />
-    </>
-  )
-}
-
-export function NodeResizer({ isVisible }: { isVisible: boolean }) {
-  return <BaseNodeResizer isVisible={isVisible} color='#fff000' minWidth={100} minHeight={30} />
-}
-
-export function NodeToolbar() {
-  const nodeId = useNodeId()
-  const reactflow = useReactFlow()
-
-  const removeNode = useCallback(() => {
-    reactflow.setNodes((nodes) => {
-      return nodes.filter((node) => node.id !== nodeId)
-    })
-  }, [nodeId, reactflow])
-
-  return (
-    <div className='absolute bottom-full right-0 mb-2 flex w-full justify-end gap-2'>
-      <Button
-        variant='flat'
-        isIconOnly
-        color='danger'
-        size='sm'
-        aria-label='Remove node'
-        onClick={removeNode}
-      >
-        <TrashIcon className='size-4' />
-      </Button>
-    </div>
-  )
+  component.displayName = 'NodeWrapper'
+  return component
 }

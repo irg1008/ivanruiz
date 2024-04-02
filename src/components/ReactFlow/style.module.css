@@ -1,37 +1,45 @@
 :global {
-	.react-flow__attribution {
-		@apply hidden;
-	}
+  .react-flow__attribution {
+    @apply hidden;
+  }
 
-	.react-flow__controls {
-		@apply flex flex-row;
-	}
+  .react-flow__controls {
+    @apply flex flex-row;
+  }
 
-	.react-flow__controls-button {
-		border: inherit;
-		@apply border border-foreground-300 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
-	}
+  .react-flow__controls-button {
+    border: inherit;
+    @apply border border-foreground-300 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
+  }
 
-	.react-flow__controls-button:hover {
-		@apply bg-foreground-200;
-	}
+  .react-flow__controls-button:hover {
+    @apply bg-foreground-200;
+  }
 
-	.react-flow__controls-button:first-child {
-		@apply rounded-l-lg;
-	}
+  .react-flow__controls-button:first-child {
+    @apply rounded-l-lg;
+  }
 
-	.react-flow__controls-button:last-child {
-		@apply rounded-r-lg;
-	}
+  .react-flow__controls-button:last-child {
+    @apply rounded-r-lg;
+  }
 
-	.react-flow__controls-button path {
-		@apply fill-current;
-	}
+  .react-flow__controls-button path {
+    @apply fill-current;
+  }
 
-	.react-flow__arrowhead *,
-	.react-flow__edge * {
-		transition:
-			stroke 0.5s,
-			fill 0.5s;
-	}
+  .react-flow__arrowhead *,
+  .react-flow__edge * {
+    transition:
+      stroke 0.5s,
+      fill 0.5s;
+  }
+
+  .react-flow__node:has(> .h-fit) {
+    @apply h-max !important;
+  }
+
+  .react-flow__node:has(> .w-fit) {
+    @apply w-max !important;
+  }
 }

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
 import { useRef, type PropsWithChildren } from 'react'
 import { CircleItems } from '../CircleItems'
-import { FlowSearch } from './Search'
+import FlowSearch from './Search'
 
 export type HeroProps = {
   initQuery?: string
@@ -45,7 +45,15 @@ export function Hero({ initQuery = '' }: HeroProps) {
             make you lose your time. <mark>Click the links</mark> to get to know me better or{' '}
             <mark>search below</mark> for an easy lookup.
           </motion.p>
-          <FlowSearch initQuery={initQuery} />
+
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 1 }}
+            className='mt-8'
+          >
+            <FlowSearch initQuery={initQuery} autoFocus />
+          </motion.div>
         </header>
 
         <aside

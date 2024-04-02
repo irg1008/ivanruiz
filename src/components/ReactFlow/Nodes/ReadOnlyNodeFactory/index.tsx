@@ -1,13 +1,21 @@
 import { Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
+import {
+  Suspense,
+  lazy,
+  useEffect,
+  useMemo,
+  useState,
+  type ComponentType,
+  type LazyExoticComponent,
+} from 'react'
 import { useReactFlow } from 'reactflow'
 import { NodeSocial } from '../../NodeSocial'
 import { nodeWrapper } from '../../NodeWrapper'
 import type { NodeType } from '../types'
 
-type ImportFn = () => Promise<JSX.Element | (() => JSX.Element)>
+type ImportFn = () => LazyExoticComponent<ComponentType>
 
-type AvailableComponent = 'nodeSocial'
+type AvailableComponent = 'nodeSocial' | 'search' | 'starProject'
 
 type ImportData = {
   import: ImportFn
@@ -17,9 +25,16 @@ type ImportData = {
 
 const availableComponents: Record<AvailableComponent, ImportData> = {
   nodeSocial: {
-    import: () => import('@/components/SocialLinks').then((module) => module.SocialLinks),
+    import: () => lazy(() => import('@/components/SocialLinks')),
     label: 'Social Links',
-    isSocialComponent: true,
+  },
+  search: {
+    import: () => lazy(() => import('@/components/Hero/Search')),
+    label: 'Search',
+  },
+  starProject: {
+    import: () => lazy(() => import('@/components/StarProject')),
+    label: 'Github Stars',
   },
 }
 
@@ -31,7 +46,7 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
   const { id, data } = props
   const { componentToLoad } = data
 
-  const [importedComponent, setImportedComponent] = useState<JSX.Element>()
+  const [LazyComponent, setLazyComponent] = useState<LazyExoticComponent<ComponentType>>()
   const reactFlow = useReactFlow()
 
   useEffect(() => {
@@ -41,13 +56,13 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
 
   const setDynamicElement = async (key: AvailableComponent) => {
     const componentData = availableComponents[key]
-    const component = await componentData.import()
-    setImportedComponent(component)
+    const component = componentData.import()
+    setLazyComponent(component)
   }
 
   const updateNodeComponentToLoad = (key: string) => {
     reactFlow.setNodes((nodes) => {
-      const node = nodes.find((node) => node.id === id)
+      const node = reactFlow.getNode(id)
       if (!node) return nodes
       node.data = { componentToLoad: key }
       nodes.splice(nodes.indexOf(node), 1, node)
@@ -55,17 +70,20 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
     })
   }
 
-  const isSocialComponent = () => {
-    if (!isValidComponentToLoad(componentToLoad)) return false
-    const componentData = availableComponents[componentToLoad]
-    return componentData.isSocialComponent
-  }
+  const componentData = useMemo(() => {
+    if (!isValidComponentToLoad(componentToLoad)) return
+    return availableComponents[componentToLoad]
+  }, [componentToLoad])
 
   return (
     <>
       <Card className='size-full'>
         <CardBody>
-          {importedComponent ?? (
+          {LazyComponent ? (
+            <Suspense>
+              <LazyComponent />
+            </Suspense>
+          ) : (
             <Listbox
               aria-label='Choose Node'
               onAction={(key) => updateNodeComponentToLoad(key as AvailableComponent)}
@@ -78,7 +96,7 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
         </CardBody>
       </Card>
 
-      {isSocialComponent() && <NodeSocial />}
+      {componentData?.isSocialComponent && <NodeSocial />}
     </>
   )
 })

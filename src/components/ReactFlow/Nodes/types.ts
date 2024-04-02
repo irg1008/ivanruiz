@@ -8,10 +8,17 @@ export enum NodeType {
   ReadOnlyFactory = 'readonly-factory',
 }
 
+export enum ElementFit {
+  Fit = 'fit',
+  Expand = 'expand',
+}
+
 // Types for the different nodes
 
 export type BaseNodeData = {
   snapshotName: SnapshotDTO['name']
+  horiontalFit?: ElementFit
+  verticalFit?: ElementFit
 }
 
 export type JobNodeData = {

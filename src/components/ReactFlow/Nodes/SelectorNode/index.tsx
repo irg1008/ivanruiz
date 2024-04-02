@@ -14,7 +14,7 @@ export const SelectorNode = nodeWrapper<NodeType.Selector>(({ id, data }) => {
 
   const updateNodeType = (newType: NodeType) => {
     reactFlow.setNodes((nodes) => {
-      const node = nodes.find((node) => node.id === id)
+      const node = reactFlow.getNode(id)
       if (!node) return nodes
       node.data = data
       node.type = newType

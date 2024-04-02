@@ -15,12 +15,11 @@ export function JobNodeEditing(data: JobNodeData) {
   const node = nodeId === null ? null : reactflow.getNode(nodeId)
 
   const onFieldChange = (field: keyof JobNodeData, e: ChangeEvent<HTMLInputElement>) => {
-    if (!nodeId) return
     if (!node) return
     node.data[field] = e.target.value
 
     reactflow.setNodes((nodes) => {
-      const index = nodes.findIndex((n) => n.id === nodeId)
+      const index = nodes.indexOf(node)
       nodes[index] = node
       return nodes
     })

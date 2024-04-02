@@ -10,9 +10,10 @@ import { ResultsModal } from './ResultsModal'
 
 export type FlowSearchProps = {
   initQuery?: string
+  autoFocus?: boolean
 }
 
-export function FlowSearch({ initQuery = '' }: FlowSearchProps) {
+export default function FlowSearch({ initQuery = '', autoFocus = false }: FlowSearchProps = {}) {
   const { isOpen, onOpen: openResultModal, onOpenChange: closeModal } = useDisclosure()
 
   const [query, setQuery] = useState<string>(initQuery)
@@ -51,21 +52,15 @@ export function FlowSearch({ initQuery = '' }: FlowSearchProps) {
 
   return (
     <>
-      <motion.div
-        initial={{ x: 50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 1 }}
-        className='flex flex-col items-center gap-4'
-      >
+      <div className='flex flex-col items-center gap-4'>
         <Input
           type='search'
           variant='faded'
-          autoFocus
           defaultValue={initQuery}
-          classNames={{ mainWrapper: 'mt-8' }}
           placeholder='Search my skills, jobs, etc'
           startContent={<SearchIcon size={18} />}
           onChange={(e) => onInputChange(e.target.value)}
+          autoFocus={autoFocus}
         />
         {isEmptySearch && query && !loading && (
           <motion.p
@@ -88,7 +83,7 @@ export function FlowSearch({ initQuery = '' }: FlowSearchProps) {
             <p className='text-secondary'>{`"${query}"`}</p>
           </motion.div>
         )}
-      </motion.div>
+      </div>
 
       <ResultsModal
         query={query}

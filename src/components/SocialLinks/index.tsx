@@ -38,7 +38,7 @@ const socials: Social[] = [
   },
 ]
 
-export function SocialLinks() {
+export default function SocialLinks() {
   return (
     <div className='flex gap-4'>
       {socials.map(({ name, url, icon: Icon }) => (
