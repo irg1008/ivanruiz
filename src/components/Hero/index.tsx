@@ -3,7 +3,7 @@ import { Button, Image } from '@nextui-org/react'
 import { navigate } from 'astro:transitions/client'
 import { motion } from 'framer-motion'
 import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
-import { type PropsWithChildren } from 'react'
+import { useRef, type PropsWithChildren } from 'react'
 import { CircleItems } from '../CircleItems'
 import { FlowSearch } from './Search'
 
@@ -19,9 +19,12 @@ export function Hero({ initQuery = '' }: HeroProps) {
     { icon: SpeechIcon, children: 'Events', link: '/events' },
   ]
 
+  const asideRef = useRef<HTMLElement>(null)
+  const asideWidth = asideRef.current?.offsetWidth
+
   return (
     <>
-      <section className='z-10 flex max-w-screen-lg flex-col items-center gap-20 px-10 lg:flex-row lg:items-start lg:justify-between'>
+      <section className='z-10 flex max-w-screen-lg flex-col items-center gap-20 px-10 lg:flex-row lg:items-start lg:justify-between lg:gap-14'>
         <header className='lg:basis-1/2'>
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
@@ -45,14 +48,17 @@ export function Hero({ initQuery = '' }: HeroProps) {
           <FlowSearch initQuery={initQuery} />
         </header>
 
-        <aside className='flex items-center justify-end lg:basis-1/2'>
+        <aside
+          className='shrink-1 flex items-center justify-end lg:max-w-[600px] lg:basis-1/2 2xl:max-w-[650px]'
+          ref={asideRef}
+        >
           <CircleItems
             archStart={[-50, -40]}
             maxArch={[100, 120]}
             breakpoints={[0, 650]}
             winWidthPercent={0.7}
             pointSize={50}
-            maxWidth={640}
+            maxWidth={asideWidth ?? 640}
             circleWidthPercent={0.85}
             circleClassName='bg-secondary-200 shadow-secondary-200 border-8 border-secondary-100/40'
             circleComponent={<InnerCircleItem />}

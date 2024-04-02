@@ -1,3 +1,4 @@
+import { socialLinks } from '@/lib/consts/social.consts'
 import {
   SiBuymeacoffee,
   SiGithub,
@@ -17,22 +18,22 @@ type Social = {
 const socials: Social[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com/irg1008?tab=repositories',
+    url: socialLinks.github,
     icon: SiGithub,
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/ian-garcia-7b0b3b1b3/',
+    url: socialLinks.linkedin,
     icon: SiLinkedin,
   },
   {
     name: 'X',
-    url: 'https://twitter.com/irg1008',
+    url: socialLinks.x,
     icon: SiX,
   },
   {
     name: 'Buy Me A Coffee',
-    url: 'https://www.buymeacoffee.com/irg1008',
+    url: socialLinks.buyMeACoffee,
     icon: SiBuymeacoffee,
   },
 ]
