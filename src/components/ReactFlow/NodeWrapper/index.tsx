@@ -13,7 +13,7 @@ import type { NodeProps, NodeType, WrapperCB } from '../Nodes/types'
 
 export function nodeWrapper<T extends NodeType>(cb: WrapperCB<T>) {
   return memo<NodeProps<T>>((props) => {
-    const { selected, isConnectable } = props
+    const { selected, isConnectable, data } = props
 
     return (
       <article className='group/node-wrapper size-full' onDoubleClick={(e) => e.stopPropagation()}>

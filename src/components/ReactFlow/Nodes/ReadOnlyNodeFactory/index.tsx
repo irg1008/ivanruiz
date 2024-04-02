@@ -1,6 +1,6 @@
 import { Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { useReactFlow, type Node } from 'reactflow'
+import { useReactFlow } from 'reactflow'
 import { NodeSocial } from '../../NodeSocial'
 import { nodeWrapper } from '../../NodeWrapper'
 import type { NodeType } from '../types'
@@ -9,12 +9,17 @@ type ImportFn = () => Promise<JSX.Element | (() => JSX.Element)>
 
 type AvailableComponent = 'nodeSocial'
 
-type ImportData = { import: ImportFn; label: string }
+type ImportData = {
+  import: ImportFn
+  label: string
+  isSocialComponent?: boolean
+}
 
 const availableComponents: Record<AvailableComponent, ImportData> = {
   nodeSocial: {
     import: () => import('@/components/SocialLinks').then((module) => module.SocialLinks),
     label: 'Social Links',
+    isSocialComponent: true,
   },
 }
 
@@ -35,7 +40,7 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
   }, [componentToLoad])
 
   const setDynamicElement = async (key: AvailableComponent) => {
-    const componentData = availableComponents[key as AvailableComponent]
+    const componentData = availableComponents[key]
     const component = await componentData.import()
     setImportedComponent(component)
   }
@@ -44,18 +49,16 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
     reactFlow.setNodes((nodes) => {
       const node = nodes.find((node) => node.id === id)
       if (!node) return nodes
-
-      const newNode: Node = {
-        ...node,
-        data: {
-          ...node.data,
-          componentToLoad: key,
-        },
-      }
-
-      nodes.splice(nodes.indexOf(node), 1, newNode)
+      node.data = { componentToLoad: key }
+      nodes.splice(nodes.indexOf(node), 1, node)
       return nodes
     })
+  }
+
+  const isSocialComponent = () => {
+    if (!isValidComponentToLoad(componentToLoad)) return false
+    const componentData = availableComponents[componentToLoad]
+    return componentData.isSocialComponent
   }
 
   return (
@@ -75,7 +78,7 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
         </CardBody>
       </Card>
 
-      <NodeSocial />
+      {isSocialComponent() && <NodeSocial />}
     </>
   )
 })

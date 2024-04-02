@@ -1,5 +1,5 @@
 import { Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react'
-import { useReactFlow, type Node } from 'reactflow'
+import { useReactFlow } from 'reactflow'
 import { nodeWrapper } from '../../NodeWrapper'
 import { NodeType } from '../types'
 
@@ -16,14 +16,9 @@ export const SelectorNode = nodeWrapper<NodeType.Selector>(({ id, data }) => {
     reactFlow.setNodes((nodes) => {
       const node = nodes.find((node) => node.id === id)
       if (!node) return nodes
-
-      const newNode: Node = {
-        ...node,
-        type: newType,
-        data,
-      }
-
-      nodes.splice(nodes.indexOf(node), 1, newNode)
+      node.data = data
+      node.type = newType
+      nodes.splice(nodes.indexOf(node), 1, node)
       return nodes
     })
   }
