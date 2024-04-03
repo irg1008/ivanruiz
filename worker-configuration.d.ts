@@ -1,2 +1,1 @@
-interface Env {
-}
+interface Env {}

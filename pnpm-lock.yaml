@@ -82,6 +82,9 @@ devDependencies:
   '@eslint/eslintrc':
     specifier: 3.0.2
     version: 3.0.2
+  '@eslint/js':
+    specifier: 8.57.0
+    version: 8.57.0
   '@types/dagre':
     specifier: 0.7.52
     version: 0.7.52

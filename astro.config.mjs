@@ -20,10 +20,11 @@ export default defineConfig({
     sitemap(),
   ],
   output: 'server',
-  adapter: cloudflare(),
-  platformProxy: {
-    enabled: true,
-  },
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   build: {
     inlineStylesheets: 'always',
   },
