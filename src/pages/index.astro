@@ -11,27 +11,24 @@ const initQuery = searchParams.get('q') ?? ''
 
 <Layout title='Iván Ruiz'>
   <main
-    class='flex min-h-dvh flex-col items-center pt-32 bg-dot-black/20 dark:bg-dot-white/20 lg:pt-40'
+    class='flex min-h-dvh flex-col items-center overflow-hidden pt-32 bg-dot-black/20 dark:bg-dot-white/20 lg:pt-40'
   >
     <Hero client:only='react' initQuery={initQuery} />
     <aside class='absolute right-0 top-0 p-10'>
       <SocialLinks client:load />
     </aside>
 
-    <div class='h-[100px]'>Holiws</div>
+    <div class='h-[1000px]'>Holiws</div>
 
     <Footer client:only='react'>
       <ReactFlowLoader
         snapshotName='footer'
         flowClassName='!overflow-visible'
         showBackground={false}
-        showControls={false}
         flowProps={{
           preventScrolling: false,
-          panOnDrag: false,
-          fitViewOptions: { padding: 0.2 },
-          nodesDraggable: true,
           autoPanOnNodeDrag: false,
+          fitViewOptions: { padding: 0 },
         }}
       />
     </Footer>
