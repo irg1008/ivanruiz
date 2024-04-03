@@ -1,24 +1,12 @@
-import type { FlatNodeLikeDTO, FlowLikesDTO } from '@/lib/db/dto/reactflow.dto'
-import type { Like, Node, NodeLike } from '@/lib/db/xata'
-import { persistentMap } from '@nanostores/persistent'
 import { useStore } from '@nanostores/react'
-import { atom, deepMap } from 'nanostores'
-import { useCallback, useMemo } from 'react'
-
-export const $isEditing = atom(false)
-export const $flowLikes = deepMap<FlowLikesDTO>()
-
-export const useIsEditing = () => {
-  const isEditing = useStore($isEditing)
-
-  const toggleEditing = useCallback(() => {
-    $isEditing.set(!isEditing)
-  }, [isEditing])
-
-  return { isEditing, toggleEditing }
-}
+import { useContext, useMemo } from 'react'
+import type { Node } from 'reactflow'
+import { FlowCanvasContext } from '../contexts/FlowCanvas.context'
+import type { FlatNodeLikeDTO } from '../db/dto/reactflow.dto'
+import type { Like } from '../db/xata'
 
 export const useNodeLikes = (nodeId: Node['id']) => {
+  const { $flowLikes } = useContext(FlowCanvasContext)
   const store = useStore($flowLikes)
   const likes = useMemo(() => store[nodeId] ?? [], [store, nodeId])
 
@@ -57,18 +45,4 @@ export const useNodeLikes = (nodeId: Node['id']) => {
     setLikesCount,
     setLikes,
   }
-}
-
-const $localFlowLikes = persistentMap<Record<NodeLike['id'], string | undefined>>('userLikes')
-
-export const addToLocalLikes = (nodeLikeId: NodeLike['id']) => {
-  $localFlowLikes.setKey(nodeLikeId, '👊')
-}
-
-export const removeFromLocalLikes = (nodeLikeId: NodeLike['id']) => {
-  $localFlowLikes.setKey(nodeLikeId, undefined)
-}
-
-export const hasUserLike = (nodeLikeId: NodeLike['id']) => {
-  return Boolean($localFlowLikes.get()[nodeLikeId])
 }

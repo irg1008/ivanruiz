@@ -18,7 +18,7 @@ const initQuery = searchParams.get('q') ?? ''
       <SocialLinks client:load />
     </aside>
 
-    <div class='h-[1000px]'>Holiws</div>
+    <div class='h-[100px]'>Holiws</div>
 
     <Footer client:only='react'>
       <ReactFlowLoader
@@ -28,7 +28,6 @@ const initQuery = searchParams.get('q') ?? ''
         flowProps={{
           preventScrolling: false,
           autoPanOnNodeDrag: false,
-          fitViewOptions: { padding: 0.3 },
         }}
       />
     </Footer>

@@ -1,5 +1,5 @@
 import type { FlatNodeLikeDTO } from '@/lib/db/dto/reactflow.dto'
-import { hasUserLike } from '@/lib/stores/reactflow.store'
+import { hasUserLike } from '@/lib/stores/likes.store'
 import { Badge, Button } from '@nextui-org/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'

@@ -1,4 +1,4 @@
-import { ReactFlowCanvas } from '@/components/ReactFlow'
+import { ReactFlow } from '@/components/ReactFlow'
 import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 
@@ -44,7 +44,7 @@ export function ResultsModal({ flow, query, isOpen, onOpenChange }: ResultsModal
               Search results for <em>{`"${query}"`}</em>
             </ModalHeader>
             <ModalBody>
-              <ReactFlowCanvas
+              <ReactFlow
                 className='h-[80dvh]'
                 flowLikes={flow.likes}
                 snapshot={{

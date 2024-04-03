@@ -1,6 +1,6 @@
 import type { CreateNodeLikeDTO, FlatNodeLikeDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
 import type { Like, NodeLike } from '@/lib/db/xata'
-import { addToLocalLikes, hasUserLike, removeFromLocalLikes } from '@/lib/stores/reactflow.store'
+import { addToLocalLikes, hasUserLike, removeFromLocalLikes } from '@/lib/stores/likes.store'
 
 export const saveSnapshot = async (snapshot: SnapshotDTO) => {
   return await fetch('/api/reactflow', {
@@ -24,9 +24,11 @@ export const likeNodeContent = async (
     headers: { 'Content-Type': 'application/json' },
   })
   if (!res.ok) return null
+
   const flatLikes: FlatNodeLikeDTO[] = await res.json()
   const newLike = flatLikes.find((like) => like.content === data.content)
   if (newLike) addToLocalLikes(newLike.nodeLikeId)
+
   return flatLikes
 }
 

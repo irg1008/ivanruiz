@@ -1,6 +1,6 @@
 import { NodeSocial } from '@/components/ReactFlow/NodeSocial'
 import { nodeWrapper } from '@/components/ReactFlow/NodeWrapper'
-import { useIsEditing } from '@/lib/stores/reactflow.store'
+import { useIsEditing } from '@/lib/hooks/useEditing'
 import { transition } from '@/lib/transition'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
 import { navigate } from 'astro:transitions/client'

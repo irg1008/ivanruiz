@@ -12,13 +12,13 @@ export function Footer({ children }: FooterProps) {
       <motion.div
         initial={{
           opacity: 0,
-          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+          clipPath: 'polygon(0 100%, 100% 0%, 100% 100%, 0 100%)',
         }}
         animate={{
           opacity: 1,
           clipPath: isDark
-            ? 'polygon(0 30%, 100% 0, 100% 100%, 0% 100%)'
-            : 'polygon(0 50%, 100% 0, 100% 100%, 0% 100%)',
+            ? 'polygon(0 40%, 100% 30%, 100% 100%, 0% 100%)'
+            : 'polygon(0 30%, 100% 0%, 100% 100%, 0% 100%)',
         }}
         transition={{
           type: 'spring',

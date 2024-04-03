@@ -1,6 +1,7 @@
 import type { FlatNodeLikeDTO } from '@/lib/db/dto/reactflow.dto'
+import { useIsEditing } from '@/lib/hooks/useEditing'
+import { useNodeLikes } from '@/lib/hooks/useNodeLikes'
 import { likeNodeContent, toggleLikeNode } from '@/lib/services/reactflow.service'
-import { useIsEditing, useNodeLikes } from '@/lib/stores/reactflow.store'
 import { Button, ButtonGroup, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react'
 import { SmileIcon } from 'lucide-react'
 import { memo, useState } from 'react'
