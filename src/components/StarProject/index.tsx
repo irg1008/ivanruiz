@@ -20,7 +20,7 @@ export default function StarProject() {
         variant='shadow'
         className='flex items-center gap-px'
         radius='sm'
-        startContent={<StarIcon className='size-3 text-yellow-300' />}
+        startContent={<StarIcon className='size-3 dark:text-yellow-300' />}
       >
         {stars.starCount}
       </Chip>

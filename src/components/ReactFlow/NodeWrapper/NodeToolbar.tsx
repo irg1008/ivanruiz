@@ -18,9 +18,9 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
   const reactflow = useReactFlow()
 
   const removeNode = useCallback(() => {
-    reactflow.setNodes((nodes) => {
-      return nodes.filter((node) => node.id !== nodeId)
-    })
+    if (!nodeId) return
+    const node = reactflow.getNode(nodeId)
+    reactflow.deleteElements({ nodes: [node!] })
   }, [nodeId, reactflow])
 
   const updateNodeData = useCallback(

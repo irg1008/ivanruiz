@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils/cn'
 import { motion } from 'framer-motion'
 import { type CSSProperties, type ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { useDebounceValue, useWindowSize } from 'usehooks-ts'
+import { useWindowSize } from 'usehooks-ts'
 import { Meteors } from '../Meteors'
 
 type CircleItemsProps = {
@@ -42,13 +42,14 @@ export function CircleItems({
   meteorsClassName,
   className,
 }: CircleItemsProps) {
-  const { width: winSize } = useWindowSize()
-  const [debWinSize] = useDebounceValue(winSize, 500)
+  const { width: winWidth } = useWindowSize({
+    debounceDelay: 500,
+  })
 
   function getArrayValue<T = number>(values: T | T[]): T {
     if (!Array.isArray(values)) return values
     if (breakpoints?.length === 0) return values[0] as T
-    const index = breakpoints!.findLastIndex((bp) => bp < debWinSize)
+    const index = breakpoints!.findLastIndex((bp) => bp < winWidth)
     return (values[index] as T) ?? (values[0] as T)
   }
 
@@ -62,7 +63,7 @@ export function CircleItems({
 
   const numItems = children?.length ?? 0
 
-  const width = Math.max(minWidth, Math.min(debWinSize * winWidthPercent, maxWidth))
+  const width = Math.max(minWidth, Math.min(winWidth * winWidthPercent, maxWidth))
   const radius = width / 2 - pointSize / 2
 
   const cssAngleFix = -90

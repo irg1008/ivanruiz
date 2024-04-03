@@ -4,7 +4,7 @@ import { Position, type Edge, type Node, type ReactFlowJsonObject } from 'reactf
 const dagreGraph = new dagre.graphlib.Graph()
 dagreGraph.setDefaultEdgeLabel(() => ({}))
 
-type Direction = 'TB' | 'LR'
+export type Direction = 'TB' | 'LR'
 
 type LayoutOptions = {
   direction: Direction
@@ -36,12 +36,12 @@ export const getLayoutedElements = (
   const sourcePosition = isHorizontal ? Position.Right : Position.Bottom
 
   nodes.forEach((node) => {
-    const { x, y } = dagreGraph.node(node.id)
+    const { x, width, y, height } = dagreGraph.node(node.id)
 
     node.targetPosition = targetPosition
     node.sourcePosition = sourcePosition
-    node.position.x = x * distanceScale
-    node.position.y = y * distanceScale
+    node.position.x = (x - width / 2) * distanceScale
+    node.position.y = (y - height / 2) * distanceScale
   })
 
   return { nodes, edges }

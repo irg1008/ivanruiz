@@ -1,15 +1,11 @@
 :global {
-  .react-flow__attribution {
-    @apply hidden;
-  }
-
   .react-flow__controls {
     @apply flex flex-row;
   }
 
   .react-flow__controls-button {
     border: inherit;
-    @apply border border-foreground-300 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
+    @apply border border-foreground-50 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
   }
 
   .react-flow__controls-button:hover {
@@ -36,10 +32,10 @@
   }
 
   .react-flow__node:has(> .h-fit) {
-    @apply h-max !important;
+    @apply !h-max;
   }
 
   .react-flow__node:has(> .w-fit) {
-    @apply w-max !important;
+    @apply !w-max;
   }
 }

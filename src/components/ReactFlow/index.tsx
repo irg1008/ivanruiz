@@ -1,30 +1,25 @@
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-  type ComponentProps,
-  type MouseEventHandler,
-} from 'react'
+import { memo, useCallback, useEffect, type ComponentProps, type MouseEventHandler } from 'react'
 import ReactFlow, {
   Background,
   BackgroundVariant,
   ConnectionLineType,
+  ConnectionMode,
   Controls,
   MarkerType,
   MiniMap,
   Panel,
   ReactFlowProvider,
+  SelectionMode,
   addEdge,
   updateEdge,
   useEdgesState,
   useNodesState,
   useReactFlow,
+  useStore,
   type DefaultEdgeOptions,
   type Node,
   type OnConnect,
   type OnEdgeUpdateFunc,
-  type ReactFlowInstance,
 } from 'reactflow'
 
 import type { FlowLikesDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
@@ -32,6 +27,7 @@ import { getNodeId, saveSnapshot } from '@/lib/services/reactflow.service'
 import { $flowLikes, useIsEditing } from '@/lib/stores/reactflow.store'
 import { transition } from '@/lib/transition'
 import { cn } from '@/lib/utils/cn'
+import { getLayoutedElements, type Direction } from '@/lib/utils/layout.utils'
 import { Button, Tooltip } from '@nextui-org/react'
 import { PencilIcon, SaveIcon } from 'lucide-react'
 import 'reactflow/dist/style.css'
@@ -113,25 +109,42 @@ function CustomReactFlow({
 }: ReactFlowCanvasProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(snapshot.document.nodes ?? [])
   const [edges, setEdges, onEdgesChange] = useEdgesState(snapshot.document.edges ?? [])
-  const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null)
-  const { screenToFlowPosition } = useReactFlow()
+
+  const { screenToFlowPosition, fitView, toObject } = useReactFlow()
   const { isEditing, toggleEditing } = useIsEditing()
+
+  const unselect = useStore((s) => s.unselectNodesAndEdges)
+  const reactFlowWidth = useStore((s) => s.width)
+  const reactflowHeight = useStore((s) => s.height)
 
   useEffect(() => {
     if (flowLikes) $flowLikes.set(flowLikes)
   }, [flowLikes])
 
-  const deselectNodes = (nodes: Node[]) => {
-    return nodes.map((n) => ({ ...n, selected: false }))
-  }
+  const setLayout = useCallback(
+    (direction: Direction) => {
+      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges, {
+        direction,
+        distanceScale: 1.2,
+      })
+      setNodes(layoutedNodes)
+      setEdges(layoutedEdges)
+    },
+    [getLayoutedElements, setNodes, setEdges]
+  )
+
+  useEffect(() => {
+    if (!reactFlowWidth || isEditing) return
+    if (reactFlowWidth < 768) setLayout('TB')
+    fitView({ padding: 0.3 })
+  }, [reactFlowWidth, reactflowHeight, setLayout, fitView])
 
   const onSave = async () => {
-    if (!rfInstance || !allowEditing) return
+    if (!allowEditing) return
     toggleEditing()
-    setNodes(deselectNodes(nodes))
 
-    const flowObject = rfInstance.toObject()
-    flowObject.nodes = deselectNodes(flowObject.nodes)
+    const flowObject = toObject()
+    unselect({ nodes: flowObject.nodes })
 
     await onCustomSave({
       ...snapshot,
@@ -195,11 +208,16 @@ function CustomReactFlow({
         connectionLineStyle={baseEdge.style}
         connectionLineType={connectionType}
         zoomOnDoubleClick={false}
+        selectionOnDrag={true}
+        selectionMode={SelectionMode.Partial}
+        selectNodesOnDrag={isEditing}
+        panOnDrag={isEditing ? [1] : [0, 1]}
+        proOptions={{ hideAttribution: true }}
         defaultEdgeOptions={baseEdge}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        connectionMode={ConnectionMode.Loose}
         onConnect={onConnect}
-        onInit={setRfInstance}
         onEdgeUpdate={onEdgeUpdate}
         onDoubleClick={createNodeSelector}
         {...(isEditing ? editingFlowProps : flowProps)}

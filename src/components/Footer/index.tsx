@@ -12,7 +12,7 @@ export function Footer({ children }: FooterProps) {
       <motion.div
         initial={{
           opacity: 0,
-          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
         }}
         animate={{
           opacity: 1,
