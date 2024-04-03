@@ -8,7 +8,10 @@ export type Direction = 'TB' | 'LR'
 
 type LayoutOptions = {
   direction: Direction
-  distanceScale: number
+  distanceScale: {
+    x: number
+    y: number
+  }
 }
 
 export const getLayoutedElements = (
@@ -18,6 +21,8 @@ export const getLayoutedElements = (
 ): Pick<ReactFlowJsonObject, 'edges' | 'nodes'> => {
   const { direction, distanceScale } = options
 
+  // TODO: Change settings so the generated layout is more vertical in vertical mode or has less distance between nodes.
+  // Bst way is to make nodes horizontally aligned with different parent node, to move slighly vertical. This way gives the feeling of bein in differnet steps
   dagreGraph.setGraph({ rankdir: direction })
 
   nodes.forEach((node) => {
@@ -40,8 +45,8 @@ export const getLayoutedElements = (
 
     node.targetPosition = targetPosition
     node.sourcePosition = sourcePosition
-    node.position.x = (x - width / 2) * distanceScale
-    node.position.y = (y - height / 2) * distanceScale
+    node.position.x = (x - width / 2) * distanceScale.x
+    node.position.y = (y - height / 2) * distanceScale.y
   })
 
   return { nodes, edges }

@@ -110,7 +110,7 @@ function CustomReactFlow({
   const [nodes, setNodes, onNodesChange] = useNodesState(snapshot.document.nodes ?? [])
   const [edges, setEdges, onEdgesChange] = useEdgesState(snapshot.document.edges ?? [])
 
-  const { screenToFlowPosition, fitView, toObject } = useReactFlow()
+  const { screenToFlowPosition, fitView, toObject, getEdges, getNodes } = useReactFlow()
   const { isEditing, toggleEditing } = useIsEditing()
 
   const unselect = useStore((s) => s.unselectNodesAndEdges)
@@ -123,10 +123,17 @@ function CustomReactFlow({
 
   const setLayout = useCallback(
     (direction: Direction) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges, {
-        direction,
-        distanceScale: 1.2,
-      })
+      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+        getNodes(),
+        getEdges(),
+        {
+          direction,
+          distanceScale: {
+            x: 0.8,
+            y: 1.6,
+          },
+        }
+      )
       setNodes(layoutedNodes)
       setEdges(layoutedEdges)
     },

@@ -25,7 +25,7 @@ const findHighlightNodes = ({ nodes }: ReactFlowJsonObject, highlight: string) =
   // Find the node closest to the search term
   const positionsArray = Array.from(nodePositions.keys())
   const searchNodeIds = searchPositions.map((position) => {
-    const closestPosition = positionsArray.findLast((pos) => pos < position)
+    const closestPosition = positionsArray.findLast((pos) => pos < position!)
     return nodePositions.get(closestPosition!)
   })
 
@@ -68,6 +68,9 @@ export const createSearchFlowObject = async (query: string): Promise<ReactFlowJs
 export const searchMe = async (query: string): Promise<FlowDTO> => {
   const flowObject = await createSearchFlowObject(query)
   const likes = await getLikesCountForIds(flowObject.nodes.map((node) => node.id))
-  const layoutedFlowObject = getLayoutedFlow(flowObject, { direction: 'TB', distanceScale: 1.4 })
+  const layoutedFlowObject = getLayoutedFlow(flowObject, {
+    direction: 'TB',
+    distanceScale: { x: 1.4, y: 1.4 },
+  })
   return { likes, flowObject: layoutedFlowObject }
 }
