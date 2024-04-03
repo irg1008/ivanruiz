@@ -1,4 +1,5 @@
-import { Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { Card, CardBody, Listbox, ListboxItem, Skeleton } from '@nextui-org/react'
 import {
   Suspense,
   lazy,
@@ -76,11 +77,17 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
   }, [componentToLoad])
 
   return (
-    <>
+    <ErrorBoundary>
       <Card className='size-full'>
         <CardBody>
           {LazyComponent ? (
-            <Suspense>
+            <Suspense
+              fallback={
+                <Skeleton>
+                  <div className='h-24 w-52 rounded-lg bg-default-300'></div>
+                </Skeleton>
+              }
+            >
               <LazyComponent />
             </Suspense>
           ) : (
@@ -97,6 +104,6 @@ export const ReadOnlyNodeFactory = nodeWrapper<NodeType.ReadOnlyFactory>((props)
       </Card>
 
       {componentData?.isSocialComponent && <NodeSocial />}
-    </>
+    </ErrorBoundary>
   )
 })

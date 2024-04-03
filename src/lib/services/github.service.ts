@@ -8,6 +8,7 @@ export type StarsInfo = {
 
 export const getGithubStars = async (owner: string, repo: string): Promise<StarsInfo | null> => {
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`)
+
   if (!res.ok) return null
   const data = await res.json()
   return {
