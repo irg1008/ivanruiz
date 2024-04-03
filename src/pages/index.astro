@@ -28,6 +28,8 @@ const initQuery = searchParams.get('q') ?? ''
         flowProps={{
           preventScrolling: false,
           autoPanOnNodeDrag: false,
+          minZoom: 0.5,
+          maxZoom: 1,
         }}
       />
     </Footer>

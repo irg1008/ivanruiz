@@ -30,7 +30,6 @@ export type BaseReactFlowCanvasProps = {
   flowClassName?: string
   flowProps?: ReactFlowProps
   editingFlowProps?: ReactFlowProps
-  onCustomSave?: (snapshot: SnapshotDTO) => unknown | Promise<unknown>
 }
 
 export type ConditionalReactFlowCanvasProps =
@@ -68,20 +67,18 @@ export function FlowCanvas({
   showControls = true,
   flowClassName,
   showMinimap = false,
-  onCustomSave = saveSnapshot,
   flowProps,
   editingFlowProps,
 }: FlowCanvasProps) {
   const {
-    padding,
     nodes,
     edges,
     createNodeSelector,
     onConnect,
     onEdgeUpdate,
+    unselect,
     onEdgesChange,
     onNodesChange,
-    unselect,
   } = useFlowCanvas({
     edges: snapshot.document.edges ?? [],
     nodes: snapshot.document.nodes ?? [],
@@ -98,7 +95,7 @@ export function FlowCanvas({
     const flowObject = toObject()
     unselect({ nodes: flowObject.nodes })
 
-    await onCustomSave({
+    await saveSnapshot({
       ...snapshot,
       document: flowObject,
     })
@@ -109,9 +106,13 @@ export function FlowCanvas({
       <ReactFlow
         // eslint-disable-next-line tailwindcss/no-custom-classname
         className={cn('touchdevice-flow', flowClassName)}
-        fitView
-        fitViewOptions={{ padding }}
         nodeOrigin={[0.5, 0]}
+        fitView
+        fitViewOptions={{
+          padding: 0.2,
+        }}
+        minZoom={0.4}
+        maxZoom={1.4}
         nodes={nodes}
         edges={edges}
         nodesConnectable={isEditing}
@@ -124,13 +125,13 @@ export function FlowCanvas({
         connectionLineType={connectionType}
         zoomOnDoubleClick={false}
         selectionOnDrag={true}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         selectionMode={SelectionMode.Partial}
         selectNodesOnDrag={isEditing}
         panOnDrag={isEditing ? [1] : [0, 1]}
         proOptions={{ hideAttribution: true }}
         defaultEdgeOptions={baseEdge}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
         connectionMode={ConnectionMode.Loose}
         onConnect={onConnect}
         onEdgeUpdate={onEdgeUpdate}

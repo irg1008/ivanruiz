@@ -1,7 +1,7 @@
 import { xata } from '@/lib/db'
 import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import type { Node } from '@/lib/db/xata'
-import { getLayoutedFlow } from '@/lib/utils/layout.utils'
+import { getDagreLayoutedFlow } from '@/lib/utils/layout.utils'
 import type { Edge as FlowEdge, Node as FlowNode, ReactFlowJsonObject } from 'reactflow'
 import { getLikesCountForIds } from './reactflow.service'
 
@@ -68,9 +68,6 @@ export const createSearchFlowObject = async (query: string): Promise<ReactFlowJs
 export const searchMe = async (query: string): Promise<FlowDTO> => {
   const flowObject = await createSearchFlowObject(query)
   const likes = await getLikesCountForIds(flowObject.nodes.map((node) => node.id))
-  const layoutedFlowObject = getLayoutedFlow(flowObject, {
-    direction: 'TB',
-    distanceScale: { x: 1.4, y: 1.4 },
-  })
+  const layoutedFlowObject = getDagreLayoutedFlow(flowObject, { direction: 'TB' })
   return { likes, flowObject: layoutedFlowObject }
 }

@@ -14,7 +14,7 @@ import {
 } from 'reactflow'
 import type { SnapshotDTO } from '../db/dto/reactflow.dto'
 import { getNodeId } from '../services/reactflow.service'
-import { getLayoutedElements, type Direction } from '../utils/layout.utils'
+import { getDagreLayoutedElements } from '../utils/layout.utils'
 import { useIsEditing } from './useEditing'
 
 type UseFlowCanvasProps = {
@@ -28,48 +28,43 @@ export const useFlowCanvas = ({
   nodes: initialNodes,
   edges: initialEdges,
 }: UseFlowCanvasProps) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-
-  const { screenToFlowPosition, fitView, getEdges, getNodes } = useReactFlow()
+  const unselect = useStore((s) => s.unselectNodesAndEdges)
+  const { screenToFlowPosition, viewportInitialized, fitView } = useReactFlow()
   const { isEditing } = useIsEditing()
 
-  const unselect = useStore((s) => s.unselectNodesAndEdges)
   const reactFlowWidth = useStore((s) => s.width)
 
-  const isMobile = reactFlowWidth < 768
-  const padding = isMobile ? 0.3 : 0.8
-
-  const setLayout = useCallback(
-    (direction: Direction) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        getNodes(),
-        getEdges(),
-        {
-          direction,
-          distanceScale: {
-            x: 0.8,
-            y: 1.6,
-          },
-        }
-      )
-      setNodes(layoutedNodes)
-      setEdges(layoutedEdges)
-    },
-    [setNodes, setEdges, getNodes, getEdges]
-  )
+  const [nodes, setNodes, onNodesChange] = useNodesState([])
+  const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
   useEffect(() => {
-    if (!reactFlowWidth || isEditing) return
+    if (!viewportInitialized) return
 
-    fitView({ padding })
-    if (isMobile) setLayout('TB')
-  }, [reactFlowWidth, isEditing, setLayout, fitView, isMobile, padding])
+    if (reactFlowWidth > 900) {
+      setNodes(initialNodes)
+      setEdges(initialEdges)
+      return
+    }
+
+    const layout = getDagreLayoutedElements(initialNodes, initialEdges, {
+      width: reactFlowWidth,
+      direction: 'TB',
+    })
+
+    setNodes(layout.nodes)
+    setEdges(layout.edges)
+  }, [viewportInitialized, setNodes, setEdges, initialEdges, initialNodes, reactFlowWidth, fitView])
+
+  useEffect(() => {
+    if (!reactFlowWidth) return
+    window.requestAnimationFrame(() => {
+      fitView({ padding: 0.2 })
+    })
+  }, [reactFlowWidth, fitView])
 
   const onConnect: OnConnect = useCallback(
     (params) => {
       if (!isEditing) return
-
       setEdges((eds) => addEdge(params, eds))
     },
     [isEditing, setEdges]
@@ -105,10 +100,10 @@ export const useFlowCanvas = ({
   )
 
   return {
-    padding,
-    isMobile,
     nodes,
     edges,
+    setNodes,
+    setEdges,
     onNodesChange,
     onEdgesChange,
     onConnect,

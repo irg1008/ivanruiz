@@ -5,7 +5,7 @@
 
   .react-flow__controls-button {
     border: inherit;
-    @apply border border-foreground-50 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
+    @apply border border-foreground-400 bg-background text-foreground drop-shadow-sm transition-colors duration-200;
   }
 
   .react-flow__controls-button:hover {
