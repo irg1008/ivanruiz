@@ -5,7 +5,6 @@ import { memo } from 'react'
 import { ReactFlowProvider } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { FlowCanvas, type FlowCanvasProps } from './FlowCanvas'
-import './style.module.css'
 
 export type ReactFlowProps = FlowCanvasProps &
   FlowCanvasProviderProps & {

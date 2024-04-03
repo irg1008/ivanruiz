@@ -19,6 +19,7 @@ import ReactFlow, {
   type DefaultEdgeOptions,
 } from 'reactflow'
 import { nodeTypes } from '../Nodes'
+import './style.module.css'
 
 export type ReactFlowProps = Omit<ComponentProps<typeof ReactFlow>, 'className'>
 
