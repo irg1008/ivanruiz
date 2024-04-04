@@ -1,0 +1,7 @@
+---
+import Page from '../../../../[snapshot]/admin/[...key].astro'
+export const prerender = false
+const { props } = Astro
+---
+
+<Page {...props} />

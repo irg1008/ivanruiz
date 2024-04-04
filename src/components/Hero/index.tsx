@@ -1,5 +1,6 @@
 import { useTheme } from '@/lib/stores/theme.store'
 import { Button, Image } from '@nextui-org/react'
+import { l } from 'astro-i18n'
 import { navigate } from 'astro:transitions/client'
 import { motion } from 'framer-motion'
 import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
@@ -57,7 +58,7 @@ export function Hero({ initQuery = '' }: HeroProps) {
         </header>
 
         <aside
-          className='shrink-1 flex items-center justify-end lg:max-w-[600px] lg:basis-1/2 2xl:max-w-[650px]'
+          className='flex shrink items-center justify-end lg:max-w-[600px] lg:basis-1/2 2xl:max-w-[650px]'
           ref={asideRef}
         >
           <CircleItems
@@ -104,7 +105,7 @@ export function Hero({ initQuery = '' }: HeroProps) {
 
 type CircleItemProps = PropsWithChildren<{
   icon: LucideIcon
-  link: string
+  link: keyof RouteParameters
 }>
 
 const CircleItem = ({ icon: Icon, children, link }: CircleItemProps) => {
@@ -116,7 +117,7 @@ const CircleItem = ({ icon: Icon, children, link }: CircleItemProps) => {
         color='secondary'
         size='lg'
         startContent={<Icon className='text-secondary-100' />}
-        onClick={async () => await navigate(link)}
+        onClick={async () => await navigate(l(link))}
       >
         {children}
       </Button>

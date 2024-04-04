@@ -1,14 +1,18 @@
 ---
 import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
 import { TitleName } from '@/components/TitleName'
-import Layout from '@/layouts/Layout.astro'
+import Layout from './Layout.astro'
 
-if (!Astro.params.snapshot) return new Response('Not Found', { status: 404 })
+type Props = {
+  snapshotName: 'jobs' | 'education' | 'events'
+}
+
+const { snapshotName } = Astro.props
 ---
 
-<Layout title={Astro.params.snapshot}>
+<Layout title={snapshotName}>
   <main class='h-dvh'>
-    <ReactFlowLoader snapshotName={Astro.params.snapshot} />
+    <ReactFlowLoader snapshotName={snapshotName} />
   </main>
   <div class='absolute right-0 top-0'>
     <TitleName client:only='react' />

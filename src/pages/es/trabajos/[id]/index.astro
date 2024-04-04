@@ -1,0 +1,7 @@
+---
+import Page from '../../../jobs/[id].astro'
+export const prerender = false
+const { props } = Astro
+---
+
+<Page {...props} />
