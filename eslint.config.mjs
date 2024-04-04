@@ -24,6 +24,7 @@ export default [
   ...compat.config(eslintPluginTailwind.configs.recommended),
   eslintPluginPrettierRecommended,
   {
+    ignores: ['./src/lib/db/xata.ts'],
     rules: {
       'no-console': 'warn',
       'no-extend-native': 'error',
