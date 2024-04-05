@@ -1,7 +1,7 @@
 import FlowSearch from '@/components/Search'
 import { useTheme } from '@/lib/stores/theme.store'
 import { Button, Image } from '@nextui-org/react'
-import { t } from 'astro-i18n'
+import { l, t } from 'astro-i18n'
 import { navigate } from 'astro:transitions/client'
 import { motion } from 'framer-motion'
 import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
@@ -113,7 +113,7 @@ const CircleItem = ({ icon: Icon, children, link }: CircleItemProps) => {
         color='secondary'
         size='lg'
         startContent={<Icon className='text-secondary-100' />}
-        onClick={async () => await navigate(link)}
+        onClick={async () => await navigate(l(link))}
       >
         {children}
       </Button>

@@ -4,6 +4,8 @@ import tailwind from '@astrojs/tailwind'
 import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
 
+import node from '@astrojs/node'
+
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
@@ -54,10 +56,8 @@ export default defineConfig({
     }),
   ],
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
+  adapter: node({
+    mode: 'standalone',
   }),
   build: {
     inlineStylesheets: 'always',
@@ -66,20 +66,5 @@ export default defineConfig({
     build: {
       cssMinify: 'lightningcss',
     },
-    ssr: {
-      external: ['node:buffer', 'node:crypto'],
-    },
-    plugins: [
-      VitePWA({
-        registerType: 'autoUpdate',
-        includeAssets: ['**/*'],
-        injectRegister: 'auto',
-        workbox: {
-          globDirectory: 'dist',
-          globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
-          navigateFallback: null,
-        },
-      }),
-    ],
   },
 })
