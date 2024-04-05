@@ -1,8 +1,8 @@
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
-import { VitePWA } from 'vite-plugin-pwa'
 
 // https://astro.build/config
 export default defineConfig({
