@@ -1,23 +1,18 @@
 ---
-import type { FlowLikesDTO, SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
 import { isValidApiKey } from '@/pages/_services/admin.service'
-import { GET as getFlowSnapshot } from '@/pages/api/reactflow/[snapshot]'
-import { GET as getFlowLikes } from '@/pages/api/reactflow/[snapshot]/likes'
+import { getAllLikesCount, getSnapshot } from '@/pages/_services/reactflow.service'
 import { ReactFlow, type ReactFlowProps } from './ReactFlow'
 
 type Props = Omit<ReactFlowProps, 'flowLikes' | 'snapshot' | 'allowEditing'> & {
   snapshotName: string
 }
 
-Astro.params.snapshot = Astro.props.snapshotName
+const { snapshotName } = Astro.props
 
-const snapshotRes = await getFlowSnapshot(Astro)
-if (!snapshotRes.ok) return new Response('Not Found', { status: 404 })
-const snapshot: SnapshotDTO = await snapshotRes.json()
+const snapshot = await getSnapshot(snapshotName)
+if (!snapshot) return new Response('Not Found', { status: 404 })
 
-const flowLikesRes = await getFlowLikes(Astro)
-const flowLikes: FlowLikesDTO = await flowLikesRes.json()
-
+const flowLikes = await getAllLikesCount(snapshotName)
 const allowEditing = isValidApiKey(Astro.cookies)
 ---
 
