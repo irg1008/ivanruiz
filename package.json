@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "wrangler pages dev ./dist --compatibility-flags='nodejs_compat'",
-    "wrangler": "wrangler types",
+    "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "format": "prettier --write src",
@@ -27,7 +26,6 @@
   },
   "dependencies": {
     "@fontsource-variable/jost": "5.0.18",
-    "@icons-pack/react-simple-icons": "9.4.0",
     "@nanostores/persistent": "0.10.1",
     "@nanostores/react": "0.7.2",
     "@nextui-org/react": "2.2.10",
