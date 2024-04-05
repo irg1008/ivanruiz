@@ -1,9 +1,10 @@
-import cloudflare from '@astrojs/cloudflare'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
+
+import netlify from '@astrojs/netlify'
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,14 +28,35 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
         navigateFallback: null,
       },
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|avif)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+          },
+        },
+        {
+          urlPattern: /\.(?:woff|woff2|ttf|eot|ico)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'fonts',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+          },
+        },
+      ],
+      navigateFallback: null,
     }),
   ],
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
+  adapter: netlify(),
   build: {
     inlineStylesheets: 'always',
   },
