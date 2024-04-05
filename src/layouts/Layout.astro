@@ -2,9 +2,15 @@
 import { ThemeToggle } from '@/components/ThemeToggler'
 import { getTheme } from '@/pages/_services/theme.service'
 import '@fontsource-variable/jost'
+import { t } from 'astro-i18n'
 import { ViewTransitions } from 'astro:transitions'
 
-const { title } = Astro.props
+type Props = {
+  title?: string
+  description?: string
+}
+
+const { title, description } = Astro.props
 const theme = getTheme(Astro.cookies)
 ---
 
@@ -14,7 +20,8 @@ const theme = getTheme(Astro.cookies)
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title ?? t('meta_title')}</title>
+    <meta name='description' content={description ?? t('meta_description')} />
     <ViewTransitions />
   </head>
   <body

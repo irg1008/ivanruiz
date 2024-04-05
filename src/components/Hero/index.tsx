@@ -1,23 +1,23 @@
+import FlowSearch from '@/components/Search'
 import { useTheme } from '@/lib/stores/theme.store'
 import { Button, Image } from '@nextui-org/react'
-import { l } from 'astro-i18n'
+import { l, t } from 'astro-i18n'
 import { navigate } from 'astro:transitions/client'
 import { motion } from 'framer-motion'
 import { BriefcaseIcon, GraduationCapIcon, SpeechIcon, type LucideIcon } from 'lucide-react'
 import { useRef, type PropsWithChildren } from 'react'
 import { CircleItems } from '../CircleItems'
-import FlowSearch from './Search'
 
-export type HeroProps = {
+export type HeroProps = PropsWithChildren<{
   initQuery?: string
-}
+}>
 
-export function Hero({ initQuery = '' }: HeroProps) {
+export function Hero({ initQuery = '', children }: HeroProps) {
   const { isDark } = useTheme()
   const items: CircleItemProps[] = [
-    { icon: BriefcaseIcon, children: 'Jobs', link: '/jobs' },
-    { icon: GraduationCapIcon, children: 'Education', link: '/education' },
-    { icon: SpeechIcon, children: 'Events', link: '/events' },
+    { icon: BriefcaseIcon, children: t('hero.links.jobs'), link: '/jobs' },
+    { icon: GraduationCapIcon, children: t('hero.links.education'), link: '/education' },
+    { icon: SpeechIcon, children: t('hero.links.events'), link: '/events' },
   ]
 
   const asideRef = useRef<HTMLElement>(null)
@@ -32,7 +32,7 @@ export function Hero({ initQuery = '' }: HeroProps) {
             animate={{ y: 0, opacity: 1 }}
             className='font-mogi text-7xl md:text-8xl lg:text-9xl'
           >
-            Iván Ruiz
+            {t('name')}
           </motion.h1>
           <motion.p
             initial={{ x: 50, opacity: 0 }}
@@ -40,11 +40,7 @@ export function Hero({ initQuery = '' }: HeroProps) {
             transition={{ delay: 0.5 }}
             className='text-pretty border-l-2 border-secondary pl-6 text-large'
           >
-            Hi, if you are here you probably now that I am a <mark>software engineer</mark> and you
-            are probably looking for something, be that a new recruit, or just checking this site
-            out. So I {"won't"}
-            make you lose your time. <mark>Click the links</mark> to get to know me better or{' '}
-            <mark>search below</mark> for an easy lookup.
+            {children}
           </motion.p>
 
           <motion.div

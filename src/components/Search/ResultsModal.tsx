@@ -1,6 +1,7 @@
 import { ReactFlow } from '@/components/ReactFlow'
 import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 
 export type ResultsModalProps = {
   query: string
@@ -41,21 +42,21 @@ export function ResultsModal({ flow, query, isOpen, onOpenChange }: ResultsModal
         {(onClose) => (
           <>
             <ModalHeader>
-              Search results for <em>{`"${query}"`}</em>
+              {t('search.results')} <em>{`"${query}"`}</em>
             </ModalHeader>
             <ModalBody>
               <ReactFlow
                 className='h-[80dvh]'
                 flowLikes={flow.likes}
                 snapshot={{
-                  name: 'Flow search result',
+                  name: 'flow_search_result',
                   document: flow.flowObject,
                 }}
               />
             </ModalBody>
             <ModalFooter>
               <Button color='danger' variant='flat' onPress={onClose}>
-                Close
+                {t('search.close_modal')}
               </Button>
             </ModalFooter>
           </>

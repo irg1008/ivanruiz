@@ -3,11 +3,11 @@ import { nodeWrapper } from '@/components/ReactFlow/NodeWrapper'
 import { useIsEditing } from '@/lib/hooks/useEditing'
 import { transition } from '@/lib/transition'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
-import { l } from 'astro-i18n'
+import { l, t } from 'astro-i18n'
 import { navigate } from 'astro:transitions/client'
 import { type ChangeEvent } from 'react'
 import { useNodeId, useReactFlow } from 'reactflow'
-import type { JobNodeData, NodeType } from '../types'
+import type { JobNodeData, NodeData, NodeType } from '../types'
 
 export function JobNodeEditing(data: JobNodeData) {
   const nodeId = useNodeId()
@@ -31,21 +31,24 @@ export function JobNodeEditing(data: JobNodeData) {
       <Input
         size='sm'
         variant='flat'
-        label='Name'
+        label={t('reactflow.nodes.job.name.label')}
+        placeholder={t('reactflow.nodes.job.name.placeholder')}
         onChange={(e) => onFieldChange('name', e)}
         defaultValue={data.name}
       />
       <Input
         size='sm'
         variant='flat'
-        label='Job'
+        label={t('reactflow.nodes.job.company.label')}
+        placeholder={t('reactflow.nodes.job.job.placeholder')}
         onChange={(e) => onFieldChange('job', e)}
         defaultValue={data.job}
       />
       <Input
         size='sm'
         variant='flat'
-        label='Emoji'
+        label={t('reactflow.nodes.job.emoji.label')}
+        placeholder={t('reactflow.nodes.job.emoji.placeholder')}
         onChange={(e) => onFieldChange('emoji', e)}
         defaultValue={data.emoji}
       />
@@ -53,20 +56,26 @@ export function JobNodeEditing(data: JobNodeData) {
   )
 }
 
-export function JobNodeContent({ nodeId, name, job, emoji }: JobNodeData & { nodeId: string }) {
+export function JobNodeContent({
+  nodeId,
+  name,
+  job,
+  emoji,
+  snapshotName,
+}: NodeData<NodeType.Job> & { nodeId: string }) {
   return (
     <main className='flex transition-colors'>
       <transition.div
-        name={`info-emoji-${nodeId}`}
+        name={`${snapshotName}-info-emoji-${nodeId}`}
         className='flex size-12 items-center justify-center rounded-full bg-gray-100 text-gray-900'
       >
         {emoji}
       </transition.div>
       <div className='ml-2'>
-        <transition.div name={`info-name-${nodeId}`} className='text-lg font-bold'>
+        <transition.div name={`${snapshotName}-info-name-${nodeId}`} className='text-lg font-bold'>
           {name}
         </transition.div>
-        <transition.div name={`info-job-${nodeId}`} className='text-foreground-500'>
+        <transition.div name={`${snapshotName}-info-job-${nodeId}`} className='text-foreground-500'>
           {job}
         </transition.div>
       </div>
@@ -93,7 +102,7 @@ export const JobNode = nodeWrapper<NodeType.Job>((props) => {
                 variant='solid'
                 className='m-4'
               >
-                Open page
+                {t('reactflow.nodes.job.open_page')}
               </Button>
             </>
           )}

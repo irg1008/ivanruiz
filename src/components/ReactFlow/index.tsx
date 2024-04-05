@@ -19,7 +19,10 @@ export const ReactFlow = memo(({ className, ...props }: ReactFlowProps) => {
   return (
     <ReactFlowProvider>
       <FlowCanvasProvider {...props}>
-        <transition.div name='reactflow' className={cn('size-full', className)}>
+        <transition.div
+          name={`reactflow-${props.snapshot.name}`}
+          className={cn('size-full', className)}
+        >
           <FlowCanvas {...props} />
         </transition.div>
       </FlowCanvasProvider>

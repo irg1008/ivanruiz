@@ -2,6 +2,7 @@ import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import { searchMe } from '@/lib/services/search.service'
 import { removeQueryParam, updateQueryParam } from '@/lib/utils/url.utils'
 import { Input, Spinner, useDisclosure } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import { motion } from 'framer-motion'
 import { SearchIcon } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
@@ -57,7 +58,7 @@ export default function FlowSearch({ initQuery = '', autoFocus = false }: FlowSe
           type='search'
           variant='faded'
           defaultValue={initQuery}
-          placeholder='Search my skills, jobs, etc'
+          placeholder={t('search.placeholder')}
           startContent={<SearchIcon size={18} />}
           onChange={(e) => onInputChange(e.target.value)}
           autoFocus={autoFocus}
@@ -68,7 +69,8 @@ export default function FlowSearch({ initQuery = '', autoFocus = false }: FlowSe
             animate={{ y: 0, opacity: 1 }}
             className='line-clamp-2 shrink break-all text-center text-foreground-500'
           >
-            No results found for <em title={query} className='text-secondary'>{`"${query}"`}</em>
+            {t('search.no_results')}{' '}
+            <em title={query} className='text-secondary'>{`"${query}"`}</em>
           </motion.p>
         )}
 
@@ -79,7 +81,7 @@ export default function FlowSearch({ initQuery = '', autoFocus = false }: FlowSe
             className='flex justify-center gap-2'
           >
             <Spinner size='sm' color='secondary' />
-            <p className='text-foreground-500'>Searching for</p>
+            <p className='text-foreground-500'>{t('search.searching')}</p>
             <p className='text-secondary'>{`"${query}"`}</p>
           </motion.div>
         )}

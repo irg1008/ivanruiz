@@ -3,6 +3,7 @@ import { useIsEditing } from '@/lib/hooks/useEditing'
 import { useFlowCanvas } from '@/lib/hooks/useFlowCanvas'
 import { saveSnapshot } from '@/lib/services/reactflow.service'
 import { Button, Tooltip, cn } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import { PencilIcon, SaveIcon } from 'lucide-react'
 import { type ComponentProps } from 'react'
 import ReactFlow, {
@@ -145,13 +146,13 @@ export function FlowCanvas({
         {allowEditing && (
           <Panel position='bottom-right'>
             {isEditing ? (
-              <Tooltip content='Save' placement='left'>
+              <Tooltip content={t('reactflow.save')} placement='left'>
                 <Button isIconOnly onClick={onSave}>
                   <SaveIcon className='size-5' />
                 </Button>
               </Tooltip>
             ) : (
-              <Tooltip content='Edit' placement='left'>
+              <Tooltip content={t('reactflow.edit')} placement='left'>
                 <Button isIconOnly onClick={toggleEditing}>
                   <PencilIcon className='size-5' />
                 </Button>
