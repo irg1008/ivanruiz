@@ -1,5 +1,5 @@
 import { Image, Tooltip } from '@nextui-org/react'
-import { l, t } from 'astro-i18n'
+import { t } from 'astro-i18n'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -10,7 +10,7 @@ export function TitleName() {
 
   return (
     <aside className='relative ml-auto w-max p-12'>
-      <a href={l('/')}>
+      <a href={'/'}>
         <h2 className='font-mogi text-4xl selection:bg-foreground selection:text-background md:text-6xl lg:text-8xl'>
           {t('name_dotted')}
         </h2>
