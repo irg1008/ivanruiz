@@ -3,7 +3,6 @@ import { nodeWrapper } from '@/components/ReactFlow/NodeWrapper'
 import { useIsEditing } from '@/lib/hooks/useEditing'
 import { transition } from '@/lib/transition'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
-import { l } from 'astro-i18n'
 import { navigate } from 'astro:transitions/client'
 import { type ChangeEvent } from 'react'
 import { useNodeId, useReactFlow } from 'reactflow'
@@ -88,7 +87,7 @@ export const JobNode = nodeWrapper<NodeType.Job>((props) => {
             <>
               <JobNodeContent {...data} nodeId={id} />
               <Button
-                onClick={async () => await navigate(l(`/jobs/${id}`))}
+                onClick={async () => await navigate(`/jobs/${id}`)}
                 color='primary'
                 variant='solid'
                 className='m-4'

@@ -4,7 +4,6 @@ import { Hero } from '@/components/Hero'
 import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
 import SocialLinks from '@/components/SocialLinks'
 import Layout from '@/layouts/Layout.astro'
-import { t } from 'astro-i18n'
 
 const searchParams = Astro.url.searchParams
 const initQuery = searchParams.get('q') ?? ''
@@ -19,7 +18,7 @@ const initQuery = searchParams.get('q') ?? ''
       <SocialLinks client:load />
     </aside>
 
-    <div class='h-[100px]'>{t('hello')}</div>
+    <div class='h-[100px]'></div>
 
     <Footer client:only='react'>
       <ReactFlowLoader

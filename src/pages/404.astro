@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { Button, Code, Link } from '@nextui-org/react'
-import { l } from 'astro-i18n'
+import { Button, Code } from '@nextui-org/react'
 import { FrownIcon } from 'lucide-react'
 
 const path = Astro.url.pathname
@@ -25,9 +24,7 @@ const path = Astro.url.pathname
         </span>
       </Code>
 
-      <Button href={l('/')} as={Link} color='secondary' showAnchorIcon variant='solid'>
-        Go home
-      </Button>
+      <Button client:load href={'/'} as={'a'} color='secondary' variant='solid'> Go home </Button>
     </div>
   </main>
 </Layout>
