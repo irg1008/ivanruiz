@@ -1,6 +1,7 @@
 import type { FlatNodeLikeDTO } from '@/lib/db/dto/reactflow.dto'
 import { hasUserLike } from '@/lib/stores/likes.store'
 import { Badge, Button } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -37,6 +38,7 @@ export const Emoji = ({ like, onEmojiClick }: EmojiProps) => {
                 isIconOnly
                 color={color}
                 variant='shadow'
+                aria-label={t('reactflow.node_social.give_like', { emoji: like.content })}
                 size='sm'
                 onClick={() => {
                   onEmojiClick(like)

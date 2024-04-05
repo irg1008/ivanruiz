@@ -17,7 +17,7 @@ const allowEditing = isValidApiKey(Astro.cookies)
 ---
 
 <ReactFlow
-  client:only='true'
+  client:visible
   snapshot={snapshot}
   flowLikes={flowLikes}
   allowEditing={allowEditing}

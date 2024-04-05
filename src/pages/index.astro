@@ -4,21 +4,25 @@ import { Hero } from '@/components/Hero'
 import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
 import SocialLinks from '@/components/SocialLinks'
 import Layout from '@/layouts/Layout.astro'
+import { t } from 'astro-i18n'
 
 const searchParams = Astro.url.searchParams
 const initQuery = searchParams.get('q') ?? ''
 ---
 
-<Layout title='Iván Ruiz'>
+<Layout>
   <main
     class='flex min-h-dvh flex-col items-center overflow-hidden pt-32 bg-dot-black/20 dark:bg-dot-white/20 lg:pt-40'
   >
-    <Hero client:only='react' initQuery={initQuery} />
+    <Hero client:only='react' initQuery={initQuery}>
+      <div set:html={t('hero.about_me.description')} />
+    </Hero>
+
     <aside class='absolute right-0 top-0 p-10'>
       <SocialLinks client:load />
     </aside>
 
-    <div class='h-[100px]'></div>
+    <div class='h-[300px]'></div>
 
     <Footer client:only='react'>
       <ReactFlowLoader

@@ -1,12 +1,226 @@
 {
   "common": {
     "en": {
-      "hello": "Hello",
-      "world": "World"
+      "name": "Iván Ruiz",
+      "name_dotted": "Iván.Ruiz",
+      "title_name": {
+        "drag_me": "Hi 😸, drag me around!",
+        "img_alt": "Supposed to be a handsome dev here"
+      },
+      "star_project": {
+        "label": "Github Stars",
+        "star": "Star"
+      },
+      "social_links": {
+        "lable": "Social links"
+      },
+      "locale_switcher": {
+        "description": "Change the language of the site",
+        "label": "Language",
+        "locales": {
+          "en": "English",
+          "es": "Español"
+        }
+      },
+      "hero": {
+        "about_me": {
+          "description": "Hi, if you are here you probably now that I am a <mark>software engineer</mark> and you are probably looking for something, be that a new recruit, or just checking this site out. So I won't make you lose your time. <mark>Click the links</mark> to get to know me better or <mark>search below</mark> for an easy lookup."
+        },
+        "links": {
+          "jobs": "Jobs",
+          "education": "Education",
+          "events": "Events"
+        }
+      },
+      "search": {
+        "label": "Search",
+        "placeholder": "Search my skills, jobs, etc",
+        "no_results": "No results found for",
+        "results": "Search results for",
+        "searching": "Searching for",
+        "close_modal": "Close"
+      },
+      "errors": {
+        "loading_component": "Error loading this element, sorry"
+      },
+      "reactflow": {
+        "toolbar": {
+          "toggle_vertical_fit": "Toggle vertical fit",
+          "toggle_horizontal_fit": "Toggle horizontal fit",
+          "delete_node": "Delete node"
+        },
+        "node_social": {
+          "give_like": "Give a like with emoji {# variable(emoji) #}"
+        },
+        "save": "Save",
+        "edit": "Edit",
+        "nodes": {
+          "selector": {
+            "label": "Selector",
+            "choose_node": "Choose a node"
+          },
+          "job": {
+            "label": "Job",
+            "open_page": "Open page",
+            "name": {
+              "label": "Name",
+              "placeholder": "Job name"
+            },
+            "company": {
+              "label": "Company",
+              "placeholder": "Company name"
+            },
+            "job": {
+              "label": "Job",
+              "placeholder": "Job title"
+            },
+            "description": {
+              "label": "Description",
+              "placeholder": "Job description"
+            },
+            "emoji": {
+              "label": "Emoji",
+              "placeholder": "🐦"
+            }
+          },
+          "read_only_factory": {
+            "label": "Read only",
+            "choose_component": "Choose a component"
+          }
+        }
+      },
+      "404": {
+        "meta_title": "Page not found: {# variable(path) #}",
+        "title": "Page not found: {# variable(path) #}",
+        "home_action": "Go to home"
+      }
     },
     "es": {
-      "hello": "Hola",
-      "world": "Mundo"
+      "title_name": {
+        "drag_me": "¡Hola 😸, muéveme!",
+        "img_alt": "Debería haber un chico guapo aquí"
+      },
+      "star_project": {
+        "label": "Estrellas en Github"
+      },
+      "social_links": {
+        "lable": "Enlaces sociales"
+      },
+      "locale_switcher": {
+        "description": "Cambia el idioma del sitio",
+        "label": "Idioma"
+      },
+      "hero": {
+        "about_me": {
+          "description": "Hola, si estás aquí probablemente sepas que soy un <mark>ingeniero de software</mark> y probablemente estés buscando algo, ya sea un nuevo recluta, o simplemente echando un vistazo a esta web. Así que no te haré perder el tiempo. <mark>Haz clic en los enlaces</mark> para conocerme mejor o <mark>busca abajo</mark> para una búsqueda fácil."
+        },
+        "links": {
+          "jobs": "Trabajos",
+          "education": "Educación",
+          "events": "Eventos"
+        }
+      },
+      "search": {
+        "label": "Buscar",
+        "placeholder": "Busca mis habilidades, trabajos, etc",
+        "no_results": "No se encontraron resultados para",
+        "results": "Resultados de búsqueda para",
+        "searching": "Buscando",
+        "close_modal": "Cerrar"
+      },
+      "errors": {
+        "loading_component": "Ha ocurrido un error, prueba de nuevo más tarde"
+      },
+      "reactflow": {
+        "toolbar": {
+          "toggle_vertical_fit": "Ajuste vertical",
+          "toggle_horizontal_fit": "Ajuste horizontal",
+          "delete_node": "Eliminar nodo"
+        },
+        "node_social": {
+          "give_like": "Dar un like con el emoji {# variable(emoji) #}"
+        },
+        "save": "Guardar",
+        "edit": "Editar",
+        "nodes": {
+          "selector": {
+            "choose_node": "Elige un nodo"
+          },
+          "job": {
+            "label": "Trabajo",
+            "open_page": "Abrir página",
+            "name": {
+              "label": "Nombre",
+              "placeholder": "Nombre del trabajo"
+            },
+            "company": {
+              "label": "Empresa",
+              "placeholder": "Nombre de la empresa"
+            },
+            "job": {
+              "label": "Puesto",
+              "placeholder": "Puesto de trabajo"
+            },
+            "description": {
+              "label": "Descripción",
+              "placeholder": "Descripción del trabajo"
+            },
+            "emoji": {
+              "label": "Emoji",
+              "placeholder": "💻"
+            }
+          },
+          "read_only_factory": {
+            "label": "Solo lectura",
+            "choose_component": "Elige un componente"
+          }
+        }
+      },
+      "404": {
+        "meta_title": "Página no encontrada: {# variable(path) #}",
+        "title": "Página no encontrada: {# variable(path) #}",
+        "home_action": "Ir a inicio"
+      }
+    }
+  },
+  "/": {
+    "en": {
+      "meta_title": "Home - Iván Ruiz",
+      "meta_description": "Iván Ruiz's personal website"
+    },
+    "es": {
+      "meta_title": "Inicio - Iván Ruiz",
+      "meta_description": "Sitio web personal de Iván Ruiz"
+    }
+  },
+  "/jobs": {
+    "en": {
+      "meta_title": "Jobs - Iván Ruiz",
+      "meta_description": "Iván Ruiz's professional experience"
+    },
+    "es": {
+      "meta_title": "Trabajos - Iván Ruiz",
+      "meta_description": "Experiencia profesional de Iván Ruiz"
+    },
+    "/education": {
+      "en": {
+        "meta_title": "Education - Iván Ruiz",
+        "meta_description": "Iván Ruiz's academic background"
+      },
+      "es": {
+        "meta_title": "Educación - Iván Ruiz",
+        "meta_description": "Formación académica de Iván Ruiz"
+      }
+    },
+    "/events": {
+      "en": {
+        "meta_title": "Events - Iván Ruiz",
+        "meta_description": "Iván Ruiz's participation in events"
+      },
+      "es": {
+        "meta_title": "Eventos - Iván Ruiz",
+        "meta_description": "Participación de Iván Ruiz en eventos"
+      }
     }
   }
 }

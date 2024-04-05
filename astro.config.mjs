@@ -1,9 +1,10 @@
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import vercel from '@astrojs/vercel/serverless'
 import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
+
+import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
@@ -55,6 +56,9 @@ export default defineConfig({
     }),
   ],
   output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
   build: {
     inlineStylesheets: 'always',
   },
@@ -62,9 +66,5 @@ export default defineConfig({
     build: {
       cssMinify: 'lightningcss',
     },
-    ssr: {
-      external: ['node:buffer', 'node:crypto'],
-    },
   },
-  adapter: vercel(),
 })

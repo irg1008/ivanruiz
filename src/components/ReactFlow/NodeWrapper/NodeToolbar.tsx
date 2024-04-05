@@ -1,4 +1,5 @@
 import { Button, Tooltip } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import {
   ChevronsDownUpIcon,
   ChevronsLeftRightIcon,
@@ -56,13 +57,17 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
 
   return (
     <div className='absolute right-0 mt-2 flex w-full justify-end gap-2'>
-      <Tooltip content='Toggle horizontal fit' placement='top'>
+      <Tooltip
+        content={t('reactflow.toolbar.toggle_horizontal_fit')}
+        placement='bottom'
+        delay={2000}
+      >
         <Button
           variant='flat'
           isIconOnly
           color='secondary'
           size='sm'
-          aria-label='Horizontal fit'
+          aria-label={t('reactflow.toolbar.toggle_horizontal_fit')}
           onClick={toggleHorizontalFit}
         >
           {horiontalFit === ElementFit.Fit ? (
@@ -73,13 +78,13 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
         </Button>
       </Tooltip>
 
-      <Tooltip content='Toggle vertical fit' placement='top'>
+      <Tooltip content={t('reactflow.toolbar.toggle_vertical_fit')} placement='bottom' delay={2000}>
         <Button
           variant='flat'
           isIconOnly
           color='secondary'
           size='sm'
-          aria-label='Vertical fit'
+          aria-label={t('reactflow.toolbar.toggle_vertical_fit')}
           onClick={toggleVerticalFit}
         >
           {verticalFit === ElementFit.Fit ? (
@@ -90,13 +95,13 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
         </Button>
       </Tooltip>
 
-      <Tooltip content='Remove node' placement='top'>
+      <Tooltip content={t('reactflow.toolbar.delete_node')} placement='bottom' delay={2000}>
         <Button
           variant='flat'
           isIconOnly
           color='danger'
           size='sm'
-          aria-label='Remove node'
+          aria-label={t('reactflow.toolbar.delete_node')}
           onClick={removeNode}
         >
           <TrashIcon className='size-4' />

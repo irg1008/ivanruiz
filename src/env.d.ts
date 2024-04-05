@@ -12,26 +12,73 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
-declare namespace App {
-  interface Locals extends Runtime {}
-}
+/* eslint-disable */
 
 // ###> astro-i18n/type-generation ###
-/* eslint-disable */
 type PrimaryLocale = 'en'
 type SecondaryLocale = 'es'
 type Locale = PrimaryLocale | SecondaryLocale
 type RouteParameters = {
-  '/404': undefined
   '/': undefined
+  '/jobs': undefined
+  '/404': undefined
   '/education': undefined
   '/events': undefined
-  '/jobs': undefined
   '/jobs/[id]': { id: unknown }
   '/[snapshot]/admin/[...key]': { snapshot: unknown; key: unknown }
 }
 type Route = keyof RouteParameters
-type TranslationVariables = { hello: object | undefined; world: object | undefined }
+type TranslationVariables = {
+  '404.meta_title': { path?: unknown } | undefined
+  '404.title': { path?: unknown } | undefined
+  '404.home_action': object | undefined
+  'name': object | undefined
+  'name_dotted': object | undefined
+  'title_name.drag_me': object | undefined
+  'title_name.img_alt': object | undefined
+  'star_project.label': object | undefined
+  'star_project.star': object | undefined
+  'social_links.lable': object | undefined
+  'locale_switcher.description': object | undefined
+  'locale_switcher.label': object | undefined
+  'locale_switcher.locales.en': object | undefined
+  'locale_switcher.locales.es': object | undefined
+  'hero.about_me.description': object | undefined
+  'hero.links.jobs': object | undefined
+  'hero.links.education': object | undefined
+  'hero.links.events': object | undefined
+  'search.label': object | undefined
+  'search.placeholder': object | undefined
+  'search.no_results': object | undefined
+  'search.results': object | undefined
+  'search.searching': object | undefined
+  'search.close_modal': object | undefined
+  'errors.loading_component': object | undefined
+  'reactflow.toolbar.toggle_vertical_fit': object | undefined
+  'reactflow.toolbar.toggle_horizontal_fit': object | undefined
+  'reactflow.toolbar.delete_node': object | undefined
+  'reactflow.node_social.give_like': { emoji?: unknown } | undefined
+  'reactflow.save': object | undefined
+  'reactflow.edit': object | undefined
+  'reactflow.nodes.selector.label': object | undefined
+  'reactflow.nodes.selector.choose_node': object | undefined
+  'reactflow.nodes.job.label': object | undefined
+  'reactflow.nodes.job.open_page': object | undefined
+  'reactflow.nodes.job.name.label': object | undefined
+  'reactflow.nodes.job.name.placeholder': object | undefined
+  'reactflow.nodes.job.company.label': object | undefined
+  'reactflow.nodes.job.company.placeholder': object | undefined
+  'reactflow.nodes.job.job.label': object | undefined
+  'reactflow.nodes.job.job.placeholder': object | undefined
+  'reactflow.nodes.job.description.label': object | undefined
+  'reactflow.nodes.job.description.placeholder': object | undefined
+  'reactflow.nodes.job.emoji.label': object | undefined
+  'reactflow.nodes.job.emoji.placeholder': object | undefined
+  'reactflow.nodes.read_only_factory.label': object | undefined
+  'reactflow.nodes.read_only_factory.choose_component': object | undefined
+  'meta_title': object | undefined
+  'meta_description': object | undefined
+}
 type Translation = keyof TranslationVariables
 type Environment = 'none' | 'node' | 'browser'
 declare module 'astro-i18n' {

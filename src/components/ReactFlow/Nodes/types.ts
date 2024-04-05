@@ -3,7 +3,6 @@ import type { NodeProps as ReactflowNodeProps } from 'reactflow'
 
 export enum NodeType {
   Job = 'job',
-  Timeline = 'timeline',
   Selector = 'selector',
   ReadOnlyFactory = 'readonly-factory',
 }

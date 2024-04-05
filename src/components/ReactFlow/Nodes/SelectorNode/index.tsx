@@ -1,12 +1,12 @@
-import { Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react'
+import { nodeWrapper } from '@/components/ReactFlow/NodeWrapper'
+import { NodeType } from '@/components/ReactFlow/Nodes/types'
+import { Card, CardBody, CardHeader, Divider, Listbox, ListboxItem } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import { useReactFlow } from 'reactflow'
-import { nodeWrapper } from '../../NodeWrapper'
-import { NodeType } from '../types'
 
 const nodeTypeLabels: Partial<Record<NodeType, string>> = {
-  [NodeType.Job]: 'Job',
-  [NodeType.Timeline]: 'Timeline',
-  [NodeType.ReadOnlyFactory]: 'Read Only',
+  [NodeType.Job]: t('reactflow.nodes.job.label'),
+  [NodeType.ReadOnlyFactory]: t('reactflow.nodes.read_only_factory.label'),
 }
 
 export const SelectorNode = nodeWrapper<NodeType.Selector>(({ id, data }) => {
@@ -25,8 +25,13 @@ export const SelectorNode = nodeWrapper<NodeType.Selector>(({ id, data }) => {
 
   return (
     <Card className='size-full'>
+      <CardHeader>{t('reactflow.nodes.selector.choose_node')}</CardHeader>
+      <Divider />
       <CardBody>
-        <Listbox aria-label='Choose Node' onAction={(key) => updateNodeType(key as NodeType)}>
+        <Listbox
+          aria-label={t('reactflow.nodes.selector.choose_node')}
+          onAction={(key) => updateNodeType(key as NodeType)}
+        >
           {Object.entries(nodeTypeLabels).map(([key, label]) => (
             <ListboxItem key={key}>{label}</ListboxItem>
           ))}

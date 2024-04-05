@@ -1,8 +1,9 @@
 ---
 import { clearApiKey, setApiKey } from '@/pages/_services/admin.service'
+import { astroI18n } from 'astro-i18n'
 
 const apiKey = Astro.params.key
 apiKey ? setApiKey(Astro.cookies, apiKey) : clearApiKey(Astro.cookies)
 
-return Astro.redirect('/' + Astro.params.snapshot, 302)
+astroI18n.redirect('/' + Astro.params.snapshot, 302)
 ---

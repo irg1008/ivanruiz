@@ -4,9 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:i18n": "nodemon src/i18n/**/*.json --exec \"pnpm run i18n:sync && pnpm run dev\"",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro preview",
+    "preview": "node --env-file=.env.development ./dist/server/entry.mjs",
+    "wrangler": "wrangler types",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "format": "prettier --write src",
@@ -21,8 +23,7 @@
     "i18n:extract": "astro-i18n extract",
     "i18n:generate:pages": "astro-i18n generate:pages --purge",
     "i18n:generate:types": "astro-i18n generate:types",
-    "i18n:sync": "npm run i18n:generate:pages && npm run i18n:generate:types",
-    "i18n:dev": "nodemon src/i18n/**/*.json --exec \"pnpm run i18n:sync && pnpm run dev\""
+    "i18n:sync": "npm run i18n:generate:pages && npm run i18n:generate:types"
   },
   "dependencies": {
     "@fontsource-variable/jost": "5.0.18",
@@ -34,8 +35,8 @@
     "astro-i18n": "2.2.4",
     "dagre": "0.8.5",
     "framer-motion": "11.0.25",
-    "lucide-react": "0.364.0",
-    "nanostores": "0.10.2",
+    "lucide-react": "0.365.0",
+    "nanostores": "0.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-error-boundary": "4.0.13",
@@ -44,7 +45,7 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
-    "@astrojs/vercel": "7.5.2",
+    "@astrojs/node": "^8.2.5",
     "@astrojs/check": "0.5.10",
     "@astrojs/react": "3.1.1",
     "@astrojs/sitemap": "3.1.2",
@@ -81,10 +82,9 @@
     "prettier-plugin-tailwindcss": "0.5.13",
     "tailwind-merge": "2.2.2",
     "typescript": "5.4.3",
-    "typescript-eslint": "7.4.0",
-    "wrangler": "3.47.1"
+    "typescript-eslint": "7.4.0"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   }
 }

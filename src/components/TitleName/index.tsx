@@ -1,4 +1,5 @@
 import { Image, Tooltip } from '@nextui-org/react'
+import { l, t } from 'astro-i18n'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -9,13 +10,13 @@ export function TitleName() {
 
   return (
     <aside className='relative ml-auto w-max p-12'>
-      <a href={'/'}>
+      <a href={l('/')}>
         <h2 className='font-mogi text-4xl selection:bg-foreground selection:text-background md:text-6xl lg:text-8xl'>
-          Iván.Ruiz
+          {t('name_dotted')}
         </h2>
       </a>
       <div className='absolute left-1/2 top-4 w-10 -translate-x-1/2 md:w-14 lg:w-20'>
-        <Tooltip content='Hi 😸, drag me around!' isDisabled={!showTooltip} showArrow offset={10}>
+        <Tooltip content={t('title_name.drag_me')} isDisabled={!showTooltip} showArrow offset={10}>
           <motion.div
             className='cursor-grab'
             drag
@@ -46,7 +47,7 @@ export function TitleName() {
               isBlurred
               disableSkeleton
               src={meImg}
-              alt='Supposed to be a handsome dev here'
+              alt={t('title_name.img_alt')}
               className='-rotate-3'
             />
           </motion.div>

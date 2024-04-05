@@ -1,4 +1,5 @@
 import { Chip, Image } from '@nextui-org/react'
+import { t } from 'astro-i18n'
 import { TriangleAlertIcon } from 'lucide-react'
 import type { PropsWithChildren } from 'react'
 import { ErrorBoundary as ReactErrorboundary } from 'react-error-boundary'
@@ -23,7 +24,7 @@ function ErrorFallback() {
         color='danger'
         className='flex items-center gap-1'
       >
-        Error loading component
+        {t('errors.loading_component')}
       </Chip>
     </div>
   )
