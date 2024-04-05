@@ -6,14 +6,14 @@
   "regions": ["dub1"],
   "builds": [
     {
-      "src": "/dist/server/entry.mjs",
+      "src": "dist/server/entry.mjs",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/server/entry.mjs"
+      "dest": "dist/server/entry.mjs"
     }
   ]
 }
