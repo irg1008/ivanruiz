@@ -14,6 +14,21 @@
       "social_links": {
         "lable": "Social links"
       },
+      "site_links": {
+        "label": "Site links",
+        "jobs": {
+          "label": "Jobs",
+          "description": "Professional experience"
+        },
+        "education": {
+          "label": "Education",
+          "description": "Academic background"
+        },
+        "events": {
+          "label": "Events",
+          "description": "Participation in events"
+        }
+      },
       "locale_switcher": {
         "description": "Change the language of the site",
         "label": "Language",
@@ -105,6 +120,21 @@
       },
       "social_links": {
         "lable": "Enlaces sociales"
+      },
+      "site_links": {
+        "label": "Enlaces del sitio",
+        "jobs": {
+          "label": "Trabajos",
+          "description": "Experiencia profesional"
+        },
+        "education": {
+          "label": "Educación",
+          "description": "Formación académica"
+        },
+        "events": {
+          "label": "Eventos",
+          "description": "Participación en eventos"
+        }
       },
       "locale_switcher": {
         "description": "Cambia el idioma del sitio",

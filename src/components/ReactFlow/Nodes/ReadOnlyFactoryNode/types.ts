@@ -1,6 +1,11 @@
 import type { ComponentType, LazyExoticComponent } from 'react'
 
-export type AvailableComponent = 'nodeSocial' | 'search' | 'starProject' | 'localeSwitcher'
+export type AvailableComponent =
+  | 'nodeSocial'
+  | 'search'
+  | 'starProject'
+  | 'localeSwitcher'
+  | 'siteLinks'
 
 export type ImportFn = () => LazyExoticComponent<ComponentType>
 

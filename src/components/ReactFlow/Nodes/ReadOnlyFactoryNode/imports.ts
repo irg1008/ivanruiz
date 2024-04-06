@@ -19,6 +19,10 @@ export const availableComponents: Record<AvailableComponent, ImportData> = {
     import: () => lazy(() => import('@/components/LocaleSwitcher')),
     label: t('locale_switcher.label'),
   },
+  siteLinks: {
+    import: () => lazy(() => import('@/components/SiteLinks')),
+    label: t('site_links.label'),
+  },
 }
 
 export const isValidComponentToLoad = (key: string): key is AvailableComponent => {

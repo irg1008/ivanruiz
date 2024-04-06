@@ -16,6 +16,7 @@ export enum ElementFit {
 
 export type BaseNodeData = {
   snapshotName: SnapshotDTO['name']
+  rotation?: number
   horiontalFit?: ElementFit
   verticalFit?: ElementFit
 }

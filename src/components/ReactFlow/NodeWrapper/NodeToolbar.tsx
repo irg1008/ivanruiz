@@ -8,15 +8,19 @@ import {
   TrashIcon,
 } from 'lucide-react'
 import { useCallback } from 'react'
-import { useNodeId, useReactFlow } from 'reactflow'
+import { useNodeId, useReactFlow, useUpdateNodeInternals } from 'reactflow'
 import { ElementFit, NodeType, type BaseNodeData, type NodeProps } from '../Nodes/types'
 
-export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
-  const { data } = props
+type NodeToolbarProps<T extends NodeType> = NodeProps<T> & {
+  iconRotation?: number
+}
+
+export function NodeToolbar<T extends NodeType>({ data, iconRotation }: NodeToolbarProps<T>) {
   const { horiontalFit, verticalFit } = data
 
   const nodeId = useNodeId()
   const reactflow = useReactFlow()
+  const updateNodeInternals = useUpdateNodeInternals()
 
   const removeNode = useCallback(() => {
     if (!nodeId) return
@@ -37,8 +41,10 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
 
         return nodes
       })
+
+      updateNodeInternals(nodeId)
     },
-    [nodeId, reactflow]
+    [nodeId, reactflow, updateNodeInternals]
   )
 
   const toggleFit = useCallback((fit?: ElementFit) => {
@@ -50,10 +56,12 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
   }, [updateNodeData, toggleFit])
 
   const toggleVerticalFit = useCallback(() => {
-    updateNodeData((data) => ({
-      verticalFit: data.verticalFit === ElementFit.Fit ? ElementFit.Expand : ElementFit.Fit,
-    }))
-  }, [updateNodeData])
+    updateNodeData((data) => ({ verticalFit: toggleFit(data.verticalFit) }))
+  }, [updateNodeData, toggleFit])
+
+  const iconClassName = 'size-4'
+  const iconStyle: React.CSSProperties = { transform: `rotate(${iconRotation}deg)` }
+  const iconProps = { className: iconClassName, style: iconStyle }
 
   return (
     <div className='absolute right-0 mt-2 flex w-full justify-end gap-2'>
@@ -71,9 +79,9 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
           onClick={toggleHorizontalFit}
         >
           {horiontalFit === ElementFit.Fit ? (
-            <ChevronsLeftRightIcon className='size-4' />
+            <ChevronsLeftRightIcon {...iconProps} />
           ) : (
-            <ChevronsRightLeftIcon className='size-4' />
+            <ChevronsRightLeftIcon {...iconProps} />
           )}
         </Button>
       </Tooltip>
@@ -88,9 +96,9 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
           onClick={toggleVerticalFit}
         >
           {verticalFit === ElementFit.Fit ? (
-            <ChevronsUpDownIcon className='size-4' />
+            <ChevronsUpDownIcon {...iconProps} />
           ) : (
-            <ChevronsDownUpIcon className='size-4' />
+            <ChevronsDownUpIcon {...iconProps} />
           )}
         </Button>
       </Tooltip>
@@ -104,7 +112,7 @@ export function NodeToolbar<T extends NodeType>(props: NodeProps<T>) {
           aria-label={t('reactflow.toolbar.delete_node')}
           onClick={removeNode}
         >
-          <TrashIcon className='size-4' />
+          <TrashIcon {...iconProps} />
         </Button>
       </Tooltip>
     </div>
