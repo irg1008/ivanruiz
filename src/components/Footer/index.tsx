@@ -8,7 +8,7 @@ export function Footer({ children }: FooterProps) {
   const { isDark } = useTheme()
 
   return (
-    <footer className='relative z-10 h-[70dvh] w-full'>
+    <footer className='relative z-10 h-[30dvh] w-full'>
       <motion.div
         initial={{
           opacity: 0,

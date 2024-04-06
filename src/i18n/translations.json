@@ -2,6 +2,8 @@
   "common": {
     "en": {
       "name": "Iván Ruiz",
+      "full_name": "Iván Ruiz Gázquez",
+      "location_country": "Spain",
       "name_dotted": "Iván.Ruiz",
       "title_name": {
         "drag_me": "Hi 😸, drag me around!",
@@ -28,6 +30,10 @@
           "label": "Events",
           "description": "Participation in events"
         }
+      },
+      "made_by": {
+        "label": "Made by",
+        "description": "Made by Iván Ruiz Gázquez with ⌨️, 🧠 and ☕"
       },
       "locale_switcher": {
         "description": "Change the language of the site",
@@ -69,6 +75,7 @@
         },
         "save": "Save",
         "edit": "Edit",
+        "exit": "Exit",
         "nodes": {
           "selector": {
             "label": "Selector",
@@ -111,6 +118,7 @@
       }
     },
     "es": {
+      "location_country": "España",
       "title_name": {
         "drag_me": "¡Hola 😸, muéveme!",
         "img_alt": "Debería haber un chico guapo aquí"
@@ -135,6 +143,10 @@
           "label": "Eventos",
           "description": "Participación en eventos"
         }
+      },
+      "made_by": {
+        "label": "Hecho por",
+        "description": "Hecho por Iván Ruiz Gázquez con ⌨️, 🧠 y ☕"
       },
       "locale_switcher": {
         "description": "Cambia el idioma del sitio",
@@ -172,6 +184,7 @@
         },
         "save": "Guardar",
         "edit": "Editar",
+        "exit": "Salir",
         "nodes": {
           "selector": {
             "choose_node": "Elige un nodo"

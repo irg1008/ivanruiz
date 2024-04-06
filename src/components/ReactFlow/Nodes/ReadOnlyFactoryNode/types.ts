@@ -6,6 +6,7 @@ export type AvailableComponent =
   | 'starProject'
   | 'localeSwitcher'
   | 'siteLinks'
+  | 'madeBy'
 
 export type ImportFn = () => LazyExoticComponent<ComponentType>
 

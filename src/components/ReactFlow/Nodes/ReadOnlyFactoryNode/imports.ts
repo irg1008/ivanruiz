@@ -23,6 +23,10 @@ export const availableComponents: Record<AvailableComponent, ImportData> = {
     import: () => lazy(() => import('@/components/SiteLinks')),
     label: t('site_links.label'),
   },
+  madeBy: {
+    import: () => lazy(() => import('@/components/MadeBy')),
+    label: t('made_by.label'),
+  },
 }
 
 export const isValidComponentToLoad = (key: string): key is AvailableComponent => {

@@ -13,7 +13,7 @@ export default function StarProject() {
   }, [])
 
   return stars ? (
-    <Link href={stars.projectUrl} color='foreground' isExternal className='flex gap-2'>
+    <Link href={stars.projectUrl} color='foreground' isExternal className='flex gap-2 capitalize'>
       <SiGithub className='size-5' />
       {t('star')}
       <Chip

@@ -1,3 +1,5 @@
+import { t } from 'astro-i18n'
+
 export default function MadeBy() {
-  return <></>
+  return <span>{t('made_by.description')}</span>
 }
