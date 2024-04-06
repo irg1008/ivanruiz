@@ -1,10 +1,9 @@
+import netlify from '@astrojs/netlify'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config'
-
-import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
@@ -56,9 +55,7 @@ export default defineConfig({
     }),
   ],
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: netlify(),
   build: {
     inlineStylesheets: 'always',
   },

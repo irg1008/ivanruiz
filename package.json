@@ -8,7 +8,6 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "node --env-file=.env.development ./dist/server/entry.mjs",
-    "wrangler": "wrangler types",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "format": "prettier --write src",
@@ -26,6 +25,7 @@
     "i18n:sync": "npm run i18n:generate:pages && npm run i18n:generate:types"
   },
   "dependencies": {
+    "@astrojs/netlify": "5.2.0",
     "@fontsource-variable/jost": "5.0.18",
     "@icons-pack/react-simple-icons": "9.4.0",
     "@nanostores/persistent": "0.10.1",
@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.5.10",
-    "@astrojs/node": "^8.2.5",
     "@astrojs/react": "3.1.1",
     "@astrojs/sitemap": "3.1.2",
     "@astrojs/tailwind": "5.1.0",
