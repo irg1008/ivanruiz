@@ -6,7 +6,7 @@ export default async () => {
 
   const res = await fetch(siteUrl)
   // eslint-disable-next-line no-console
-  if (!res.ok) console.log(`Failed to ping ${siteUrl}`)
+  if (!res.ok) console.error(`Failed to ping ${siteUrl}`)
 }
 
 export const config: Config = {
