@@ -37,15 +37,12 @@ export const useFlowCanvas = ({
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-  useEffect(() => {
-    if (!viewportInitialized) return
+  const reset = useCallback(() => {
+    setNodes(initialNodes)
+    setEdges(initialEdges)
+  }, [setNodes, setEdges, initialNodes, initialEdges])
 
-    if (reactFlowWidth > 900) {
-      setNodes(initialNodes)
-      setEdges(initialEdges)
-      return
-    }
-
+  const setLayout = useCallback(() => {
     const layout = getDagreLayoutedElements(initialNodes, initialEdges, {
       width: reactFlowWidth,
       direction: 'TB',
@@ -53,7 +50,16 @@ export const useFlowCanvas = ({
 
     setNodes(layout.nodes)
     setEdges(layout.edges)
-  }, [viewportInitialized, setNodes, setEdges, initialEdges, initialNodes, reactFlowWidth, fitView])
+  }, [initialNodes, initialEdges, setNodes, setEdges, reactFlowWidth])
+
+  const init = useCallback(() => {
+    if (!viewportInitialized) return
+    reactFlowWidth > 900 ? reset() : setLayout()
+  }, [viewportInitialized, reactFlowWidth, reset, setLayout])
+
+  useEffect(() => {
+    init()
+  }, [init])
 
   useEffect(() => {
     if (!reactFlowWidth) return
@@ -102,6 +108,9 @@ export const useFlowCanvas = ({
   return {
     nodes,
     edges,
+    reset,
+    init,
+    setLayout,
     setNodes,
     setEdges,
     onNodesChange,

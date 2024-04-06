@@ -5,7 +5,7 @@ import { saveSnapshot } from '@/lib/services/reactflow.service'
 import { Button, ButtonGroup, Tooltip, cn } from '@nextui-org/react'
 import { t } from 'astro-i18n'
 import { PencilIcon, SaveIcon, XIcon } from 'lucide-react'
-import { type ComponentProps } from 'react'
+import { useState, type ComponentProps } from 'react'
 import ReactFlow, {
   Background,
   BackgroundVariant,
@@ -71,6 +71,9 @@ export function FlowCanvas({
   flowProps,
   editingFlowProps,
 }: FlowCanvasProps) {
+  const [initialNodes, setInitialNodes] = useState(snapshot.document.nodes)
+  const [initialEdges, setInitialEdges] = useState(snapshot.document.edges)
+
   const {
     nodes,
     edges,
@@ -80,9 +83,10 @@ export function FlowCanvas({
     unselect,
     onEdgesChange,
     onNodesChange,
+    init,
   } = useFlowCanvas({
-    edges: snapshot.document.edges ?? [],
-    nodes: snapshot.document.nodes ?? [],
+    edges: initialEdges,
+    nodes: initialNodes,
     snapshotName: snapshot.name,
   })
 
@@ -100,6 +104,15 @@ export function FlowCanvas({
       ...snapshot,
       document: flowObject,
     })
+
+    setInitialNodes(flowObject.nodes)
+    setInitialEdges(flowObject.edges)
+  }
+
+  const exitEditing = () => {
+    if (!allowEditing) return
+    toggleEditing()
+    init()
   }
 
   return (
@@ -148,7 +161,7 @@ export function FlowCanvas({
             {isEditing ? (
               <ButtonGroup>
                 <Tooltip content={t('reactflow.exit')}>
-                  <Button isIconOnly onClick={toggleEditing}>
+                  <Button isIconOnly onClick={exitEditing}>
                     <XIcon className='size-5' />
                   </Button>
                 </Tooltip>
