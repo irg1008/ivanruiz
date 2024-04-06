@@ -2,12 +2,12 @@
 import { JobNodeContent } from '@/components/ReactFlow/Nodes/JobNode'
 import { TitleName } from '@/components/TitleName'
 import Layout from '@/layouts/Layout.astro'
-import { GET } from '@/pages/api/reactflow/node/[id]'
-import type { Node } from 'reactflow'
+import { getNodeInfo } from '../../_services/reactflow.service'
 
-const nodeRes = await GET(Astro)
-if (!nodeRes.ok) return new Response('Not Found', { status: 404 })
-const node: Node = await nodeRes.json()
+if (!Astro.params.id) return new Response('Not Found', { status: 404 })
+
+const node = await getNodeInfo(Astro.params.id)
+if (!node) return new Response('Not Found', { status: 404 })
 ---
 
 <Layout>
