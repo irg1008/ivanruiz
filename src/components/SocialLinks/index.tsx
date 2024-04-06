@@ -1,47 +1,45 @@
+import type { IconType } from '@/components/Icons/Icon'
+import { SiBuyMeACoffe } from '@/components/Icons/SiBuyMeACoffe'
+import { SiGithub } from '@/components/Icons/SiGithub'
+import { SiLinkedIn } from '@/components/Icons/SiLinkedIn'
+import { SiX } from '@/components/Icons/SiX'
 import { socialLinks } from '@/lib/consts/social.consts'
-// import {
-//   SiBuymeacoffee,
-//   SiGithub,
-//   SiLinkedin,
-//   SiX,
-//   type IconType,
-// } from '@icons-pack/react-simple-icons'
 import { Link, Tooltip } from '@nextui-org/react'
 import { ExternalLink } from 'lucide-react'
 
 type Social = {
   name: string
   url: string
-  // icon: IconType
+  icon: IconType
 }
 
 const socials: Social[] = [
   {
     name: 'GitHub',
     url: socialLinks.github,
-    // icon: SiGithub,
+    icon: SiGithub,
   },
   {
     name: 'LinkedIn',
     url: socialLinks.linkedin,
-    // icon: SiLinkedin,
+    icon: SiLinkedIn,
   },
   {
     name: 'X',
     url: socialLinks.x,
-    // icon: SiX,
+    icon: SiX,
   },
   {
     name: 'Buy Me A Coffee',
     url: socialLinks.buyMeACoffee,
-    // icon: SiBuymeacoffee,
+    icon: SiBuyMeACoffe,
   },
 ]
 
 export default function SocialLinks() {
   return (
     <div className='flex gap-4'>
-      {socials.map(({ name, url }) => (
+      {socials.map(({ name, url, icon: Icon }) => (
         <Tooltip
           key={name}
           content={
@@ -59,7 +57,7 @@ export default function SocialLinks() {
             rel='noopener noreferrer'
             className='text-gray-500 hover:text-gray-700'
           >
-            {/* <Icon className='size-6 text-secondary' /> */}
+            <Icon className='size-6 text-secondary' />
           </Link>
         </Tooltip>
       ))}
