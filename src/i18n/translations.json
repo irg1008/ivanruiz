@@ -201,26 +201,26 @@
     "es": {
       "meta_title": "Trabajos - Iván Ruiz",
       "meta_description": "Experiencia profesional de Iván Ruiz"
+    }
+  },
+  "/education": {
+    "en": {
+      "meta_title": "Education - Iván Ruiz",
+      "meta_description": "Iván Ruiz's academic background"
     },
-    "/education": {
-      "en": {
-        "meta_title": "Education - Iván Ruiz",
-        "meta_description": "Iván Ruiz's academic background"
-      },
-      "es": {
-        "meta_title": "Educación - Iván Ruiz",
-        "meta_description": "Formación académica de Iván Ruiz"
-      }
+    "es": {
+      "meta_title": "Educación - Iván Ruiz",
+      "meta_description": "Formación académica de Iván Ruiz"
+    }
+  },
+  "/events": {
+    "en": {
+      "meta_title": "Events - Iván Ruiz",
+      "meta_description": "Iván Ruiz's participation in events"
     },
-    "/events": {
-      "en": {
-        "meta_title": "Events - Iván Ruiz",
-        "meta_description": "Iván Ruiz's participation in events"
-      },
-      "es": {
-        "meta_title": "Eventos - Iván Ruiz",
-        "meta_description": "Participación de Iván Ruiz en eventos"
-      }
+    "es": {
+      "meta_title": "Eventos - Iván Ruiz",
+      "meta_description": "Participación de Iván Ruiz en eventos"
     }
   }
 }
