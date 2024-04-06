@@ -7,7 +7,7 @@
     "dev:i18n": "nodemon src/i18n/**/*.json --exec \"pnpm run i18n:sync && pnpm run dev\"",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "node --env-file=.env.development ./dist/server/entry.mjs",
+    "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "format": "prettier --write src",

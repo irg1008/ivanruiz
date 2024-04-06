@@ -1,5 +1,5 @@
 import { getMyGithubStars, type StarsInfo } from '@/lib/services/github.service'
-import { SiGithub } from '@icons-pack/react-simple-icons'
+// import { SiGithub } from '@icons-pack/react-simple-icons'
 import { Chip, Link, Skeleton } from '@nextui-org/react'
 import { t } from 'astro-i18n'
 import { StarIcon } from 'lucide-react'
@@ -14,7 +14,7 @@ export default function StarProject() {
 
   return stars ? (
     <Link href={stars.projectUrl} color='foreground' isExternal className='flex gap-2'>
-      <SiGithub className='size-5' />
+      {/* <SiGithub className='size-5' /> */}
       {t('star')}
       <Chip
         size='sm'
