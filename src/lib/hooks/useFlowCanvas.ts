@@ -42,7 +42,7 @@ export const useFlowCanvas = ({
     setEdges(initialEdges)
   }, [setNodes, setEdges, initialNodes, initialEdges])
 
-  const setLayout = useCallback(() => {
+  const setLayout = useCallback(async () => {
     const layout = getDagreLayoutedElements(initialNodes, initialEdges, {
       width: reactFlowWidth,
       direction: 'TB',

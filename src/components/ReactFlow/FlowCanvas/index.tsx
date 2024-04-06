@@ -122,6 +122,7 @@ export function FlowCanvas({
         className={cn('touchdevice-flow', flowClassName)}
         nodeOrigin={[0.5, 0]}
         fitView
+        defaultViewport={snapshot.document.viewport}
         fitViewOptions={{
           padding: 0.2,
         }}

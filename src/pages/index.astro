@@ -1,5 +1,4 @@
 ---
-import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
 import SocialLinks from '@/components/SocialLinks'
@@ -24,7 +23,14 @@ const initQuery = searchParams.get('q') ?? ''
 
     <div class='h-[300px]'></div>
 
-    <Footer client:only='react'>
+    <footer class='relative z-10 h-[35dvh] w-full pb-12'>
+      <div
+        class='absolute bottom-0 left-0 size-full bg-secondary-100/50 transition-colors'
+        style={{
+          clipPath: 'polygon(0 30%, 100% 0%, 100% 100%, 0% 100%)',
+        }}
+      >
+      </div>
       <ReactFlowLoader
         snapshotName='footer'
         flowClassName='!overflow-visible'
@@ -33,10 +39,10 @@ const initQuery = searchParams.get('q') ?? ''
           preventScrolling: false,
           autoPanOnNodeDrag: false,
           minZoom: 0.5,
-          maxZoom: 1,
-          fitViewOptions: { padding: 0 },
+          maxZoom: 1.5,
+          fitViewOptions: { padding: 0.2 },
         }}
       />
-    </Footer>
+    </footer>
   </main>
 </Layout>
