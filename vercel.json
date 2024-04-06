@@ -2,7 +2,7 @@
   "regions": ["dub1"],
   "crons": [
     {
-      "path": "api/github/stars",
+      "path": "/api/github/stars",
       "schedule": "* * * * *"
     }
   ]
