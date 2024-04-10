@@ -29,8 +29,6 @@ const theme = getTheme(Astro.cookies)
   >
     <slot />
 
-    {JSON.stringify(Astro.cookies.get('theme'))}
-
     <span class='absolute left-0 top-0 flex items-start gap-2 p-10'>
       <ThemeToggle client:only='react' initialTheme={theme} />
     </span>
