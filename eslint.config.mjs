@@ -15,13 +15,20 @@ const compat = new FlatCompat()
 export default [
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs['flat/recommended'],
-  ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
   ...compat.config({ settings: { react: { version: 'detect' } } }),
-  ...compat.config(eslintPluginReact.configs['recommended']),
+  ...compat.config({
+    overrides: [
+      {
+        files: './src/**/*.{txs,jsx}',
+        ...eslintPluginReact.configs['recommended'],
+      },
+    ],
+  }),
   ...compat.config(eslintPluginReact.configs['jsx-runtime']),
   ...compat.config(eslintPluginReactHooks.configs.recommended),
   ...compat.config(eslintPluginTailwind.configs.recommended),
+  ...eslintPluginAstro.configs['flat/recommended'],
+  ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
   eslintPluginPrettierRecommended,
   {
     ignores: ['./src/lib/db/xata.ts', './src/pages/es/**'],

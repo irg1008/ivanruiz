@@ -16,6 +16,7 @@ export default defineAstroI18nConfig({
       jobs: 'trabajos',
       education: 'educacion',
       events: 'eventos',
+      projects: 'proyectos',
     },
   }, // { [secondary_locale1]: { about: "about-translated", ... } }
 })
