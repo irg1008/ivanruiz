@@ -36,8 +36,7 @@ export const useTheme = (initialTheme?: Theme) => {
 const root = document.documentElement
 
 const setDocTheme = (theme: Theme) => {
-  root.classList.remove('dark', 'light')
-  root.classList.add(theme)
+  root.dataset.theme = theme
 }
 
 const prefersReducedMotion = () => {
