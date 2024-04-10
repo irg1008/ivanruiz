@@ -32,10 +32,10 @@ export const useFlowCanvas = ({
   const { screenToFlowPosition, viewportInitialized, fitView } = useReactFlow()
   const { isEditing } = useIsEditing()
 
-  const reactFlowWidth = useStore((s) => s.width)
-
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
+
+  const reactFlowWidth = useStore((s) => s.width)
 
   const reset = useCallback(() => {
     setNodes(initialNodes)
@@ -56,17 +56,6 @@ export const useFlowCanvas = ({
     if (!viewportInitialized) return
     reactFlowWidth > 900 ? reset() : setLayout()
   }, [viewportInitialized, reactFlowWidth, reset, setLayout])
-
-  useEffect(() => {
-    init()
-  }, [init])
-
-  useEffect(() => {
-    if (!reactFlowWidth) return
-    window.requestAnimationFrame(() => {
-      fitView({ padding: 0.2 })
-    })
-  }, [reactFlowWidth, fitView])
 
   const onConnect: OnConnect = useCallback(
     (params) => {
@@ -104,6 +93,18 @@ export const useFlowCanvas = ({
     },
     [screenToFlowPosition, isEditing, setNodes, snapshotName]
   )
+
+  useEffect(() => {
+    init()
+  }, [init])
+
+  useEffect(() => {
+    if (!reactFlowWidth) return
+    window.requestAnimationFrame(() => {
+      fitView({ padding: 0.2 })
+      console.log('fitView')
+    })
+  }, [reactFlowWidth, fitView])
 
   return {
     nodes,

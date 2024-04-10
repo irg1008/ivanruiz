@@ -1,0 +1,39 @@
+---
+import { TitleName } from '@/components/TitleName'
+import Layout from '@/layouts/Layout.astro'
+import { addLocaleToSlug } from '@/lib/services/content.service'
+import { Image } from 'astro:assets'
+import { getEntry } from 'astro:content'
+
+const { slug } = Astro.params
+if (!slug) return new Response('Not Found', { status: 404 })
+
+const localizedSlug = addLocaleToSlug(slug)
+const project = await getEntry('projects', localizedSlug)
+if (!project) return new Response('Not Found', { status: 404 })
+
+const relatedJob = project.data.relatedJob ? await getEntry(project.data.relatedJob) : null
+---
+
+<Layout title={project.data.title}>
+  <TitleName client:visible />
+
+  <div class='rounded-lg border border-red-500 p-12' transition:name={`content-${slug}`}>
+    {
+      project.data.cover && (
+        <Image
+          width={200}
+          height={200}
+          src={project.data.cover.src}
+          alt={project.data.cover.alt}
+          class='object-contain'
+        />
+      )
+    }
+    <div transition:name={`project-info-company-${slug}`} class='w-min text-lg font-bold'>
+      {project.data.title}
+      {project.data.description}
+      {relatedJob?.data.company}
+    </div>
+  </div>
+</Layout>

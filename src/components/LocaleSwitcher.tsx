@@ -8,7 +8,7 @@ const routeIcons: Record<Locale, ReactNode> = {
 }
 
 export default function LocaleSwitcher() {
-  const { locale, locales, route } = astroI18n
+  const { locale, locales } = astroI18n
   const params = Object.fromEntries(new URLSearchParams(location.search).entries())
 
   return (
@@ -35,7 +35,7 @@ export default function LocaleSwitcher() {
             key={locale}
             className='capitalize'
             startContent={routeIcons[locale]}
-            href={l(route, params, { targetLocale: locale })}
+            href={l('/', params, { targetLocale: locale })}
           >
             {t(`locale_switcher.locales.${locale}`)}
           </DropdownItem>

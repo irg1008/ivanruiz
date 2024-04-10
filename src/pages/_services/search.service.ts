@@ -1,3 +1,4 @@
+import type { SnapshotName } from '@/components/ReactFlow/types'
 import { xata } from '@/lib/db'
 import type { FlowDTO } from '@/lib/db/dto/reactflow.dto'
 import type { Node } from '@/lib/db/xata'
@@ -33,6 +34,8 @@ const findHighlightNodes = ({ nodes }: ReactFlowJsonObject, highlight: string) =
 }
 
 export const createSearchFlowObject = async (query: string): Promise<ReactFlowJsonObject> => {
+  const skippedSnapshots: SnapshotName[] = ['footer']
+
   const res = await xata.db.Snapshot.search(query, {
     target: ['name', 'document'],
     highlight: {
@@ -40,6 +43,9 @@ export const createSearchFlowObject = async (query: string): Promise<ReactFlowJs
       encodeHTML: false,
     },
     fuzziness: 2,
+    filter: {
+      $not: { name: { $any: skippedSnapshots } },
+    },
     prefix: 'disabled',
   })
 

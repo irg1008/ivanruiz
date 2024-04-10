@@ -1,10 +1,12 @@
 import type { SnapshotDTO } from '@/lib/db/dto/reactflow.dto'
+import type { ContentCollectionKey, ValidContentEntrySlug } from 'astro:content'
 import type { NodeProps as ReactflowNodeProps } from 'reactflow'
 
 export enum NodeType {
   Job = 'job',
   Selector = 'selector',
   ReadOnlyFactory = 'readonly-factory',
+  Project = 'project',
 }
 
 export enum ElementFit {
@@ -21,10 +23,9 @@ export type BaseNodeData = {
   verticalFit?: ElementFit
 }
 
-export type JobNodeData = {
-  name: string
-  job: string
-  emoji: string
+export type DataWithSlug<C extends ContentCollectionKey> = {
+  slug: ValidContentEntrySlug<C>
+  searchMeta?: object
 }
 
 export type ReadOnlyFactoryData = {
@@ -32,7 +33,8 @@ export type ReadOnlyFactoryData = {
 }
 
 export type NodeDataRecord = {
-  [NodeType.Job]: JobNodeData
+  [NodeType.Job]: DataWithSlug<'jobs'>
+  [NodeType.Project]: DataWithSlug<'projects'>
   [NodeType.ReadOnlyFactory]: ReadOnlyFactoryData
 }
 

@@ -65,6 +65,11 @@
         "loading_component": "Error loading this element, sorry"
       },
       "reactflow": {
+        "hint": {
+          "title": "Navigating the timeline",
+          "description": "Pan to explore the content or scroll to zoom in and out",
+          "dismiss_text": "Got it!"
+        },
         "toolbar": {
           "toggle_vertical_fit": "Toggle vertical fit",
           "toggle_horizontal_fit": "Toggle horizontal fit",
@@ -83,27 +88,15 @@
           },
           "job": {
             "label": "Job",
-            "open_page": "Open page",
-            "name": {
-              "label": "Name",
-              "placeholder": "Job name"
-            },
-            "company": {
-              "label": "Company",
-              "placeholder": "Company name"
-            },
-            "job": {
-              "label": "Job",
-              "placeholder": "Job title"
-            },
-            "description": {
-              "label": "Description",
-              "placeholder": "Job description"
-            },
-            "emoji": {
-              "label": "Emoji",
-              "placeholder": "🐦"
-            }
+            "select_label": "Your job",
+            "job_cta": "View details",
+            "choose_job": "Choose a job"
+          },
+          "project": {
+            "label": "Project",
+            "select_label": "Your project",
+            "project_cta": "View details",
+            "choose_project": "Choose a project"
           },
           "read_only_factory": {
             "label": "Read only",
@@ -174,6 +167,11 @@
         "loading_component": "Ha ocurrido un error, prueba de nuevo más tarde"
       },
       "reactflow": {
+        "hint": {
+          "title": "Navegando por la línea temporal",
+          "description": "Desplázate para explorar el contenido o haz scroll para hacer zoom",
+          "dismiss_text": "¡Entendido!"
+        },
         "toolbar": {
           "toggle_vertical_fit": "Ajuste vertical",
           "toggle_horizontal_fit": "Ajuste horizontal",
@@ -191,27 +189,15 @@
           },
           "job": {
             "label": "Trabajo",
-            "open_page": "Abrir página",
-            "name": {
-              "label": "Nombre",
-              "placeholder": "Nombre del trabajo"
-            },
-            "company": {
-              "label": "Empresa",
-              "placeholder": "Nombre de la empresa"
-            },
-            "job": {
-              "label": "Puesto",
-              "placeholder": "Puesto de trabajo"
-            },
-            "description": {
-              "label": "Descripción",
-              "placeholder": "Descripción del trabajo"
-            },
-            "emoji": {
-              "label": "Emoji",
-              "placeholder": "💻"
-            }
+            "select_label": "Tu trabajo",
+            "job_cta": "Ver detalles",
+            "choose_job": "Elige un trabajo"
+          },
+          "project": {
+            "label": "Proyecto",
+            "select_label": "Tu proyecto",
+            "project_cta": "Ver detalles",
+            "choose_project": "Elige un proyecto"
           },
           "read_only_factory": {
             "label": "Solo lectura",

@@ -6,6 +6,7 @@ import { useReactFlow } from 'reactflow'
 
 const nodeTypeLabels: Partial<Record<NodeType, string>> = {
   [NodeType.Job]: t('reactflow.nodes.job.label'),
+  [NodeType.Project]: t('reactflow.nodes.project.label'),
   [NodeType.ReadOnlyFactory]: t('reactflow.nodes.read_only_factory.label'),
 }
 

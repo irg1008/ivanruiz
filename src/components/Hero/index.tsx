@@ -145,7 +145,7 @@ const InnerCircleItem = () => {
           loading='eager'
           isBlurred
           disableSkeleton
-          src='/imgs/me-borderless.webp'
+          src='/imgs/me/me-borderless.webp'
           alt='Supposed to be a handsome dev here'
           className='-rotate-3'
         />

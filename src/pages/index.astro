@@ -23,7 +23,7 @@ const initQuery = searchParams.get('q') ?? ''
 
     <div class='h-[300px]'></div>
 
-    <footer class='relative z-10 h-[35dvh] w-full pb-12'>
+    <footer class='relative z-10 h-[40dvh] w-full'>
       <div
         class='absolute bottom-0 left-0 size-full bg-secondary-100/50 transition-colors'
         style={{
@@ -36,10 +36,11 @@ const initQuery = searchParams.get('q') ?? ''
         flowClassName='!overflow-visible'
         showBackground={false}
         flowProps={{
+          panOnDrag: false,
           preventScrolling: false,
           autoPanOnNodeDrag: false,
           minZoom: 0.5,
-          maxZoom: 1.5,
+          maxZoom: 2,
           fitViewOptions: { padding: 0.2 },
         }}
       />

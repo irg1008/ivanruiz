@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 export function TitleName() {
-  const [stopImg, dragImg] = ['/imgs/me.webp', '/imgs/me_handsome.webp']
+  const [stopImg, dragImg] = ['/imgs/me/me.webp', '/imgs/me/me-handsome.webp']
   const [meImg, setMeImg] = useState(stopImg)
   const [showTooltip, setShowTooltip] = useState(true)
 

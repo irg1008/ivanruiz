@@ -1,0 +1,56 @@
+---
+import { TitleName } from '@/components/TitleName'
+import Layout from '@/layouts/Layout.astro'
+import { addLocaleToSlug } from '@/lib/services/content.service'
+import { Image } from 'astro:assets'
+import { getEntries, getEntry } from 'astro:content'
+
+const { slug } = Astro.params
+if (!slug) return new Response('Not Found', { status: 404 })
+
+const localizedSlug = addLocaleToSlug(slug)
+const job = await getEntry('jobs', localizedSlug)
+if (!job) return new Response('Not Found', { status: 404 })
+
+const relatedProjects = await getEntries(job.data.relatedProjects)
+---
+
+<Layout title={job.data.title}>
+  <TitleName client:visible />
+
+  <div class='rounded-lg border border-red-500 p-12' transition:name={`${slug}-job`}>
+    {
+      job.data.companyLogo && (
+        <Image
+          width={200}
+          height={200}
+          src={job.data.companyLogo.src}
+          alt={job.data.companyLogo.alt}
+          class='object-contain'
+        />
+      )
+    }
+    <div transition:name={`${slug}-job-company`} class='w-min text-lg font-bold'>
+      {job.data.company}
+      {job.data.location}
+    </div>
+
+    {
+      relatedProjects.map((project) => (
+        <div class='flex flex-col gap-4'>
+          {project.data.cover && (
+            <Image
+              width={200}
+              height={200}
+              src={project.data.cover.src}
+              alt={project.data.cover.alt}
+              class='rounded-lg object-cover'
+            />
+          )}
+          <h2 class='text-2xl font-bold'>{project.data.title}</h2>
+          <p>{project.data.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</Layout>

@@ -95,7 +95,6 @@ export function FlowCanvas({
 
   const onSave = async () => {
     if (!allowEditing) return
-    toggleEditing()
 
     const flowObject = toObject()
     unselect({ nodes: flowObject.nodes })
@@ -107,6 +106,8 @@ export function FlowCanvas({
 
     setInitialNodes(flowObject.nodes)
     setInitialEdges(flowObject.edges)
+
+    toggleEditing()
   }
 
   const exitEditing = () => {
@@ -122,12 +123,11 @@ export function FlowCanvas({
         className={cn('touchdevice-flow', flowClassName)}
         nodeOrigin={[0.5, 0]}
         fitView
-        defaultViewport={snapshot.document.viewport}
         fitViewOptions={{
-          padding: 0.2,
+          padding: 1,
         }}
-        minZoom={0.4}
-        maxZoom={1.4}
+        minZoom={0.6}
+        maxZoom={1.2}
         nodes={nodes}
         edges={edges}
         nodesConnectable={isEditing}

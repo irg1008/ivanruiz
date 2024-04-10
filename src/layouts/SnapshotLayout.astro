@@ -1,20 +1,25 @@
 ---
+import type { NavigableSnapshotName } from '@/components/ReactFlow/types'
 import ReactFlowLoader from '@/components/ReactFlowLoader.astro'
+import { SnapshotHint } from '@/components/SnapshotHint'
 import { TitleName } from '@/components/TitleName'
 import Layout from './Layout.astro'
 
 type Props = {
-  snapshotName: 'jobs' | 'education' | 'events'
+  snapshotName: NavigableSnapshotName
 }
 
 const { snapshotName } = Astro.props
 ---
 
 <Layout>
-  <main class='h-dvh'>
+  <main class='relative h-dvh'>
+    <SnapshotHint client:only='react' />
+
     <ReactFlowLoader snapshotName={snapshotName} />
+
+    <div class='absolute right-0 top-0'>
+      <TitleName client:only='react' />
+    </div>
   </main>
-  <div class='absolute right-0 top-0'>
-    <TitleName client:only='react' />
-  </div>
 </Layout>

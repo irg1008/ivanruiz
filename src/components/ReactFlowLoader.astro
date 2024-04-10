@@ -2,9 +2,10 @@
 import { isValidApiKey } from '@/pages/_services/admin.service'
 import { getAllLikesCount, getSnapshot } from '@/pages/_services/reactflow.service'
 import { ReactFlow, type ReactFlowProps } from './ReactFlow'
+import type { SnapshotName } from './ReactFlow/types'
 
 type Props = Omit<ReactFlowProps, 'flowLikes' | 'snapshot' | 'allowEditing'> & {
-  snapshotName: string
+  snapshotName: SnapshotName
 }
 
 const { snapshotName } = Astro.props

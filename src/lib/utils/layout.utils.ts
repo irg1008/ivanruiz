@@ -16,7 +16,7 @@ const dagreGraph = new dagre.graphlib.Graph()
 dagreGraph.setDefaultEdgeLabel(() => ({}))
 
 const config: GraphLabel = {
-  nodesep: 40,
+  nodesep: 100,
   edgesep: 40,
   ranksep: 200,
   ranker: 'longest-path',
